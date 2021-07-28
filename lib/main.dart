@@ -324,32 +324,155 @@ class Location {
   final String imageUrl;
 }
 
-const urlPrefix =
-    'https://flutter.dev/docs/cookbook/img-files/effects/parallax';
 const locations = [
   Location(
-    name: 'Lakers beat Thunder',
-    place: 'Oklahoma City',
-    imageUrl: 'https://www.nba.com/lakers/sites/lakers/files/2021_lal_mktg_lakers_lens_1080x1080_em.jpg',
+    name: 'Celtics',
+    place: 'Boston',
+    imageUrl: 'images/celtics.jpg',
   ),
   Location(
-    name: 'Sixers beat Hawks',
+    name: 'Nets',
+    place: 'Brooklyn',
+    imageUrl: 'images/nets.jpg',
+  ),
+  Location(
+    name: 'Knicks',
+    place: 'New York',
+    imageUrl: 'images/knicks.jpg',
+  ),
+  Location(
+    name: 'Sixers',
     place: 'Philadelphia',
-    imageUrl: 'https://lebronwire.usatoday.com/wp-content/uploads/sites/37/2020/02/gettyimages-1199128962.jpg',
+    imageUrl: 'images/sixers.jpg',
   ),
   Location(
-    name: 'Bucks beat Suns',
+    name: 'Raptors',
+    place: 'Toronto',
+    imageUrl: 'images/raptors.jpg',
+  ),
+  Location(
+    name: 'Bulls',
+    place: 'Chicago',
+    imageUrl: 'images/bulls.jpg',
+  ),
+  Location(
+    name: 'Cavaliers',
+    place: 'Cleveland',
+    imageUrl: 'images/cavs.jpg',
+  ),
+  Location(
+    name: 'Pistons',
+    place: 'Detroit',
+    imageUrl: 'images/pistons.jpg',
+  ),
+  Location(
+    name: 'Pacers',
+    place: 'Indianapolis',
+    imageUrl: 'images/pacers.jpg',
+  ),
+  Location(
+    name: 'Bucks',
     place: 'Milwaukee',
-    imageUrl: 'https://www.nba.com/bucks/sites/bucks/files/getty-images-1233841218.jpg',
+    imageUrl: 'images/bucks.jpg',
   ),
   Location(
-    name: 'Warriors beat Nuggets',
-    place: 'San Francisco',
-    imageUrl: 'https://www.nba.com/warriors/sites/warriors/files/gettyimages-1230095108.jpg',
+    name: 'Hawks',
+    place: 'Atlanta',
+    imageUrl: 'images/hawks.jpg',
   ),
   Location(
-    name: 'Nuggets beat Suns',
+    name: 'Hornets',
+    place: 'Charlotte',
+    imageUrl: 'images/hornets.jpg',
+  ),
+  Location(
+    name: 'Heat',
+    place: 'Miami',
+    imageUrl: 'images/heat.jpg',
+  ),
+  Location(
+    name: 'Magic',
+    place: 'Orlando',
+    imageUrl: 'images/magic.jpg',
+  ),
+  Location(
+    name: 'Wizards',
+    place: 'Washington',
+    imageUrl: 'images/wizards.jpg',
+  ),
+  Location(
+    name: 'Nuggets',
     place: 'Denver',
-    imageUrl: 'https://www.nba.com/nuggets/sites/nuggets/files/getty-images-1230385418.jpg',
-  )
+    imageUrl: 'images/nuggets.jpg',
+  ),
+  Location(
+    name: 'Timberwolves',
+    place: 'Minneapolis',
+    imageUrl: 'images/timberwolves.jpg',
+  ),
+  Location(
+    name: 'Thunder',
+    place: 'Oklahoma City',
+    imageUrl: 'images/thunder.jpg',
+  ),
+  Location(
+    name: 'Blazers',
+    place: 'Portland',
+    imageUrl: 'images/blazers.jpg',
+  ),
+  Location(
+    name: 'Jazz',
+    place: 'Salt Lake City',
+    imageUrl: 'images/jazz.jpg',
+  ),
+  Location(
+    name: 'Warriors',
+    place: 'San Francisco',
+    imageUrl: 'images/warriors.jpg',
+  ),
+  Location(
+    name: 'Clippers',
+    place: 'Los Angeles',
+    imageUrl: 'images/clippers.jpg',
+  ),
+  Location(
+    name: 'Lakers',
+    place: 'Los Angeles',
+    imageUrl: 'images/lakers.jpg',
+  ),
+  Location(
+    name: 'Suns',
+    place: 'Phoenix',
+    imageUrl: 'images/suns.jpg',
+  ),
+  Location(
+    name: 'Kings',
+    place: 'Sacramento',
+    imageUrl: 'images/kings.jpg',
+  ),
+  Location(
+    name: 'Mavericks',
+    place: 'Dallas',
+    imageUrl: 'images/mavericks.webp',
+  ),
+  Location(
+    name: 'Rockets',
+    place: 'Houston',
+    imageUrl: 'images/rockets.jpg',
+  ),
+  Location(
+    name: 'Grizzlies',
+    place: 'Memphis',
+    imageUrl: 'images/grizzlies.jpg',
+  ),
+  Location(
+    name: 'Pelicans',
+    place: 'New Orleans',
+    imageUrl: 'images/pelicans.jpg',
+  ),
+  Location(
+    name: 'Spurs',
+    place: 'San Antonio',
+    imageUrl: 'images/spurs.jpg',
+  ),
 ];
