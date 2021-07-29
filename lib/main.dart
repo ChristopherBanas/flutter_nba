@@ -403,7 +403,7 @@ const locations = [
   Location(
     name: 'Nuggets',
     place: 'Denver',
-    imageUrl: 'images/nuggets.jpeg',
+    imageUrl: 'images/nuggets.jpg',
   ),
   Location(
     name: 'Timberwolves',
