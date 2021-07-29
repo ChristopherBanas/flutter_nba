@@ -331,14 +331,14 @@ const locations = [
     imageUrl: 'images/celtics.jpg',
   ),
   Location(
-    name: 'Nets',
-    place: 'Brooklyn',
-    imageUrl: 'images/nets.jpg',
-  ),
-  Location(
     name: 'Knicks',
     place: 'New York',
     imageUrl: 'images/knicks.jpg',
+  ),
+  Location(
+    name: 'Nets',
+    place: 'Brooklyn',
+    imageUrl: 'images/nets.jpg',
   ),
   Location(
     name: 'Sixers',
@@ -378,7 +378,7 @@ const locations = [
   Location(
     name: 'Hawks',
     place: 'Atlanta',
-    imageUrl: 'images/hawks.jpg',
+    imageUrl: 'images/hawks.jpeg',
   ),
   Location(
     name: 'Hornets',
@@ -403,7 +403,7 @@ const locations = [
   Location(
     name: 'Nuggets',
     place: 'Denver',
-    imageUrl: 'images/nuggets.jpg',
+    imageUrl: 'images/nuggets.jpeg',
   ),
   Location(
     name: 'Timberwolves',
@@ -453,7 +453,7 @@ const locations = [
   Location(
     name: 'Mavericks',
     place: 'Dallas',
-    imageUrl: 'images/mavericks.webp',
+    imageUrl: 'images/mavericks.jpg',
   ),
   Location(
     name: 'Rockets',
@@ -466,13 +466,13 @@ const locations = [
     imageUrl: 'images/grizzlies.jpg',
   ),
   Location(
+    name: 'Spurs',
+    place: 'San Antonio',
+    imageUrl: 'images/spurs.jpeg',
+  ),
+  Location(
     name: 'Pelicans',
     place: 'New Orleans',
     imageUrl: 'images/pelicans.jpg',
-  ),
-  Location(
-    name: 'Spurs',
-    place: 'San Antonio',
-    imageUrl: 'images/spurs.jpg',
   ),
 ];
