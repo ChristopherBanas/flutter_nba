@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_nba/example_back.dart';
+import 'package:flutter_nba/standings.dart';
 import 'package:flutter_nba/menu_button.dart';
-import 'package:flutter_nba/parallax.dart';
+import 'package:flutter_nba/games.dart';
 import 'package:page_flip_builder/page_flip_builder.dart';
 
 final Color darkBlue = Color.fromARGB(255, 18, 32, 47);
@@ -22,9 +22,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: darkBlue),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        floatingActionButton: ExampleExpandableFab(onFlip: () => pageFlipKey.currentState?.flip()),
+        floatingActionButton: Menu(onFlip: () => pageFlipKey.currentState?.flip()),
         body: Container(
-            color: Colors.white,
+            //color: Colors.white,
             child: PageFlipBuilder(
               key: pageFlipKey,
               frontBuilder: (_) => Scaffold(body: Center(child: GamesParallaxList(onFlip: () => pageFlipKey.currentState?.flip())),),

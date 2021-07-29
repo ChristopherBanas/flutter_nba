@@ -6,35 +6,16 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 
 @immutable
-class ExampleExpandableFab extends StatelessWidget {
-  static const _actionTitles = ['Create Post', 'Upload Photo', 'Upload Video'];
-
-  const ExampleExpandableFab({
+class Menu extends StatelessWidget {
+  const Menu({
     Key? key, this.onFlip
   }) : super(key: key);
   final VoidCallback? onFlip;
 
-  void _showAction(BuildContext context, int index) {
-    showDialog<void>(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          content: Text(_actionTitles[index]),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('CLOSE'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return ExpandableFab(
-        distance: 75.0,
+        distance: 85.0,
         children: [
           ActionButton(
             onPressed: onFlip,
@@ -43,6 +24,20 @@ class ExampleExpandableFab extends StatelessWidget {
           ActionButton(
             onPressed: onFlip,
             icon: FaIcon(FontAwesomeIcons.trophy, size: 20.0,),
+          ),
+          ActionButton(
+            icon: const Icon(Icons.info_outline_rounded),
+            onPressed: () => {
+              showDialog<String>(
+                context: context,
+                builder: (BuildContext context) => SimpleDialog(
+                  title: Center(child: const Text("Info")),
+                  children: [
+                    Center(child: Text("Credits & dark mode / light mode button will go here")),
+                  ],
+                ),
+              ),
+            }
           )
         ],
     );
