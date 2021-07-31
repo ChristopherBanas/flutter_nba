@@ -3,12 +3,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_nba/games_page/flippable_card.dart';
 
-class GamesParallaxList extends StatelessWidget {
-  const GamesParallaxList({
-    Key? key, this.onFlip
-  }) : super(key: key);
-  final VoidCallback? onFlip;
+class GamesParallaxList extends StatefulWidget {
+
+  @override
+  _GamesParallaxListState createState() => _GamesParallaxListState();
+}
+
+class _GamesParallaxListState extends State<GamesParallaxList> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +20,23 @@ class GamesParallaxList extends StatelessWidget {
       child: Column(
         children: [
           for (final location in locations)
-            GameItem(
-              imageUrl: location.imageUrl,
-              name: location.name,
-              country: location.place,
-            ),
+            FlippableCard(
+                frontWidget: GameItem(
+                  imageUrl: location.imageUrl,
+                  name: location.name,
+                  country: location.place,
+                ),
+                backWidget: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                  child: AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: Container(color: Colors.blue,),
+                    ),
+                  ),
+                )
+            )
         ],
       ),
     );
