@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_nba/standings_page/standings.dart';
-import 'package:flutter_nba/menu_button.dart';
 import 'package:flutter_nba/games_page/games.dart';
 import 'package:page_flip_builder/page_flip_builder.dart';
+
+import 'globals.dart';
+import 'menu_button/menu_widget.dart';
 
 final Color darkBlue = Color.fromARGB(255, 18, 32, 47);
 
@@ -25,7 +27,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: darkBlue),
+      theme: lightTheme,
+      darkTheme: darkTheme,
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         floatingActionButton: Menu(onFlip: () => pageFlipKey.currentState?.flip()),

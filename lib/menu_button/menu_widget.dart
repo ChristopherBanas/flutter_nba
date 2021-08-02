@@ -2,43 +2,42 @@
 
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:flutter_nba/menu_button/expanded_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 
 @immutable
 class Menu extends StatelessWidget {
+  final VoidCallback onFlip;
+
   const Menu({
-    Key? key, this.onFlip
-  }) : super(key: key);
-  final VoidCallback? onFlip;
+    required this.onFlip
+  });
 
   @override
   Widget build(BuildContext context) {
     return ExpandableFab(
         distance: 85.0,
         children: [
-          ActionButton(
-            onPressed: onFlip,
-            icon: const Icon(Icons.sports_basketball),
+          ExpandedButton(onFlip: onFlip, buttonIcon: Icons.sports_basketball),
+          ExpandedButton(
+            onFlip: onFlip,
+            buttonIcon: Icons.emoji_events_outlined,
           ),
-          ActionButton(
-            onPressed: onFlip,
-            icon: FaIcon(FontAwesomeIcons.trophy, size: 20.0,),
-          ),
-          ActionButton(
-            icon: const Icon(Icons.info_outline_rounded),
-            onPressed: () => {
-              showDialog<String>(
-                context: context,
-                builder: (BuildContext context) => SimpleDialog(
-                  title: Center(child: const Text("Info")),
-                  children: [
-                    Center(child: Text("Credits & dark mode / light mode button will go here")),
-                  ],
+          ExpandedButton(
+              onFlip: () => {
+                showDialog<String>(
+                  context: context,
+                  builder: (BuildContext context) => SimpleDialog(
+                    title: Center(child: const Text("Info")),
+                    children: [
+                      Center(child: Text("Credits & dark mode / light mode button will go here")),
+                    ],
+                  ),
                 ),
-              ),
-            }
-          )
+              },
+              buttonIcon: Icons.info_outline_rounded
+          ),
         ],
     );
   }
@@ -46,16 +45,15 @@ class Menu extends StatelessWidget {
 
 @immutable
 class ExpandableFab extends StatefulWidget {
-  const ExpandableFab({
-    Key? key,
-    this.initialOpen,
-    required this.distance,
-    required this.children,
-  }) : super(key: key);
-
   final bool? initialOpen;
   final double distance;
   final List<Widget> children;
+
+  const ExpandableFab({
+    this.initialOpen,
+    required this.distance,
+    required this.children,
+  });
 
   @override
   _ExpandableFabState createState() => _ExpandableFabState();
@@ -123,6 +121,7 @@ class _ExpandableFabState extends State<ExpandableFab>
         child: Material(
           shape: const CircleBorder(),
           clipBehavior: Clip.antiAlias,
+          color: Theme.of(context).primaryColor,
           elevation: 4.0,
           child: InkWell(
             onTap: _toggle,
@@ -130,7 +129,7 @@ class _ExpandableFabState extends State<ExpandableFab>
               padding: const EdgeInsets.all(8.0),
               child: Icon(
                 Icons.close,
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).accentColor,
               ),
             ),
           ),
@@ -175,8 +174,9 @@ class _ExpandableFabState extends State<ExpandableFab>
           curve: const Interval(0.25, 1.0, curve: Curves.easeInOut),
           duration: const Duration(milliseconds: 250),
           child: FloatingActionButton(
+            backgroundColor: Theme.of(context).primaryColor,
             onPressed: _toggle,
-            child: const Icon(Icons.menu),
+            child: Icon(Icons.menu, color: Theme.of(context).accentColor,),
           ),
         ),
       ),
@@ -186,18 +186,18 @@ class _ExpandableFabState extends State<ExpandableFab>
 
 @immutable
 class _ExpandingActionButton extends StatelessWidget {
-  _ExpandingActionButton({
-    Key? key,
-    required this.directionInDegrees,
-    required this.maxDistance,
-    required this.progress,
-    required this.child,
-  }) : super(key: key);
-
   final double directionInDegrees;
   final double maxDistance;
   final Animation<double> progress;
   final Widget child;
+
+  const _ExpandingActionButton({
+    required this.directionInDegrees,
+    required this.maxDistance,
+    required this.progress,
+    required this.child,
+  });
+
 
   @override
   Widget build(BuildContext context) {
@@ -227,14 +227,13 @@ class _ExpandingActionButton extends StatelessWidget {
 
 @immutable
 class ActionButton extends StatelessWidget {
-  const ActionButton({
-    Key? key,
-    this.onPressed,
-    required this.icon,
-  }) : super(key: key);
-
   final VoidCallback? onPressed;
   final Widget icon;
+
+  const ActionButton({
+    this.onPressed,
+    required this.icon,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -257,12 +256,11 @@ class ActionButton extends StatelessWidget {
 
 @immutable
 class FakeItem extends StatelessWidget {
-  const FakeItem({
-    Key? key,
-    required this.isBig,
-  }) : super(key: key);
-
   final bool isBig;
+
+  const FakeItem({
+    required this.isBig,
+  });
 
   @override
   Widget build(BuildContext context) {
