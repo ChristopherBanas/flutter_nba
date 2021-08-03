@@ -8,22 +8,17 @@ import 'package:page_flip_builder/page_flip_builder.dart';
 import 'globals.dart';
 import 'menu_button/menu_widget.dart';
 
-final Color darkBlue = Color.fromARGB(255, 18, 32, 47);
 
 void main() {
   runApp(MyApp());
 }
-class MyApp extends StatefulWidget {
 
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
+class MyApp extends StatelessWidget {
 
   final pageFlipKey = GlobalKey<PageFlipBuilderState>();
   final GamesParallaxList gamesList = GamesParallaxList(); //to prevent rebuilding all the time
   final ExampleBack standings = ExampleBack();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -31,7 +26,12 @@ class _MyAppState extends State<MyApp> {
       darkTheme: darkTheme,
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        floatingActionButton: Menu(onFlip: () => pageFlipKey.currentState?.flip()),
+        floatingActionButton: Menu(
+            onFlip: () => {
+              pageFlipKey.currentState?.flip(),
+              onScores = !onScores
+            }
+        ),
         body: Container(
           child: PageFlipBuilder(
             key: pageFlipKey,

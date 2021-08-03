@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
+
+bool onScores = true;
 ThemeData lightTheme = ThemeData(
   // Define the default brightness and colors.
   brightness: Brightness.light,
   primaryColor: Color(0xff2196f3),
-  accentColor: Colors.white,
   scaffoldBackgroundColor: Colors.white38,
 
   // Define the default font family.
@@ -22,8 +23,6 @@ ThemeData lightTheme = ThemeData(
 ThemeData darkTheme = ThemeData(
   // Define the default brightness and colors.
   brightness: Brightness.dark,
-  primaryColor: Colors.greenAccent.shade700,
-  accentColor: Colors.black,
   scaffoldBackgroundColor: Color(0xff212121),
 
   // Define the default font family.

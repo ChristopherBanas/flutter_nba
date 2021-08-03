@@ -1,5 +1,6 @@
-import 'dart:math';
+// Basedon: https://medium.com/flutter-community/flutter-flip-card-animation-eb25c403f371
 
+import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

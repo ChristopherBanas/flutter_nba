@@ -19,12 +19,12 @@ class _GamesParallaxListState extends State<GamesParallaxList> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          for (final location in locations)
+          for (final team in teams)
             FlippableCard(
                 frontWidget: GameItem(
-                  imageUrl: location.imageUrl,
-                  name: location.name,
-                  country: location.place,
+                  imageUrl: team.imageUrl,
+                  name: team.name,
+                  country: team.place,
                 ),
                 backWidget: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
@@ -322,7 +322,7 @@ class Game {
   final String imageUrl;
 }
 
-const locations = [
+const teams = [
   Game(
     name: 'Celtics',
     place: 'Boston',
