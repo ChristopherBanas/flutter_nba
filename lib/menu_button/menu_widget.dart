@@ -22,7 +22,7 @@ class _MenuState extends State<Menu> {
     return SpeedDial(
       backgroundColor: Theme.of(context).accentColor,
       activeBackgroundColor: Theme.of(context).accentColor,
-      icon: Icons.add,
+      icon: Icons.menu,
       activeIcon: Icons.close,
       spacing: 3,
       childPadding: EdgeInsets.all(5),
