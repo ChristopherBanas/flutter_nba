@@ -36,24 +36,23 @@ class _MenuState extends State<Menu> {
       tooltip: "Menu",
       useRotationAnimation: true,
       animationSpeed: 200,
-      elevation: 8.0,
       isOpenOnStart: false,
       shape: StadiumBorder(),
       children: [
         SpeedDialChild(
           child: Icon(Icons.sports_basketball),
-          backgroundColor: Colors.deepOrangeAccent,
+          backgroundColor: Colors.orange.shade700,
           foregroundColor: Colors.white,
           label: "Scores",
           onTap: () => {
-            if (!onScores){
+            if (!onScores){ //scores cant flip to scores
               widget.onFlip()
             }
           }
         ),
         SpeedDialChild(
             child: Icon(Icons.emoji_events),
-            backgroundColor: Colors.yellow.shade900,
+            backgroundColor: Colors.yellow.shade800,
             foregroundColor: Colors.white,
             label: "Standings",
             onTap: () => {

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_nba/standings_page/standings.dart';
+import 'package:flutter_nba/standings_page/standings_widget.dart';
 import 'package:flutter_nba/games_page/games.dart';
 import 'package:page_flip_builder/page_flip_builder.dart';
 
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
 
   final pageFlipKey = GlobalKey<PageFlipBuilderState>();
   final GamesParallaxList gamesList = GamesParallaxList(); //to prevent rebuilding all the time
-  final ExampleBack standings = ExampleBack();
+  final Standings standings = Standings();
 
   @override
   Widget build(BuildContext context) {
