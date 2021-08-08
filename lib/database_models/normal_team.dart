@@ -4,7 +4,7 @@ class NormalTeam{
   final Map<normalEnums, dynamic> valueMap;
 
   const NormalTeam({
-      required this.valueMap
+    required this.valueMap
   });
 
   factory NormalTeam.fromJson(Map<String, dynamic> json) => NormalTeam(

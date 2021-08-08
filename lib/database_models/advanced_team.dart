@@ -4,7 +4,7 @@ class AdvancedTeam{
   final Map<advancedEnums, dynamic> valueMap;
 
   const AdvancedTeam({
-        required this.valueMap
+    required this.valueMap
   });
 
   factory AdvancedTeam.fromJson(Map<String, dynamic> json) => AdvancedTeam(
@@ -47,8 +47,6 @@ class AdvancedTeam{
       advancedEnums.recordOct: json["Oct"],
       advancedEnums.recordNov: json["Nov"],
       advancedEnums.recordDec: json["Dec"],
-    },
-
+    }
   );
-
 }

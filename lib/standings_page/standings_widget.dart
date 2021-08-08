@@ -3,7 +3,8 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_nba/database_models/teams/team.dart';
+import 'package:flutter_nba/database_models/team.dart';
+import 'package:flutter_nba/enums.dart';
 import 'package:flutter_nba/standings_page/data_table.dart';
 import 'package:http/http.dart' as http;
 
@@ -18,7 +19,7 @@ const statTypes = const ['NORMAL', 'ADVANCED'];
 class _StandingsState extends State<Standings> {
   int selectedConference = 0;
   int selectedStatType = 0;
-  late Map<String, dynamic> standingsMap;
+  late Future<Map<String, dynamic>> standingsMap;
 
   Future<Map<String, dynamic>> fetchStandings() async {
     final response = await http
@@ -52,56 +53,68 @@ class _StandingsState extends State<Standings> {
   @override
   void initState(){
     super.initState();
-    fetchStandings().then((Map<String, dynamic> value) => {this.setState(() {
-      standingsMap = value;
-    })});
+    standingsMap = fetchStandings();
+  }
+
+  Future<Map<String, dynamic>> getMap() async {
+    return await standingsMap;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Column(
-          children: [
-            Wrap(
-              children: [
-                for (var i = 0; i < conferences.length; i++)
-                  ChoiceChip(
-                    label: Text(conferences[i]),
-                    selected: selectedConference == i,
-                    onSelected: (bool selected) {
-                      setState(() {
-                        selectedConference = i;
-                      });
-                    },
-                  )
-              ],
-            ),
-            Wrap(
-              children: [
-                for (var i = 0; i < statTypes.length; i++)
-                  ChoiceChip(
-                    label: Text(statTypes[i]),
-                    selected: selectedStatType == i,
-                    onSelected: (bool selected) {
-                      setState(() {
-                        selectedStatType = i;
-                      });
-                    },
-                  )
-              ],
-            ),
-          ],
-        ),
-        Expanded(
-          child: Center(
-            child: StandingsTable(
-                teams: standingsMap['EAST'].values.toList(),
-                colLength: 13, //advanced
-            ),
-          ),
-        ),
-      ],
+    return FutureBuilder(
+      future: standingsMap,
+      builder: (ctx, snapshot) {
+        var snap = snapshot.hasData ? snapshot.data as LinkedHashMap <String, dynamic> : null;
+        if (snapshot.hasData){
+           return Column(
+                children: [
+                  Wrap(
+                    children: [
+                      for (var i = 0; i < conferences.length; i++)
+                        ChoiceChip(
+                          label: Text(conferences[i]),
+                          selected: selectedConference == i,
+                          onSelected: (bool selected) {
+                            setState(() {
+                              selectedConference = i;
+                            });
+                          },
+                        )
+                    ],
+                  ),
+                  Wrap(
+                    children: [
+                      for (var i = 0; i < statTypes.length; i++)
+                        ChoiceChip(
+                          label: Text(statTypes[i]),
+                          selected: selectedStatType == i,
+                          onSelected: (bool selected) {
+                            setState(() {
+                              selectedStatType = i;
+                            });
+                          },
+                        )
+                    ],
+                  ),
+                  Expanded(
+                    child: Center(
+                      child: StandingsTable(
+                        teams: snap![conferences[selectedConference]].values.toList(),
+                        headers: statTypes[selectedStatType] == 'NORMAL' ?
+                          snap[conferences[selectedConference]].values.toList()[0].valueMap[teamEnums.normalStats].valueMap.keys.toList()
+                          : snap[conferences[selectedConference]].values.toList()[0].valueMap[teamEnums.advancedStats].valueMap.keys.toList(),
+                      ),
+
+                    ),
+                  ),
+                ],
+              );
+        }
+        return Center(
+            child: CircularProgressIndicator(),
+        );
+      },
     );
   }
 }
