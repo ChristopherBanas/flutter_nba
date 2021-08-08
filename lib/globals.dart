@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 
 bool onScores = true;
+
+
 ThemeData lightTheme = ThemeData(
   // Define the default brightness and colors.
   brightness: Brightness.light,
