@@ -9,19 +9,19 @@ class NormalTeam{
 
   factory NormalTeam.fromJson(Map<String, dynamic> json) => NormalTeam(
     valueMap: {
-      normalEnums.wins: json['WINS'],
-      normalEnums.losses: json['LOSSES'],
-      normalEnums.winPct: json['WinPCT'],
-      normalEnums.record: json['Record'],
-      normalEnums.homeRecord: json['HOME'],
-      normalEnums.roadRecord: json['ROAD'],
-      normalEnums.lastTen: json['L10'],
-      normalEnums.clinchIndicator: json['ClinchIndicator'],
-      normalEnums.conferenceGamesBack: json['ConferenceGamesBack'],
-      normalEnums.clinchedConferenceTitle: json['ClinchedConferenceTitle'],
-      normalEnums.clinchedPlayoffBirth: json['ClinchedPlayoffBirth'],
-      normalEnums.clinchedPlayIn: json['ClinchedPlayIn'],
-      normalEnums.eliminatedConference: json['EliminatedConference'],
+      normalEnums.W: json['WINS'],
+      normalEnums.L: json['LOSSES'],
+      normalEnums.PCT: json['WinPCT'],
+      normalEnums.HOME: json['HOME'],
+      normalEnums.ROAD: json['ROAD'],
+      normalEnums.L10: json['L10'],
+      normalEnums.OT: json["OT"],
+      normalEnums.GB: json['ConferenceGamesBack'],
+      // normalEnums.clinchIndicator: json['ClinchIndicator'],
+      // normalEnums.clinchedConferenceTitle: json['ClinchedConferenceTitle'],
+      // normalEnums.clinchedPlayoffBirth: json['ClinchedPlayoffBirth'],
+      // normalEnums.clinchedPlayIn: json['ClinchedPlayIn'],
+      // normalEnums.eliminatedConference: json['EliminatedConference'],
     },
 
   );

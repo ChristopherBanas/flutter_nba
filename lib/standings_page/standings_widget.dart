@@ -21,11 +21,8 @@ class _StandingsState extends State<Standings> {
   int selectedStatType = 0;
   late Future<Map<String, dynamic>> standingsMap;
 
-  Future<Map<String, dynamic>> fetchStandings() async {
-    final response = await http
-        .get(Uri.parse('https://nba-function.azurewebsites.net/standings'));
+  Map<String, dynamic> calculateStandings(apiData) {
     Map<String, dynamic> standings = new Map();
-    final apiData = jsonDecode(response.body)[0];
     LinkedHashMap<String, Team> eastMap = new LinkedHashMap();
     LinkedHashMap<String, Team> westMap = new LinkedHashMap();
     for(var index = 0; index < 15; index++){ // 15 teams in each conference
@@ -50,14 +47,19 @@ class _StandingsState extends State<Standings> {
     return standings;
   }
 
+  Future<Map<String, dynamic>> getAPIData() async {
+    final response = await http
+        .get(Uri.parse('https://nba-function.azurewebsites.net/standings'));
+    // final response = await http
+    //     .get(Uri.parse('http://localhost:7071/standings'));
+    final apiData = jsonDecode(response.body)[0];
+    return calculateStandings(apiData);
+  }
+
   @override
   void initState(){
     super.initState();
-    standingsMap = fetchStandings();
-  }
-
-  Future<Map<String, dynamic>> getMap() async {
-    return await standingsMap;
+    standingsMap = getAPIData();
   }
 
   @override
@@ -65,7 +67,8 @@ class _StandingsState extends State<Standings> {
     return FutureBuilder(
       future: standingsMap,
       builder: (ctx, snapshot) {
-        var snap = snapshot.hasData ? snapshot.data as LinkedHashMap <String, dynamic> : null;
+        //only way I could get the Future map to just be a map
+        var standings = snapshot.hasData ? snapshot.data as LinkedHashMap <String, dynamic> : null;
         if (snapshot.hasData){
            return Column(
                 children: [
@@ -100,12 +103,12 @@ class _StandingsState extends State<Standings> {
                   Expanded(
                     child: Center(
                       child: StandingsTable(
-                        teams: snap![conferences[selectedConference]].values.toList(),
+                        teams: standings![conferences[selectedConference]].values.toList(),
                         headers: statTypes[selectedStatType] == 'NORMAL' ?
-                          snap[conferences[selectedConference]].values.toList()[0].valueMap[teamEnums.normalStats].valueMap.keys.toList()
-                          : snap[conferences[selectedConference]].values.toList()[0].valueMap[teamEnums.advancedStats].valueMap.keys.toList(),
+                          standings[conferences[selectedConference]].values.toList()[0].valueMap[teamEnums.normalStats].valueMap.keys.toList()
+                          : standings[conferences[selectedConference]].values.toList()[0].valueMap[teamEnums.advancedStats].valueMap.keys.toList(),
+                        normal: statTypes[selectedStatType] == 'NORMAL' ? true : false,
                       ),
-
                     ),
                   ),
                 ],

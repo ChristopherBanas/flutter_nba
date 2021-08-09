@@ -9,15 +9,15 @@ enum teamEnums {
 }
 
 enum normalEnums {
-  wins,
-  losses,
-  winPct,
-  record,
-  homeRecord,
-  roadRecord,
-  lastTen,
+  W,
+  L,
+  PCT,
+  HOME,
+  ROAD,
+  L10,
   clinchIndicator,
-  conferenceGamesBack,
+  GB,
+  OT,
   clinchedConferenceTitle,
   clinchedPlayoffBirth,
   clinchedPlayIn,
@@ -25,15 +25,15 @@ enum normalEnums {
 }
 
 enum advancedEnums {
-  lastTenHome, lastTenRoad, overTime,
-  threePtsOrLess, tenPtsOrMore, longestHomeStreak,
-  longestRoadStreak, longestWinStreak, longestLossStreak,
-  currentHomeStreak, currentRoadStreak, currentStreak,
-  aheadAtHalf, behindAtHalf, tiedAtHalf, aheadAtThird,
-  behindAtThird, tiedAtThird, score100Pts,
-  oppScore100Pts, oppOver500, leadInFgPct, leadInReb,
-  fewerTurnovers, pointsPerGame, oppPointsPerGame,
-  diffPointsPerGame, vsEast, vsWest, recordJan,
-  recordFeb, recordMar, recordApr, recordMay,
-  recordJun, recordOct, recordNov, recordDec
+  L10_HOME, L10_ROAD,
+  THREE_PT_GAMES, TEN_PT_GAMES, LONGEST_HOME_STREAK,
+  LONGEST_ROAD_STREAK, LONGEST_W_STREAK, LONGEST_L_STREAK,
+  CUR_HOME_STREAK, CUR_ROAD_STREAK, CUR_STREAK,
+  UP_AT_HALF, DOWN_AT_HALF, TIED_AT_HALF, UP_AFTER_THIRD,
+  DOWN_AFTER_THIRD, TIED_AFTER_THIRD, SCORE_100,
+  OPP_SCORE_100, VS_500_AND_ABOVE, LEAD_FG_PCT, LEAD_REB,
+  LESS_TO, PPG, OPP_PPG,
+  DIFF_PPG, VS_EAST, VS_WEST, JAN,
+  FEB, MAR, APR, MAY,
+  JUN, OCT, NOV, DEC
 }

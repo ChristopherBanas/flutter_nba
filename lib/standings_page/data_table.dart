@@ -4,7 +4,7 @@ import 'package:flutter_nba/database_models/team.dart';
 import 'package:flutter_nba/enums.dart';
 import 'package:lazy_data_table/lazy_data_table.dart';
 
-Map<String, String> scriptMap = {
+Map<String, String> scriptMap = { //for super script
   '1': '\u00B9',
   '2': '\u00B2',
   '3': '\u00B3',
@@ -40,10 +40,12 @@ Map<String, String> scriptMap = {
 class StandingsTable extends StatefulWidget {
   final List<Team> teams;
   final List<dynamic> headers;
+  final bool normal;
 
   const StandingsTable({
     required this.teams,
-    required this.headers
+    required this.headers,
+    required this.normal
   });
 
   @override
@@ -60,14 +62,19 @@ class _StandingsTableState extends State<StandingsTable> {
         rows: widget.teams.length,
         columns: widget.headers.length,
         tableDimensions: LazyDataTableDimensions(
-          cellHeight: 50,
-          cellWidth: 100,
-          topHeaderHeight: 50,
-          leftHeaderWidth: 130,
+          customCellWidth: widget.normal ? {} : {0:50, 1:50, 2:125, 3:125, 4:100, 5:100, 6:95, 7:95, 8:80, 9:90, 10:80, 11:60, 12:85, 13:70, 14: 85, 15:110, 16: 95, 17:70, 18:100, 19:100, 20:80, 21:60, 22:60, 23: 50, 24:50, 25:50, 26:55, 27:55, 28:50, 29:50, 30:50, 31:50, 32:50, 33:50, 34:50, 35:50},
+          cellWidth: widget.normal ? 50 : 125,
+          leftHeaderWidth: 120,
         ),
         topHeaderBuilder: (i) => Align(
             alignment: Alignment.centerRight,
-            child: Text(widget.headers[i].toString().split('.').last)
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 1, 2, 0),
+              child: Text(
+                widget.headers[i].toString().split('.').last.replaceAll('_', ' '),
+                textAlign: TextAlign.right,
+              ),
+            )
         ),
         leftHeaderBuilder: (i) => Row(
             //mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -90,14 +97,23 @@ class _StandingsTableState extends State<StandingsTable> {
               ),
             ],
         ),
-        dataCellBuilder: (row, col) => widget.headers.length <= 15 ?
+        dataCellBuilder: (row, col) => widget.normal?
             Align(
                 alignment: Alignment.centerRight,
-                child: Text('${widget.teams[row].valueMap[teamEnums.normalStats].valueMap.values.toList()[col]}')
-            )
-            : Align(
-            alignment: Alignment.centerRight,
-            child: Text('${widget.teams[row].valueMap[teamEnums.advancedStats].valueMap.values.toList()[col]}')
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 3, 0),
+                  child: Text('${widget.teams[row].valueMap[teamEnums.normalStats].valueMap.values.toList()[col]}'),
+                )
+            ) :
+            Align(
+                alignment: Alignment.centerRight,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 2, 0),
+                  child: Text(
+                      '${widget.teams[row].valueMap[teamEnums.advancedStats].valueMap.values.toList()[col]}',
+                      textAlign: TextAlign.right,
+                  ),
+                )
             ),
         topLeftCornerWidget: Center(child: Text("")),
         tableTheme: LazyDataTableTheme(
@@ -107,6 +123,13 @@ class _StandingsTableState extends State<StandingsTable> {
           cornerColor: Colors.transparent,
           rowHeaderColor: Colors.transparent,
           alternateRowHeaderColor: Colors.transparent,
+          cellBorder: Border.all(color: Colors.grey.shade800),
+          alternateCellBorder: Border.all(color: Colors.grey.shade800),
+          alternateColumnHeaderBorder: Border.all(color: Colors.grey.shade800),
+          alternateRowHeaderBorder: Border.all(color: Colors.grey.shade800),
+          columnHeaderBorder: Border.all(color: Colors.grey.shade800),
+          cornerBorder: Border.all(color: Colors.grey.shade800),
+          rowHeaderBorder: Border.all(color: Colors.grey.shade800),
         ),
       ),
     );
