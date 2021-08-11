@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 
-bool onScores = true;
+bool onScores = false;
 
 
 ThemeData lightTheme = ThemeData(

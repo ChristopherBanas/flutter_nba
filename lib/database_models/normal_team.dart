@@ -11,7 +11,7 @@ class NormalTeam{
     valueMap: {
       normalEnums.W: json['WINS'],
       normalEnums.L: json['LOSSES'],
-      normalEnums.PCT: json['WinPCT'],
+      normalEnums.PCT: json['WinPCT'].toStringAsFixed(3),
       normalEnums.HOME: json['HOME'],
       normalEnums.ROAD: json['ROAD'],
       normalEnums.L10: json['L10'],

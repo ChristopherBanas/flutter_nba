@@ -108,6 +108,8 @@ class _StandingsState extends State<Standings> {
                           standings[conferences[selectedConference]].values.toList()[0].valueMap[teamEnums.normalStats].valueMap.keys.toList()
                           : standings[conferences[selectedConference]].values.toList()[0].valueMap[teamEnums.advancedStats].valueMap.keys.toList(),
                         normal: statTypes[selectedStatType] == 'NORMAL' ? true : false,
+                        league: conferences[selectedConference] == 'LEAGUE' ? true : false,
+                        date: standings['DATE']
                       ),
                     ),
                   ),
