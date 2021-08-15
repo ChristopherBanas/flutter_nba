@@ -4,37 +4,25 @@ import 'package:flutter/material.dart';
 bool onScores = true;
 
 
-ThemeData lightTheme = ThemeData(
-  // Define the default brightness and colors.
-  brightness: Brightness.light,
-  primaryColor: Color(0xff2196f3),
-  scaffoldBackgroundColor: Colors.white38,
-
-  // Define the default font family.
-  fontFamily: 'Georgia',
-
-  // Define the default TextTheme. Use this to specify the default
-  // text styling for headlines, titles, bodies of text, and more.
-  textTheme: const TextTheme(
-    headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-    headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-    bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
-  ),
+ThemeData darkTheme = ThemeData(
+    brightness: Brightness.dark,
+    splashColor: Colors.transparent,
+    highlightColor: Colors.transparent,
+    hoverColor: Colors.transparent,
+    appBarTheme: AppBarTheme(
+        backgroundColor: Color(0xfff212121)
+    ),
+    scaffoldBackgroundColor: Color(0xfff3c3c3c),
+    cardColor: Color(0xff565656),
 );
 
-ThemeData darkTheme = ThemeData(
-  // Define the default brightness and colors.
-  brightness: Brightness.dark,
-  scaffoldBackgroundColor: Color(0xff212121),
-
-  // Define the default font family.
-  fontFamily: 'Georgia',
-
-  // Define the default TextTheme. Use this to specify the default
-  // text styling for headlines, titles, bodies of text, and more.
-  textTheme: const TextTheme(
-    headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-    headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-    bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
-  ),
+ThemeData lightTheme = ThemeData(
+    brightness: Brightness.light,
+    splashColor: Colors.transparent,
+    highlightColor: Colors.transparent,
+    hoverColor: Colors.transparent,
+    appBarTheme: AppBarTheme(
+        backgroundColor: Color(0xfff2196f3)
+    ),
+    cardColor: Color(0xffFFFFFF)
 );

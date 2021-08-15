@@ -4,8 +4,8 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nba/database_models/team.dart';
-import 'package:flutter_nba/enums.dart';
-import 'package:flutter_nba/standings_page/data_table.dart';
+import 'package:flutter_nba/standings_page/standings_body.dart';
+import 'package:flutter_point_tab_bar/pointTabBar.dart';
 import 'package:http/http.dart' as http;
 
 class Standings extends StatefulWidget {
@@ -14,11 +14,10 @@ class Standings extends StatefulWidget {
 }
 
 const conferences = const ['EAST', 'WEST', 'LEAGUE'];
-const statTypes = const ['NORMAL', 'ADVANCED'];
 
-class _StandingsState extends State<Standings> {
+class _StandingsState extends State<Standings> with SingleTickerProviderStateMixin{
   int selectedConference = 0;
-  int selectedStatType = 0;
+  late TabController _tabController;
   late Future<Map<String, dynamic>> standingsMap;
 
   Map<String, dynamic> calculateStandings(apiData) {
@@ -48,10 +47,10 @@ class _StandingsState extends State<Standings> {
   }
 
   Future<Map<String, dynamic>> getAPIData() async {
-    // final response = await http
-    //     .get(Uri.parse('https://nba-function.azurewebsites.net/standings'));
     final response = await http
-        .get(Uri.parse('http://localhost:7071/standings'));
+        .get(Uri.parse('https://nba-function.azurewebsites.net/standings'));
+    // final response = await http
+    //     .get(Uri.parse('http://localhost:7071/standings'));
     final apiData = jsonDecode(response.body)[0];
     return calculateStandings(apiData);
   }
@@ -60,61 +59,68 @@ class _StandingsState extends State<Standings> {
   void initState(){
     super.initState();
     standingsMap = getAPIData();
+    _tabController = TabController(length: 3, vsync: this);
+    _tabController.addListener(_handleTabSelection);
+  }
+
+  _handleTabSelection() {
+    if (_tabController.indexIsChanging) {
+      setState(() {});
+    }
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    return FutureBuilder<Map<String,dynamic>>(
       future: standingsMap,
       builder: (ctx, snapshot) {
-        //only way I could get the Future map to just be a map
-        var standings = snapshot.hasData ? snapshot.data as LinkedHashMap <String, dynamic> : null;
         if (snapshot.hasData){
-           return Column(
-                children: [
-                  Wrap(
-                    children: [
-                      for (var i = 0; i < conferences.length; i++)
-                        ChoiceChip(
-                          label: Text(conferences[i]),
-                          selected: selectedConference == i,
-                          onSelected: (bool selected) {
-                            setState(() {
-                              selectedConference = i;
-                            });
-                          },
-                        )
-                    ],
-                  ),
-                  Wrap(
-                    children: [
-                      for (var i = 0; i < statTypes.length; i++)
-                        ChoiceChip(
-                          label: Text(statTypes[i]),
-                          selected: selectedStatType == i,
-                          onSelected: (bool selected) {
-                            setState(() {
-                              selectedStatType = i;
-                            });
-                          },
-                        )
-                    ],
-                  ),
-                  Expanded(
-                    child: Center(
-                      child: StandingsTable(
-                        teams: standings![conferences[selectedConference]].values.toList(),
-                        headers: statTypes[selectedStatType] == 'NORMAL' ?
-                          standings[conferences[selectedConference]].values.toList()[0].valueMap[teamEnums.normalStats].valueMap.keys.toList()
-                          : standings[conferences[selectedConference]].values.toList()[0].valueMap[teamEnums.advancedStats].valueMap.keys.toList(),
-                        normal: statTypes[selectedStatType] == 'NORMAL' ? true : false,
-                        league: conferences[selectedConference] == 'LEAGUE' ? true : false,
-                        date: standings['DATE']
-                      ),
-                    ),
-                  ),
-                ],
-              );
+           return Scaffold(
+             appBar: AppBar(
+               title: Text("Standings"),
+               toolbarHeight: 100,
+               bottom: TabBar(
+                 controller: _tabController,
+                 tabs: [
+                   for (final conf in conferences)
+                     Padding(
+                       padding: const EdgeInsets.only(bottom: 15),
+                       child: Text(conf),
+                     )
+                 ],
+                 indicator: PointTabIndicator(
+                   position: PointTabIndicatorPosition.bottom,
+                   color: Colors.white,
+                   insets: EdgeInsets.only(bottom: 6)
+                 ),
+               ),
+               shape: RoundedRectangleBorder(
+                 borderRadius: BorderRadius.vertical(
+                   bottom: Radius.circular(20),
+                 ),
+               ),
+             ),
+             body: [
+               StandingsBody(
+                   standingsMap: snapshot.data!,
+                   conference: 'EAST'
+               ),
+               StandingsBody(
+                   standingsMap: snapshot.data!,
+                   conference: 'WEST'
+               ),
+               StandingsBody(
+                   standingsMap: snapshot.data!,
+                   conference: 'LEAGUE'
+               ),
+             ][_tabController.index]
+           );
         }
         return Center(
             child: CircularProgressIndicator(),

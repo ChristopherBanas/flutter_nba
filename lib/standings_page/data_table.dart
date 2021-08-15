@@ -62,7 +62,7 @@ class _StandingsTableState extends State<StandingsTable> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+      padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
       child: LazyDataTable(
         tableTheme: LazyDataTableTheme(
           cellColor: Colors.transparent,
@@ -80,7 +80,6 @@ class _StandingsTableState extends State<StandingsTable> {
             bottom: BorderSide(color: Theme.of(context).dividerColor),
           ),
           alternateColumnHeaderBorder: Border(
-              top: BorderSide(color: Theme.of(context).dividerColor),
               bottom: BorderSide(color: Theme.of(context).accentColor, width: 2)
           ),
           alternateRowHeaderBorder: Border(
@@ -89,12 +88,9 @@ class _StandingsTableState extends State<StandingsTable> {
               bottom: BorderSide(color: Theme.of(context).dividerColor)
           ),
           columnHeaderBorder: Border(
-              top: BorderSide(color: Theme.of(context).dividerColor),
               bottom: BorderSide(color: Theme.of(context).accentColor, width: 2)
           ),
           cornerBorder: Border(
-              right: BorderSide(color: Theme.of(context).accentColor, width: 2),
-              top: BorderSide(color: Theme.of(context).dividerColor),
               bottom: BorderSide(color: Theme.of(context).accentColor, width: 2)
           ),
           rowHeaderBorder: Border(
@@ -109,7 +105,7 @@ class _StandingsTableState extends State<StandingsTable> {
           customCellWidth: widget.normal ?
           {0:30, 1:30, 2:50, 3:55, 4:55, 5:35, 6:35, 7:30}
           :
-          {0:50, 1:50, 2:125, 3:125, 4:100, 5:100, 6:95, 7:95, 8:80, 9:90, 10:80, 11:60, 12:85, 13:70, 14: 85, 15:110, 16: 95, 17:70, 18:100, 19:100, 20:80, 21:60, 22:60, 23: 50, 24:50, 25:50, 26:55, 27:55, 28:50, 29:50, 30:50, 31:50, 32:50, 33:50, 34:50, 35:50},
+          {0:50, 1:50, 2:125, 3:125, 4:100, 5:100, 6:95, 7:95, 8:80, 9:90, 10:80, 11:60, 12:85, 13:70, 14: 85, 15:110, 16: 95, 17:70, 18:100, 19:100, 20:80, 21:60, 22:55, 23: 50, 24:50, 25:50, 26:55, 27:55, 28:50, 29:50, 30:50, 31:50, 32:50, 33:50, 34:50, 35:50},
           //cellWidth: widget.normal ? 50 : 125,
           cellHeight: 30,
           leftHeaderWidth: 100,
