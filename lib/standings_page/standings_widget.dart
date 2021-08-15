@@ -48,10 +48,10 @@ class _StandingsState extends State<Standings> {
   }
 
   Future<Map<String, dynamic>> getAPIData() async {
-    final response = await http
-        .get(Uri.parse('https://nba-function.azurewebsites.net/standings'));
     // final response = await http
-    //     .get(Uri.parse('http://localhost:7071/standings'));
+    //     .get(Uri.parse('https://nba-function.azurewebsites.net/standings'));
+    final response = await http
+        .get(Uri.parse('http://localhost:7071/standings'));
     final apiData = jsonDecode(response.body)[0];
     return calculateStandings(apiData);
   }

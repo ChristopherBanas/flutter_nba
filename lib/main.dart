@@ -37,12 +37,12 @@ class MyApp extends StatelessWidget {
         body: Container(
           child: PageFlipBuilder(
             key: pageFlipKey,
-            frontBuilder: (_) => standings,
             backBuilder: (_) => Scaffold(
-                body: Center(
+              body: Center(
                 child: gamesList,
               ),
             ),
+            frontBuilder: (_) => standings,
             flipAxis: Axis.horizontal,
             interactiveFlipEnabled: false,
             nonInteractiveAnimationDuration: Duration(seconds: 1),

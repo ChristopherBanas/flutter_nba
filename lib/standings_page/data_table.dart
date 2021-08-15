@@ -58,7 +58,6 @@ class StandingsTable extends StatefulWidget {
 }
 
 class _StandingsTableState extends State<StandingsTable> {
-  Color greenC = Colors.transparent;
 
   @override
   Widget build(BuildContext context) {
@@ -107,20 +106,20 @@ class _StandingsTableState extends State<StandingsTable> {
         rows: widget.teams.length,
         columns: widget.headers.length,
         tableDimensions: LazyDataTableDimensions(
-          customCellWidth: widget.normal ? {} : {0:50, 1:50, 2:125, 3:125, 4:100, 5:100, 6:95, 7:95, 8:80, 9:90, 10:80, 11:60, 12:85, 13:70, 14: 85, 15:110, 16: 95, 17:70, 18:100, 19:100, 20:80, 21:60, 22:60, 23: 50, 24:50, 25:50, 26:55, 27:55, 28:50, 29:50, 30:50, 31:50, 32:50, 33:50, 34:50, 35:50},
-          cellWidth: widget.normal ? 50 : 125,
-          cellHeight: 35,
+          customCellWidth: widget.normal ?
+          {0:30, 1:30, 2:50, 3:55, 4:55, 5:35, 6:35, 7:30}
+          :
+          {0:50, 1:50, 2:125, 3:125, 4:100, 5:100, 6:95, 7:95, 8:80, 9:90, 10:80, 11:60, 12:85, 13:70, 14: 85, 15:110, 16: 95, 17:70, 18:100, 19:100, 20:80, 21:60, 22:60, 23: 50, 24:50, 25:50, 26:55, 27:55, 28:50, 29:50, 30:50, 31:50, 32:50, 33:50, 34:50, 35:50},
+          //cellWidth: widget.normal ? 50 : 125,
+          cellHeight: 30,
           leftHeaderWidth: 100,
         ),
         topHeaderBuilder: (i) => Align(
             alignment: Alignment.centerRight,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(0, 1, 2, 0),
-              child: Text(
-                widget.headers[i].toString().split('.').last.replaceAll('_', ' '),
-                textAlign: TextAlign.right,
-              ),
-            )
+            child: Text(
+              widget.headers[i].toString().split('.').last.replaceAll('_', ' '),
+              textAlign: TextAlign.right,
+            ),
         ),
         leftHeaderBuilder: (i) => Container(
           color:
@@ -129,7 +128,7 @@ class _StandingsTableState extends State<StandingsTable> {
                 i < 10 ?
                   Colors.yellow.withOpacity(.2) :
                   Theme.of(context).errorColor.withOpacity(.2)
-                : greenC,
+                : Colors.green.withOpacity(.2),
           child: Row(
               //mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -156,20 +155,11 @@ class _StandingsTableState extends State<StandingsTable> {
         widget.normal ?
           CustomDataCell(
             data: widget.teams[row].valueMap[teamEnums.normalStats].valueMap.values.toList()[col],
-            padding: const EdgeInsets.fromLTRB(0, 0, 2, 0),
           ) :
           CustomDataCell(
             data: widget.teams[row].valueMap[teamEnums.advancedStats].valueMap.values.toList()[col],
-            padding: const EdgeInsets.fromLTRB(0, 0, 2, 0),
           ),
-        topLeftCornerWidget: TextButton(
-          child: Center(child: Text('${widget.date}'),),
-          onPressed: () => {
-            this.setState(() {
-              greenC = (greenC == Colors.transparent) ? Colors.green.withOpacity(.2) : Colors.transparent;
-            })
-          },
-        ),
+        topLeftCornerWidget: Center(child: Text('${widget.date}'))
       ),
     );
   }
