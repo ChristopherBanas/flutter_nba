@@ -30,6 +30,8 @@ dependencies:
   lazy_data_table: ^0.3.0
   cupertino_icons: ^1.0.2
   flutter_point_tab_bar: ^0.2.0
+  flutter_switch: ^0.3.2
+  toggle_switch: ^1.2.0
 
 dev_dependencies:
   flutter_test:

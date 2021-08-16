@@ -62,7 +62,7 @@ class _StandingsTableState extends State<StandingsTable> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+      padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
       child: LazyDataTable(
         tableTheme: LazyDataTableTheme(
           cellColor: Colors.transparent,
@@ -103,7 +103,7 @@ class _StandingsTableState extends State<StandingsTable> {
         columns: widget.headers.length,
         tableDimensions: LazyDataTableDimensions(
           customCellWidth: widget.normal ?
-          {0:30, 1:30, 2:50, 3:55, 4:55, 5:35, 6:35, 7:30}
+          {0:30, 1:30, 2:50, 3:30, 4:55, 5:55, 6:35, 7:35}
           :
           {0:50, 1:50, 2:125, 3:125, 4:100, 5:100, 6:95, 7:95, 8:80, 9:90, 10:80, 11:60, 12:85, 13:70, 14: 85, 15:110, 16: 95, 17:70, 18:100, 19:100, 20:80, 21:60, 22:55, 23: 50, 24:50, 25:50, 26:55, 27:55, 28:50, 29:50, 30:50, 31:50, 32:50, 33:50, 34:50, 35:50},
           //cellWidth: widget.normal ? 50 : 125,
