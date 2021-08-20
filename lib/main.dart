@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_nba/standings_page/standings_widget.dart';
 import 'package:flutter_nba/games_page/games.dart';
-import 'package:flutter_nba/test.dart';
 import 'package:page_flip_builder/page_flip_builder.dart';
 
 import 'globals.dart';
@@ -37,12 +36,12 @@ class MyApp extends StatelessWidget {
         body: Container(
           child: PageFlipBuilder(
             key: pageFlipKey,
-            backBuilder: (_) => Scaffold(
+            frontBuilder: (_) => Scaffold(
               body: Center(
                 child: gamesList,
               ),
             ),
-            frontBuilder: (_) => standings,
+            backBuilder: (_) => standings,
             flipAxis: Axis.horizontal,
             interactiveFlipEnabled: false,
             nonInteractiveAnimationDuration: Duration(seconds: 1),

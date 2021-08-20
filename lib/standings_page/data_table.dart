@@ -123,7 +123,7 @@ class _StandingsTableState extends State<StandingsTable> {
               null : i > 5 ?
                 i < 10 ?
                   Colors.yellow.withOpacity(.2) :
-                  Theme.of(context).errorColor.withOpacity(.2)
+                  Colors.red.withOpacity(.2)
                 : Colors.green.withOpacity(.2),
           child: Row(
               //mainAxisAlignment: MainAxisAlignment.spaceBetween,

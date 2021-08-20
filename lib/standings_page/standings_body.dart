@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nba/enums.dart';
+import 'package:flutter_nba/standings_page/color_identifer.dart';
 import 'package:flutter_nba/standings_page/stat_switch.dart';
 import 'data_table.dart';
 
@@ -52,6 +53,10 @@ class _StandingsBodyState extends State<StandingsBody> {
                               })
                             }
                         ),
+                        Spacer(),
+                        ColorIdentifier(color: Colors.green.withOpacity(.2), text: 'Playoffs'),
+                        ColorIdentifier(color: Colors.yellow.withOpacity(.2), text: 'Play in'),
+                        ColorIdentifier(color: Colors.red.withOpacity(.2), text: 'Out')
                       ],
                     ),
                   ),
