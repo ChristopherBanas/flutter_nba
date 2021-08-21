@@ -9,16 +9,21 @@ import 'package:flutter_point_tab_bar/pointTabBar.dart';
 import 'package:http/http.dart' as http;
 
 class Standings extends StatefulWidget {
+  final Map<String, dynamic> standingsMap;
+
+  const Standings({
+    required this.standingsMap
+  });
+
   @override
-  _StandingsState createState() => _StandingsState();
+  StandingsState createState() => StandingsState();
 }
 
 const conferences = const ['EAST', 'WEST', 'LEAGUE'];
 
-class _StandingsState extends State<Standings> with SingleTickerProviderStateMixin{
+class StandingsState extends State<Standings> with SingleTickerProviderStateMixin{
   int selectedConference = 0;
   late TabController _tabController;
-  late Future<Map<String, dynamic>> standingsMap;
 
   Map<String, dynamic> calculateStandings(apiData) {
     Map<String, dynamic> standings = new Map();
@@ -58,7 +63,6 @@ class _StandingsState extends State<Standings> with SingleTickerProviderStateMix
   @override
   void initState(){
     super.initState();
-    standingsMap = getAPIData();
     _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(_handleTabSelection);
   }
@@ -77,55 +81,45 @@ class _StandingsState extends State<Standings> with SingleTickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Map<String,dynamic>>(
-      future: standingsMap,
-      builder: (ctx, snapshot) {
-        if (snapshot.hasData){
-           return Scaffold(
-             appBar: AppBar(
-               title: Text("Standings"),
-               toolbarHeight: 100,
-               bottom: TabBar(
-                 controller: _tabController,
-                 tabs: [
-                   for (final conf in conferences)
-                     Padding(
-                       padding: const EdgeInsets.only(bottom: 15),
-                       child: Text(conf),
-                     )
-                 ],
-                 indicator: PointTabIndicator(
-                   position: PointTabIndicatorPosition.bottom,
-                   color: Colors.white,
-                   insets: EdgeInsets.only(bottom: 6)
-                 ),
-               ),
-               shape: RoundedRectangleBorder(
-                 borderRadius: BorderRadius.vertical(
-                   bottom: Radius.circular(20),
-                 ),
-               ),
-             ),
-             body: [
-               StandingsBody(
-                   standingsMap: snapshot.data!,
-                   conference: 'EAST'
-               ),
-               StandingsBody(
-                   standingsMap: snapshot.data!,
-                   conference: 'WEST'
-               ),
-               StandingsBody(
-                   standingsMap: snapshot.data!,
-                   conference: 'LEAGUE'
-               ),
-             ][_tabController.index]
-           );
-        }
-        return Center(
-            child: CircularProgressIndicator(),
-        );
-      },
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Standings"),
+          toolbarHeight: 100,
+          bottom: TabBar(
+            controller: _tabController,
+            tabs: [
+              for (final conf in conferences)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 15),
+                  child: Text(conf),
+                )
+            ],
+            indicator: PointTabIndicator(
+                position: PointTabIndicatorPosition.bottom,
+                color: Colors.white,
+                insets: EdgeInsets.only(bottom: 6)
+            ),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(20),
+            ),
+          ),
+        ),
+        body: [
+          StandingsBody(
+              standingsMap: widget.standingsMap,
+              conference: 'EAST'
+          ),
+          StandingsBody(
+              standingsMap: widget.standingsMap,
+              conference: 'WEST'
+          ),
+          StandingsBody(
+              standingsMap: widget.standingsMap,
+              conference: 'LEAGUE'
+          ),
+        ][_tabController.index]
     );
   }
 }

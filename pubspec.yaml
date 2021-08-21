@@ -23,19 +23,20 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  page_flip_builder: ^0.1.3
-  font_awesome_flutter: ^9.1.0
-  flutter_speed_dial: ^4.2.0
-  http: ^0.13.3
-  lazy_data_table: ^0.3.0
-  cupertino_icons: ^1.0.2
-  flutter_point_tab_bar: ^0.2.0
-  flutter_switch: ^0.3.2
-  toggle_switch: ^1.2.0
+  page_flip_builder: ^0.1.3  # for flipping directories
+  flutter_speed_dial: ^4.2.0  # speed dial
+  http: ^0.13.3  # http get and post
+  lazy_data_table: ^0.3.0  # standings
+  flutter_point_tab_bar: ^0.2.0  # directory
+  toggle_switch: ^1.2.0  # normal / advanced in standings
+  animated_text_kit: ^4.2.1
+  get: ^4.1.4
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_native_splash: ^1.2.1  # splash screen
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

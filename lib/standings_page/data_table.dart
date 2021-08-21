@@ -62,7 +62,7 @@ class _StandingsTableState extends State<StandingsTable> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+      padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
       child: LazyDataTable(
         tableTheme: LazyDataTableTheme(
           cellColor: Colors.transparent,

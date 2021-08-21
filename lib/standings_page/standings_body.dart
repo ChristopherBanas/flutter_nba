@@ -41,22 +41,27 @@ class _StandingsBodyState extends State<StandingsBody> {
               ),
               child: Column(
                 children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(5, 7, 5, 0),
+                      child: StatSwitch(
+                          initIndex: selectedStatType,
+                          callBack: (index) => {
+                            this.setState(() {
+                              selectedStatType = index;
+                            })
+                          }
+                      ),
+                    ),
+                  ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(5, 7, 5, 0),
+                    padding: const EdgeInsets.fromLTRB(5, 5, 0, 0),
                     child: Row(
                       children: [
-                        StatSwitch(
-                            initIndex: selectedStatType,
-                            callBack: (index) => {
-                              this.setState(() {
-                                selectedStatType = index;
-                              })
-                            }
-                        ),
-                        Spacer(),
                         ColorIdentifier(color: Colors.green.withOpacity(.2), text: 'Playoffs'),
                         ColorIdentifier(color: Colors.yellow.withOpacity(.2), text: 'Play in'),
-                        ColorIdentifier(color: Colors.red.withOpacity(.2), text: 'Out')
+                        ColorIdentifier(color: Colors.red.withOpacity(.2), text: 'Out'),
                       ],
                     ),
                   ),
