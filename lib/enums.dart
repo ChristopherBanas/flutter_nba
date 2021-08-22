@@ -1,11 +1,11 @@
 enum teamEnums {
-  teamId,
-  city,
-  name,
-  conference,
-  playoffRank,
-  normalStats,
-  advancedStats
+  TEAM_ID,
+  CITY,
+  NAME,
+  CONFERENCE,
+  PLAYOFF_RANK,
+  NORMAL_STATS,
+  ADVANCED_STATS
 }
 
 enum normalEnums {
@@ -36,4 +36,23 @@ enum advancedEnums {
   DIFF_PPG, VS_EAST, VS_WEST, JAN,
   FEB, MAR, APR, MAY,
   JUN, OCT, NOV, DEC
+}
+
+enum gameEnums{
+  GAME_ID,
+  TEAM_BOX_SCORE,
+  AWAY,
+  HOME,
+  PLAYER_BOX_SCORE,
+  TOP_PERFORMERS,
+  DATE
+}
+
+enum boxEnums{
+  SEASON_ID,TEAM_ID,TEAM_ABBREVIATION,
+  TEAM_NAME,GAME_ID,GAME_DATE,MATCHUP,WL,MIN,
+  PTS,FGM,FGA,FG_PCT,FG3M,FG3A,FG3_PCT,FTM,FTA,
+  FT_PCT,OREB,DREB,REB,AST,STL,BLK,TOV,PF,PLUS_MINUS,
+  PLAYER_ID,PLAYER_NAME,PLAYER_NICKNAME,START_POSITION,
+  TEAM_CITY, TO
 }

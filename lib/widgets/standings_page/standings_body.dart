@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nba/enums.dart';
-import 'package:flutter_nba/standings_page/color_identifer.dart';
-import 'package:flutter_nba/standings_page/stat_switch.dart';
+import 'package:flutter_nba/widgets/standings_page/color_identifer.dart';
+import 'package:flutter_nba/widgets/standings_page/stat_switch.dart';
 import 'data_table.dart';
 
 class StandingsBody extends StatefulWidget {
@@ -33,7 +33,10 @@ class _StandingsBodyState extends State<StandingsBody> {
           Expanded(
             child: Card(
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(20),
+                  topLeft: Radius.circular(20)
+                ),
                 side: BorderSide(
                   color: Colors.black,
                   width: 1,
@@ -69,8 +72,8 @@ class _StandingsBodyState extends State<StandingsBody> {
                     child: StandingsTable(
                         teams: widget.standingsMap[widget.conference].values.toList(),
                         headers: statTypes[selectedStatType] == 'NORMAL' ?
-                        widget.standingsMap[widget.conference].values.toList()[0].valueMap[teamEnums.normalStats].valueMap.keys.toList()
-                            : widget.standingsMap[widget.conference].values.toList()[0].valueMap[teamEnums.advancedStats].valueMap.keys.toList(),
+                        widget.standingsMap[widget.conference].values.toList()[0].valueMap[teamEnums.NORMAL_STATS].valueMap.keys.toList()
+                            : widget.standingsMap[widget.conference].values.toList()[0].valueMap[teamEnums.ADVANCED_STATS].valueMap.keys.toList(),
                         normal: statTypes[selectedStatType] == 'NORMAL' ? true : false,
                         league: widget.conference == 'LEAGUE' ? true : false,
                         date: widget.standingsMap['DATE']

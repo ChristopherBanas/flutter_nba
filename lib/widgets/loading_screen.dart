@@ -1,7 +1,7 @@
 // Based on: https://github.com/ShreeyansB/fontina
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_nba/standings_page/standings_widget.dart';
+import 'package:flutter_nba/widgets/standings_page/standings_widget.dart';
 import 'package:get/get.dart';
 import 'home_screen.dart';
 
@@ -62,7 +62,7 @@ class _LoadingScreenState extends State<LoadingScreen>
             Get.off(
                   () => HomeScreen(standingsMap: result),
               transition: Transition.zoom,
-              duration: Duration(milliseconds: 400),
+              duration: Duration(milliseconds: 600),
               curve: Curves.easeOutQuad,
             );
           }

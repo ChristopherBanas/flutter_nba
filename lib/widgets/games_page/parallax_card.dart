@@ -1,46 +1,19 @@
-// Based on: https://flutter.dev/docs/cookbook/effects/parallax-scrolling
+import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_nba/games_page/flippable_card.dart';
 
-class GamesParallaxList extends StatefulWidget {
+class Game {
+  const Game({
+    required this.name,
+    required this.place,
+    required this.imageUrl,
+  });
 
-  @override
-  _GamesParallaxListState createState() => _GamesParallaxListState();
-}
-
-class _GamesParallaxListState extends State<GamesParallaxList> {
-
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          for (final team in teams)
-            FlippableCard(
-                frontWidget: GameItem(
-                  imageUrl: team.imageUrl,
-                  name: team.name,
-                  country: team.place,
-                ),
-                backWidget: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                  child: AspectRatio(
-                    aspectRatio: 16 / 9,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: Container(color: Colors.blue,),
-                    ),
-                  ),
-                )
-            )
-        ],
-      ),
-    );
-  }
+  final String name;
+  final String place;
+  final String imageUrl;
 }
 
 class GameItem extends StatelessWidget {
@@ -309,168 +282,3 @@ class RenderParallax extends RenderBox
             Offset(0.0, childRect.top));
   }
 }
-
-class Game {
-  const Game({
-    required this.name,
-    required this.place,
-    required this.imageUrl,
-  });
-
-  final String name;
-  final String place;
-  final String imageUrl;
-}
-
-const teams = [
-  Game(
-    name: 'Celtics',
-    place: 'Boston',
-    imageUrl: 'images/celtics.jpg',
-  ),
-  Game(
-    name: 'Knicks',
-    place: 'New York',
-    imageUrl: 'images/knicks.jpg',
-  ),
-  Game(
-    name: 'Nets',
-    place: 'Brooklyn',
-    imageUrl: 'images/nets.jpg',
-  ),
-  Game(
-    name: 'Sixers',
-    place: 'Philadelphia',
-    imageUrl: 'images/sixers.jpg',
-  ),
-  Game(
-    name: 'Raptors',
-    place: 'Toronto',
-    imageUrl: 'images/raptors.jpg',
-  ),
-  Game(
-    name: 'Bulls',
-    place: 'Chicago',
-    imageUrl: 'images/bulls.jpg',
-  ),
-  Game(
-    name: 'Cavaliers',
-    place: 'Cleveland',
-    imageUrl: 'images/cavs.jpg',
-  ),
-  Game(
-    name: 'Pistons',
-    place: 'Detroit',
-    imageUrl: 'images/pistons.jpg',
-  ),
-  Game(
-    name: 'Pacers',
-    place: 'Indianapolis',
-    imageUrl: 'images/pacers.jpg',
-  ),
-  Game(
-    name: 'Bucks',
-    place: 'Milwaukee',
-    imageUrl: 'images/bucks.jpg',
-  ),
-  Game(
-    name: 'Hawks',
-    place: 'Atlanta',
-    imageUrl: 'images/hawks.jpeg',
-  ),
-  Game(
-    name: 'Hornets',
-    place: 'Charlotte',
-    imageUrl: 'images/hornets.jpg',
-  ),
-  Game(
-    name: 'Heat',
-    place: 'Miami',
-    imageUrl: 'images/heat.jpg',
-  ),
-  Game(
-    name: 'Magic',
-    place: 'Orlando',
-    imageUrl: 'images/magic.jpg',
-  ),
-  Game(
-    name: 'Wizards',
-    place: 'Washington',
-    imageUrl: 'images/wizards.jpg',
-  ),
-  Game(
-    name: 'Nuggets',
-    place: 'Denver',
-    imageUrl: 'images/nuggets.jpg',
-  ),
-  Game(
-    name: 'Timberwolves',
-    place: 'Minneapolis',
-    imageUrl: 'images/timberwolves.jpg',
-  ),
-  Game(
-    name: 'Thunder',
-    place: 'Oklahoma City',
-    imageUrl: 'images/thunder.jpg',
-  ),
-  Game(
-    name: 'Blazers',
-    place: 'Portland',
-    imageUrl: 'images/blazers.jpg',
-  ),
-  Game(
-    name: 'Jazz',
-    place: 'Salt Lake City',
-    imageUrl: 'images/jazz.jpg',
-  ),
-  Game(
-    name: 'Warriors',
-    place: 'San Francisco',
-    imageUrl: 'images/warriors.jpg',
-  ),
-  Game(
-    name: 'Clippers',
-    place: 'Los Angeles',
-    imageUrl: 'images/clippers.jpg',
-  ),
-  Game(
-    name: 'Lakers',
-    place: 'Los Angeles',
-    imageUrl: 'images/lakers.jpg',
-  ),
-  Game(
-    name: 'Suns',
-    place: 'Phoenix',
-    imageUrl: 'images/suns.jpg',
-  ),
-  Game(
-    name: 'Kings',
-    place: 'Sacramento',
-    imageUrl: 'images/kings.jpg',
-  ),
-  Game(
-    name: 'Mavericks',
-    place: 'Dallas',
-    imageUrl: 'images/mavericks.jpg',
-  ),
-  Game(
-    name: 'Rockets',
-    place: 'Houston',
-    imageUrl: 'images/rockets.jpg',
-  ),
-  Game(
-    name: 'Grizzlies',
-    place: 'Memphis',
-    imageUrl: 'images/grizzlies.jpg',
-  ),
-  Game(
-    name: 'Spurs',
-    place: 'San Antonio',
-    imageUrl: 'images/spurs.jpeg',
-  ),
-  Game(
-    name: 'Pelicans',
-    place: 'New Orleans',
-    imageUrl: 'images/pelicans.jpg',
-  ),
-];

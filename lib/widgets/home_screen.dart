@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_nba/standings_page/standings_widget.dart';
+import 'package:flutter_nba/widgets/standings_page/standings_widget.dart';
 import 'package:page_flip_builder/page_flip_builder.dart';
-import 'games_page/games.dart';
-import 'globals.dart';
+import '../globals.dart';
+import 'games_page/games_widget.dart';
 import 'menu_button/menu_widget.dart';
 
 class HomeScreen extends StatelessWidget {

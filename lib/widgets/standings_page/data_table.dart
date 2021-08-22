@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_nba/database_models/team.dart';
+import 'package:flutter_nba/widgets/database_models/team.dart';
 import 'package:flutter_nba/enums.dart';
-import 'package:flutter_nba/standings_page/data_cell.dart';
+import 'package:flutter_nba/widgets/standings_page/data_cell.dart';
 import 'package:lazy_data_table/lazy_data_table.dart';
 
 Map<String, String> scriptMap = { //for super script
@@ -91,7 +91,8 @@ class _StandingsTableState extends State<StandingsTable> {
               bottom: BorderSide(color: Theme.of(context).accentColor, width: 2)
           ),
           cornerBorder: Border(
-              bottom: BorderSide(color: Theme.of(context).accentColor, width: 2)
+              bottom: BorderSide(color: Theme.of(context).accentColor, width: 2),
+              right: BorderSide(color: Theme.of(context).accentColor, width: 2),
           ),
           rowHeaderBorder: Border(
               right: BorderSide(color: Theme.of(context).accentColor, width: 2),
@@ -132,7 +133,7 @@ class _StandingsTableState extends State<StandingsTable> {
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(3, 0, 0, 0),
                     child: Image.network(
-                        'https://cdn.nba.com/logos/nba/${widget.teams[i].valueMap[teamEnums.teamId]}/primary/L/logo.svg',
+                        'https://cdn.nba.com/logos/nba/${widget.teams[i].valueMap[teamEnums.TEAM_ID]}/primary/L/logo.svg',
                         height: 30.0,
                         width: 30.0,
                         fit: BoxFit.contain,
@@ -142,7 +143,7 @@ class _StandingsTableState extends State<StandingsTable> {
                 Spacer(),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 0, 6, 0),
-                  child: Text('${widget.teams[i].valueMap[teamEnums.name]}${scriptMap['${i+1}']}'),
+                  child: Text('${widget.teams[i].valueMap[teamEnums.NAME]}${scriptMap['${i+1}']}'),
                 ),
               ],
           ),
@@ -150,10 +151,10 @@ class _StandingsTableState extends State<StandingsTable> {
         dataCellBuilder: (row, col) =>
         widget.normal ?
           CustomDataCell(
-            data: widget.teams[row].valueMap[teamEnums.normalStats].valueMap.values.toList()[col],
+            data: widget.teams[row].valueMap[teamEnums.NORMAL_STATS].valueMap.values.toList()[col],
           ) :
           CustomDataCell(
-            data: widget.teams[row].valueMap[teamEnums.advancedStats].valueMap.values.toList()[col],
+            data: widget.teams[row].valueMap[teamEnums.ADVANCED_STATS].valueMap.values.toList()[col],
           ),
         topLeftCornerWidget: Center(child: Text('${widget.date}'))
       ),
