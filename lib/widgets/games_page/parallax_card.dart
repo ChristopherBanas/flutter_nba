@@ -3,30 +3,19 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_nba/enums.dart';
+import 'package:flutter_nba/widgets/database_models/game.dart';
 
-class Game {
-  const Game({
-    required this.name,
-    required this.place,
-    required this.imageUrl,
-  });
-
-  final String name;
-  final String place;
-  final String imageUrl;
-}
 
 class GameItem extends StatelessWidget {
   GameItem({
     Key? key,
-    required this.imageUrl,
-    required this.name,
-    required this.country,
+    required this.image,
+    required this.gameModel,
   }) : super(key: key);
 
-  final String imageUrl;
-  final String name;
-  final String country;
+  final String image;
+  final Game gameModel;
   final GlobalKey _backgroundImageKey = GlobalKey();
 
   @override
@@ -41,7 +30,7 @@ class GameItem extends StatelessWidget {
             children: [
               buildBackground(context),
               //_buildGradient(),
-              buildSummary(),
+              buildSummary(context),
             ],
           ),
         ),
@@ -58,7 +47,7 @@ class GameItem extends StatelessWidget {
       ),
       children: [
         Image.network(
-          imageUrl,
+          image,
           key: _backgroundImageKey,
           fit: BoxFit.cover,
         ),
@@ -81,31 +70,118 @@ class GameItem extends StatelessWidget {
   //   );
   // }
 
-  Widget buildSummary() {
-    return Positioned(
-      left: 20,
-      bottom: 20,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            name,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Text(
-            country,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 14,
-            ),
-          ),
-        ],
-      ),
+  Widget buildSummary(context) {
+    return Stack(
+      alignment: Alignment.bottomLeft,
+      children: [
+        Positioned.fill(
+          top: 220,
+          child: Card(
+              color: Theme.of(context).cardColor.withOpacity(.4),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+                side: BorderSide(
+                  color: Colors.black,
+                  width: 1,
+                ),
+              ),
+              child: IntrinsicWidth(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 5, 0, 5),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            '${gameModel.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY].valueMap[boxEnums.PTS]}',
+                            style: TextStyle(
+                                //color: Colors.black,
+                                fontSize: 20
+                            ),
+                          ),
+                          Text(
+                            '${gameModel.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY].valueMap[boxEnums.TEAM_ABBREVIATION]}',
+                            style: TextStyle(
+                                //color: Colors.black,
+                                fontSize: 20
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 5, 20, 5),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            '${gameModel.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME].valueMap[boxEnums.PTS]}',
+                            style: TextStyle(
+                                //color: Colors.black,
+                                fontSize: 20
+                            ),
+                          ),
+                          Text(
+                            gameModel.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME].valueMap[boxEnums.TEAM_ABBREVIATION],
+                            style: TextStyle(
+                                //color: Colors.black,
+                                fontSize: 20
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    // Expanded(...)
+                  ],
+                ),
+              )
+          )
+          // child: Row(
+          //   children: [
+          //     Column(
+          //       children: [
+          //         Text(
+          //           '${gameModel.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY].valueMap[boxEnums.PTS]}',
+          //           style: TextStyle(
+          //               color: Colors.white,
+          //               fontSize: 40
+          //           ),
+          //         ),
+          //         Text(
+          //           gameModel.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY].valueMap[boxEnums.TEAM_ABBREVIATION],
+          //           style: TextStyle(
+          //               color: Colors.white,
+          //               fontSize: 40
+          //           ),
+          //         )
+          //       ],
+          //     ),
+          //     //Spacer(),
+          //     Column(
+          //       children: [
+          //         Text(
+          //           '${gameModel.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME].valueMap[boxEnums.PTS]}',
+          //           style: TextStyle(
+          //               color: Colors.white,
+          //               fontSize: 40
+          //           ),
+          //         ),
+          //         Text(
+          //           gameModel.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME].valueMap[boxEnums.TEAM_ABBREVIATION],
+          //           style: TextStyle(
+          //               color: Colors.white,
+          //               fontSize: 40
+          //           ),
+          //         )
+          //       ],
+          //     ),
+          //   ],
+          // ),
+        ),
+      ]
     );
   }
 }

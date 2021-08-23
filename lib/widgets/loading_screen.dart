@@ -1,6 +1,7 @@
 // Based on: https://github.com/ShreeyansB/fontina
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_nba/widgets/games_page/games_widget.dart';
 import 'package:flutter_nba/widgets/standings_page/standings_widget.dart';
 import 'package:get/get.dart';
 import 'home_screen.dart';
@@ -49,7 +50,8 @@ class _LoadingScreenState extends State<LoadingScreen>
           setState(() {
             _connOpacity = 1;
           });
-          var result = await Get.put(StandingsState().getAPIData());
+          var gamesResult = await Get.put(GamesWidgetState().getAPIData());
+          var standingsResult = await Get.put(StandingsWidgetState().getAPIData());
           setState(() {
             _connOpacity = 0;
           });
@@ -58,9 +60,12 @@ class _LoadingScreenState extends State<LoadingScreen>
             _fetchOpacity = 1;
           });
           await Future.delayed(Duration(milliseconds: 2000));
-          if (result.isNotEmpty) {
+          if (standingsResult.isNotEmpty && gamesResult.isNotEmpty) {
             Get.off(
-                  () => HomeScreen(standingsMap: result),
+                  () => HomeScreen(
+                      standingsMap: standingsResult,
+                      gamesList: gamesResult
+                  ),
               transition: Transition.zoom,
               duration: Duration(milliseconds: 600),
               curve: Curves.easeOutQuad,

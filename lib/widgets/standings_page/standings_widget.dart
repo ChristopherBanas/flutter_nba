@@ -8,20 +8,20 @@ import 'package:flutter_nba/widgets/standings_page/standings_body.dart';
 import 'package:flutter_point_tab_bar/pointTabBar.dart';
 import 'package:http/http.dart' as http;
 
-class Standings extends StatefulWidget {
+class StandingsWidget extends StatefulWidget {
   final Map<String, dynamic> standingsMap;
 
-  const Standings({
+  const StandingsWidget({
     required this.standingsMap
   });
 
   @override
-  StandingsState createState() => StandingsState();
+  StandingsWidgetState createState() => StandingsWidgetState();
 }
 
 const conferences = const ['EAST', 'WEST', 'LEAGUE'];
 
-class StandingsState extends State<Standings> with SingleTickerProviderStateMixin{
+class StandingsWidgetState extends State<StandingsWidget> with SingleTickerProviderStateMixin{
   int selectedConference = 0;
   late TabController _tabController;
 
