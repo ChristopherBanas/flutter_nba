@@ -3,19 +3,19 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_nba/enums.dart';
 import 'package:flutter_nba/widgets/database_models/game.dart';
+import 'package:flutter_nba/widgets/games_page/card_score.dart';
 
 
 class GameItem extends StatelessWidget {
   GameItem({
     Key? key,
     required this.image,
-    required this.gameModel,
+    required this.game,
   }) : super(key: key);
 
   final String image;
-  final Game gameModel;
+  final Game game;
   final GlobalKey _backgroundImageKey = GlobalKey();
 
   @override
@@ -23,18 +23,22 @@ class GameItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
       child: AspectRatio(
-        aspectRatio: 16 / 9,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: Stack(
-            children: [
-              buildBackground(context),
-              //_buildGradient(),
-              buildSummary(context),
-            ],
-          ),
-        ),
-      ),
+              aspectRatio: 16 / 9,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: LayoutBuilder(
+                  builder: (context, constraints){
+                    return Stack(
+                      children: [
+                        buildBackground(context),
+                        //_buildGradient(),
+                        buildSummary(context, constraints.maxHeight),
+                      ],
+                    );
+                  }
+                ),
+              ),
+            )
     );
   }
 
@@ -70,118 +74,38 @@ class GameItem extends StatelessWidget {
   //   );
   // }
 
-  Widget buildSummary(context) {
-    return Stack(
-      alignment: Alignment.bottomLeft,
-      children: [
-        Positioned.fill(
-          top: 220,
-          child: Card(
-              color: Theme.of(context).cardColor.withOpacity(.4),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-                side: BorderSide(
-                  color: Colors.black,
-                  width: 1,
+  Widget buildSummary(context, height) {
+    return Positioned.fill(
+      top: height / 1.5,
+      child: Card(
+          color: Theme.of(context).cardColor.withOpacity(.8),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+            side: BorderSide(
+              color: Colors.black,
+              width: 1,
+            ),
+          ),
+          child: IntrinsicWidth(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                CardScore(
+                    isHome: false,
+                    game: game,
+                    height: height
                 ),
-              ),
-              child: IntrinsicWidth(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 5, 0, 5),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            '${gameModel.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY].valueMap[boxEnums.PTS]}',
-                            style: TextStyle(
-                                //color: Colors.black,
-                                fontSize: 20
-                            ),
-                          ),
-                          Text(
-                            '${gameModel.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY].valueMap[boxEnums.TEAM_ABBREVIATION]}',
-                            style: TextStyle(
-                                //color: Colors.black,
-                                fontSize: 20
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 5, 20, 5),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            '${gameModel.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME].valueMap[boxEnums.PTS]}',
-                            style: TextStyle(
-                                //color: Colors.black,
-                                fontSize: 20
-                            ),
-                          ),
-                          Text(
-                            gameModel.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME].valueMap[boxEnums.TEAM_ABBREVIATION],
-                            style: TextStyle(
-                                //color: Colors.black,
-                                fontSize: 20
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    // Expanded(...)
-                  ],
-                ),
-              )
+                CardScore(
+                    isHome: true,
+                    game: game,
+                    height: height
+                )
+                // Expanded(...)
+              ],
+            ),
           )
-          // child: Row(
-          //   children: [
-          //     Column(
-          //       children: [
-          //         Text(
-          //           '${gameModel.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY].valueMap[boxEnums.PTS]}',
-          //           style: TextStyle(
-          //               color: Colors.white,
-          //               fontSize: 40
-          //           ),
-          //         ),
-          //         Text(
-          //           gameModel.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY].valueMap[boxEnums.TEAM_ABBREVIATION],
-          //           style: TextStyle(
-          //               color: Colors.white,
-          //               fontSize: 40
-          //           ),
-          //         )
-          //       ],
-          //     ),
-          //     //Spacer(),
-          //     Column(
-          //       children: [
-          //         Text(
-          //           '${gameModel.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME].valueMap[boxEnums.PTS]}',
-          //           style: TextStyle(
-          //               color: Colors.white,
-          //               fontSize: 40
-          //           ),
-          //         ),
-          //         Text(
-          //           gameModel.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME].valueMap[boxEnums.TEAM_ABBREVIATION],
-          //           style: TextStyle(
-          //               color: Colors.white,
-          //               fontSize: 40
-          //           ),
-          //         )
-          //       ],
-          //     ),
-          //   ],
-          // ),
-        ),
-      ]
+      )
     );
   }
 }
