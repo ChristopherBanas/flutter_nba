@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_nba/widgets/database_models/game.dart';
+import 'package:flutter_nba/database_models/game.dart';
 import 'package:flutter_nba/enums.dart';
 
 class CardScore extends StatelessWidget {
@@ -29,7 +29,10 @@ class CardScore extends StatelessWidget {
       children: [
         isHome ?
           WinLoss(value: game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME].valueMap[boxEnums.WL], height: height) :
-            getImage(game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY].valueMap[boxEnums.TEAM_ID]),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+              child: getImage(game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY].valueMap[boxEnums.TEAM_ID]),
+            ),
         Padding(
           padding: isHome ? const EdgeInsets.fromLTRB(10, 5, 5, 5) : const EdgeInsets.fromLTRB(5, 5, 10, 5),
           child: Column(
@@ -52,7 +55,10 @@ class CardScore extends StatelessWidget {
             ],
           ),
         ),
-        isHome ? getImage(game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME].valueMap[boxEnums.TEAM_ID]) :
+        isHome ? Padding(
+          padding: const EdgeInsets.fromLTRB(0, 0, 5, 0),
+          child: getImage(game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME].valueMap[boxEnums.TEAM_ID]),
+        ) :
           WinLoss(value: game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY].valueMap[boxEnums.WL], height: height)
       ],
     );
@@ -73,6 +79,7 @@ class WinLoss extends StatelessWidget {
     return Text(
       value,
       style: TextStyle(
+        fontWeight: FontWeight.bold,
         color: value == 'W' ? Colors.green : Colors.red,
         fontSize: height / 8
       )

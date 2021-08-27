@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nba/enums.dart';
-import 'package:flutter_nba/widgets/database_models/game.dart';
+import 'package:flutter_nba/database_models/game.dart';
 import 'package:flutter_nba/widgets/games_page/parallax_card.dart';
 import 'package:http/http.dart' as http;
 
@@ -58,7 +58,7 @@ class GamesWidgetState extends State<GamesWidget> {
                 padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
                 child: Text(
                   //widget.gamesList[0].valueMap[gameEnums.DATE],
-                  '12/22/2020',
+                  '12/25/2020',
                   style: TextStyle(color: Colors.white),
                 ),
               ),

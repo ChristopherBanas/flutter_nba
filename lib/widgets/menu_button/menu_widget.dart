@@ -19,66 +19,73 @@ class _MenuState extends State<Menu> {
 
   @override
   Widget build(BuildContext context) {
-    return SpeedDial(
-      backgroundColor: Theme.of(context).accentColor,
-      activeBackgroundColor: Theme.of(context).accentColor,
-      icon: Icons.menu,
-      activeIcon: Icons.close,
-      spacing: 3,
-      childPadding: EdgeInsets.all(5),
-      spaceBetweenChildren: 4,
-      buttonSize: 56,
-      childrenButtonSize: 56,
-      visible: true,
-      direction: SpeedDialDirection.Up,
-      closeManually: false,
-      renderOverlay: true,
-      tooltip: "Menu",
-      useRotationAnimation: true,
-      animationSpeed: 200,
-      isOpenOnStart: false,
-      shape: StadiumBorder(),
-      children: [
-        SpeedDialChild(
-          child: Icon(Icons.sports_basketball),
-          backgroundColor: Colors.orange.shade700,
-          foregroundColor: Colors.white,
-          label: "Scores",
-          onTap: () => {
-            if (!onScores){ //scores cant flip to scores
-              widget.onFlip()
-            }
-          }
-        ),
-        SpeedDialChild(
-            child: Icon(Icons.emoji_events),
-            backgroundColor: Colors.yellow.shade800,
+    return Draggable<SpeedDial>(
+      feedback: FloatingActionButton(
+        onPressed: () =>{},
+        child: Icon(Icons.menu),
+      ),
+      childWhenDragging: Container(),
+      child: SpeedDial(
+        backgroundColor: Theme.of(context).accentColor,
+        activeBackgroundColor: Theme.of(context).accentColor,
+        icon: Icons.menu,
+        activeIcon: Icons.close,
+        spacing: 3,
+        childPadding: EdgeInsets.all(5),
+        spaceBetweenChildren: 4,
+        buttonSize: 56,
+        childrenButtonSize: 56,
+        visible: true,
+        direction: SpeedDialDirection.Up,
+        closeManually: false,
+        renderOverlay: true,
+        tooltip: "Menu",
+        useRotationAnimation: true,
+        animationSpeed: 200,
+        isOpenOnStart: false,
+        shape: StadiumBorder(),
+        children: [
+          SpeedDialChild(
+            child: Icon(Icons.sports_basketball),
+            backgroundColor: Colors.orange.shade700,
             foregroundColor: Colors.white,
-            label: "Standings",
+            label: "Scores",
             onTap: () => {
-              if (onScores){
+              if (!onScores){ //scores cant flip to scores
                 widget.onFlip()
               }
             }
-        ),
-        SpeedDialChild(
-            child: Icon(Icons.info_outline_rounded),
-            backgroundColor: Colors.purple,
-            foregroundColor: Colors.white,
-            label: "About",
-            onTap: () => {
-              showDialog<String>(
-                context: context,
-                builder: (BuildContext context) => SimpleDialog(
-                  title: Center(child: const Text("Info")),
-                  children: [
-                    Center(child: Text("Credits & dark mode / light mode button will go here")),
-                  ],
+          ),
+          SpeedDialChild(
+              child: Icon(Icons.emoji_events),
+              backgroundColor: Colors.yellow.shade800,
+              foregroundColor: Colors.white,
+              label: "Standings",
+              onTap: () => {
+                if (onScores){
+                  widget.onFlip()
+                }
+              }
+          ),
+          SpeedDialChild(
+              child: Icon(Icons.info_outline_rounded),
+              backgroundColor: Colors.purple,
+              foregroundColor: Colors.white,
+              label: "About",
+              onTap: () => {
+                showDialog<String>(
+                  context: context,
+                  builder: (BuildContext context) => SimpleDialog(
+                    title: Center(child: const Text("Info")),
+                    children: [
+                      Center(child: Text("Credits & dark mode / light mode button will go here")),
+                    ],
+                  ),
                 ),
-              ),
-            },
-        ),
-      ],
+              },
+          ),
+        ],
+      ),
     );
   }
 }

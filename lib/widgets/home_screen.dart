@@ -2,7 +2,7 @@ import 'dart:core';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_nba/widgets/database_models/game.dart';
+import 'package:flutter_nba/database_models/game.dart';
 import 'package:flutter_nba/widgets/standings_page/standings_widget.dart';
 import 'package:page_flip_builder/page_flip_builder.dart';
 import '../globals.dart';

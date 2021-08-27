@@ -11,9 +11,12 @@ class CustomDataCell extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
         alignment: Alignment.centerRight,
-        child: Text(
-          '$data',
-          textAlign: TextAlign.right,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 0, 5, 0),
+          child: Text(
+            '$data',
+            textAlign: TextAlign.right,
+          ),
         ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_nba/widgets/database_models/team.dart';
+import 'package:flutter_nba/database_models/team.dart';
 import 'package:flutter_nba/enums.dart';
 import 'package:flutter_nba/widgets/standings_page/data_cell.dart';
 import 'package:lazy_data_table/lazy_data_table.dart';
@@ -113,9 +113,12 @@ class _StandingsTableState extends State<StandingsTable> {
         ),
         topHeaderBuilder: (i) => Align(
             alignment: Alignment.centerRight,
-            child: Text(
-              widget.headers[i].toString().split('.').last.replaceAll('_', ' '),
-              textAlign: TextAlign.right,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 5, 0),
+              child: Text(
+                widget.headers[i].toString().split('.').last.replaceAll('_', ' '),
+                textAlign: TextAlign.right,
+              ),
             ),
         ),
         leftHeaderBuilder: (i) => Container(
