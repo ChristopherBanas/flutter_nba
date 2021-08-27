@@ -20,7 +20,9 @@ class GamesWidget extends StatefulWidget {
 }
 
 class GamesWidgetState extends State<GamesWidget> {
-
+  late ScrollController controller;
+  double pos = 0.0;
+  late List<GameItem> gamesListWidgets;
 
   List<Game> calculateGames(apiData){
     List<Game> games = [];
@@ -40,6 +42,26 @@ class GamesWidgetState extends State<GamesWidget> {
   @override
   void initState(){
     super.initState();
+    controller = new ScrollController()..addListener(() {scrollListener();});
+    gamesListWidgets = generateGameWidget();
+  }
+
+  @override
+  void dispose() {
+    controller.removeListener(() {scrollListener();});
+    super.dispose();
+  }
+
+  List<GameItem> generateGameWidget(){
+    List<GameItem> list = [];
+    for (final game in widget.gamesList)
+      list.add(GameItem(
+          image: game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY].valueMap[boxEnums.WL] == "L" ?
+          imageMap[game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME].valueMap[boxEnums.TEAM_ID]]! :
+          imageMap[game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY].valueMap[boxEnums.TEAM_ID]]!,
+          game: game
+      ));
+    return list;
   }
 
 
@@ -72,21 +94,36 @@ class GamesWidgetState extends State<GamesWidget> {
         ),
       ),
       body: SingleChildScrollView(
+        controller: controller,
         child: Column(
           children: [
-            for (final game in widget.gamesList)
-              GameItem(
-                  image: game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY].valueMap[boxEnums.WL] == "L" ?
-                    imageMap[game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME].valueMap[boxEnums.TEAM_ID]]! :
-                      imageMap[game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY].valueMap[boxEnums.TEAM_ID]]!,
-                  game: game
-              )
+            for (final game in gamesListWidgets)
+              game
           ],
         ),
       ),
     );
   }
+  void scrollListener(){
+    if (controller.position.atEdge){
+      controller.jumpTo(controller.position.minScrollExtent);
+    }
+    // if (controller.position.atEdge){ //loop
+    //   print('end');
+    //   List<GameItem> newList = gamesListWidgets;
+    //   newList.removeAt(0);
+    //   newList.add(gamesListWidgets.first);
+    //   this.setState(() {
+    //     pos = controller.offset;
+    //     gamesListWidgets = newList;
+    //   });
+    //
+    // }
+  }
+
 }
+
+
 
 
 const imageMap = {
