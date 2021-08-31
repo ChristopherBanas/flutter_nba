@@ -6,58 +6,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_nba/database_models/game.dart';
 import 'package:flutter_nba/widgets/games_page/card_score.dart';
+import 'inherited_call_back.dart';
 
-
-class GameItem extends StatelessWidget {
-  GameItem({
-    Key? key,
-    required this.image,
-    required this.game,
-    required this.last,
-  }) : super(key: key);
-
-  final String image;
+class StackItems extends StatelessWidget{
   final Game game;
-  final bool last;
   final GlobalKey _backgroundImageKey = GlobalKey();
+  final String image;
+
+  StackItems({
+    required this.game,
+    required this.image
+  });
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      child: last ? Column(
-        children: [
-          AspectRatio(
-            aspectRatio: 16 / 9,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: LayoutBuilder(
-                  builder: (context, constraints){
-                    return Stack(
-                      children: [
-                        buildBackground(context),
-                        //_buildGradient(),
-                        buildSummary(context, constraints.maxHeight),
-                      ],
-                    );
-                  }
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
-            child: DottedLine(
-              direction: Axis.horizontal,
-              lineLength: double.infinity,
-              lineThickness: 1.0,
-              dashLength: 20,
-              dashColor: Theme.of(context).accentColor,
-              dashGapLength: 4.0,
-              dashGapColor: Colors.transparent,
-            ),
-          )
-        ],
-      ): AspectRatio(
+  Widget build(BuildContext context){
+    return InkWell(
+      onTap: () => {
+        InheritedCallBack.of(context).updateGameItem(game),
+      },
+      child: AspectRatio(
         aspectRatio: 16 / 9,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
@@ -73,7 +40,7 @@ class GameItem extends StatelessWidget {
               }
           ),
         ),
-      )
+      ),
     );
   }
 
@@ -94,6 +61,82 @@ class GameItem extends StatelessWidget {
     );
   }
 
+  Widget buildSummary(context, height) {
+    return Positioned.fill(
+        top: height / 1.5,
+        child: Card(
+            color: Theme.of(context).cardColor.withOpacity(.8),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              side: BorderSide(
+                color: Colors.black,
+                width: 1,
+              ),
+            ),
+            child: IntrinsicWidth(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  CardScore(
+                      isHome: false,
+                      game: game,
+                      height: height
+                  ),
+                  CardScore(
+                      isHome: true,
+                      game: game,
+                      height: height
+                  )
+                  // Expanded(...)
+                ],
+              ),
+            )
+        )
+    );
+  }
+
+}
+
+class GameItem extends StatelessWidget {
+  GameItem({
+    Key? key,
+    required this.image,
+    required this.game,
+    required this.last,
+  }) : super(key: key);
+
+  final String image;
+  final Game game;
+  final bool last;
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      child: last ? Column(
+        children: [
+          StackItems(game: game, image: image),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+            child: DottedLine(
+              direction: Axis.horizontal,
+              lineLength: double.infinity,
+              lineThickness: 1.0,
+              dashLength: 20,
+              dashColor: Theme.of(context).accentColor,
+              dashGapLength: 4.0,
+              dashGapColor: Colors.transparent,
+            ),
+          )
+        ],
+      ) : StackItems(game: game, image: image),
+    );
+  }
+
+
+
   // Widget _buildGradient() {
   //   return Positioned.fill(
   //     child: DecoratedBox(
@@ -109,40 +152,7 @@ class GameItem extends StatelessWidget {
   //   );
   // }
 
-  Widget buildSummary(context, height) {
-    return Positioned.fill(
-      top: height / 1.5,
-      child: Card(
-          color: Theme.of(context).cardColor.withOpacity(.8),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-            side: BorderSide(
-              color: Colors.black,
-              width: 1,
-            ),
-          ),
-          child: IntrinsicWidth(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                CardScore(
-                    isHome: false,
-                    game: game,
-                    height: height
-                ),
-                CardScore(
-                    isHome: true,
-                    game: game,
-                    height: height
-                )
-                // Expanded(...)
-              ],
-            ),
-          )
-      )
-    );
-  }
+
 }
 
 class ParallaxFlowDelegate extends FlowDelegate {

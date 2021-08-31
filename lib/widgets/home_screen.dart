@@ -1,25 +1,47 @@
 import 'dart:core';
-import 'dart:html';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nba/database_models/game.dart';
+import 'package:flutter_nba/widgets/games_page/inherited_call_back.dart';
+import 'package:flutter_nba/widgets/games_page/game_card.dart';
 import 'package:flutter_nba/widgets/standings_page/standings_widget.dart';
 import 'package:page_flip_builder/page_flip_builder.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../globals.dart';
 import 'games_page/games_widget.dart';
 import 'menu_button/menu_widget.dart';
 
-class HomeScreen extends StatelessWidget {
-  final pageFlipKey = GlobalKey<PageFlipBuilderState>();
+
+class HomeScreen extends StatefulWidget {
   final Map<String, dynamic> standingsMap;
   final List<Game> gamesList;
 
-  HomeScreen({
+  const HomeScreen({
     required this.standingsMap,
     required this.gamesList,
   });
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final pageFlipKey = GlobalKey<PageFlipBuilderState>();
+  late Game selectedGame;
+  bool hidden = true;
+
+  updateGameCard(Game game){
+    this.setState(() {
+      selectedGame = game;
+      hidden = false;
+    });
+  }
+
+  updateHidden(bool hiddenVal){
+    this.setState(() {
+      hidden = hiddenVal;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,60 +55,22 @@ class HomeScreen extends StatelessWidget {
       body: PageFlipBuilder(
         key: pageFlipKey,
         frontBuilder: (_) => Scaffold(
-          body: SlidingUpPanel(
-            body: Center(
-              child: GamesWidget(gamesList: gamesList),
-            ),
-            header: Container(
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(24.0)),
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 20.0,
-                      color: Colors.grey,
-                    ),
-                  ]
-              ),
-              margin: const EdgeInsets.fromLTRB(100,50,100,0),
-              child: Center(
-                child: Text("Heading"),
-              ),
-            ),
-            maxHeight: MediaQuery.of(context).size.height,
-            renderPanelSheet: false,
-            collapsed: Container(
-              decoration: BoxDecoration(
-                color: Colors.blueGrey,
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(24.0), topRight: Radius.circular(24.0)),
-              ),
-              margin: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 0.0),
-              child: Center(
-                child: Text(
-                  "This is the collapsed Widget",
-                  style: TextStyle(color: Colors.white),
+          body: Stack(
+            children: [
+              Center(
+                child: InheritedCallBack(
+                  updateGameItem: (game) => {updateGameCard(game)},
+                  updateHidden: (hidden) => {updateHidden(hidden)},
+                  child: GamesWidget(
+                      gamesList: widget.gamesList,
+                  ),
                 ),
               ),
-            ),
-            panel: Container(
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(24.0)),
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 20.0,
-                      color: Colors.grey,
-                    ),
-                  ]
-              ),
-              margin: const EdgeInsets.fromLTRB(10,100,10,10),
-              child: Center(
-                child: Text("This is the SlidingUpPanel when open"),
-              ),
-            ),
+              GameCard(hidden: hidden)
+            ],
           ),
         ),
-        backBuilder: (_) => StandingsWidget(standingsMap: standingsMap),
+        backBuilder: (_) => StandingsWidget(standingsMap: widget.standingsMap),
         flipAxis: Axis.horizontal,
         interactiveFlipEnabled: false,
         nonInteractiveAnimationDuration: Duration(seconds: 1),

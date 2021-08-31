@@ -12,7 +12,7 @@ class GamesWidget extends StatefulWidget {
   final List<Game> gamesList;
 
   const GamesWidget({
-    required this.gamesList
+    required this.gamesList,
   });
 
   @override
