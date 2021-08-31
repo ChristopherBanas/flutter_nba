@@ -3,8 +3,6 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_nba/data_structures/circular_linked_list.dart';
-import 'package:flutter_nba/data_structures/circular_node.dart';
 import 'package:flutter_nba/enums.dart';
 import 'package:flutter_nba/database_models/game.dart';
 import 'package:flutter_nba/widgets/games_page/parallax_card.dart';
@@ -25,8 +23,7 @@ double pos = 0.0;
 
 class GamesWidgetState extends State<GamesWidget> {
   late ScrollController controller;
-  late CircularLinkedList circularGameList;
-  late List<GameItem> gameList;
+  late List<Widget> gameList;
 
   List<Game> calculateGames(apiData){
     List<Game> games = [];
@@ -47,7 +44,6 @@ class GamesWidgetState extends State<GamesWidget> {
   void initState(){
     super.initState();
     controller = new ScrollController()..addListener(() {scrollListener();});
-    circularGameList = generateCircularList();
     gameList = generateGames();
   }
 
@@ -57,40 +53,19 @@ class GamesWidgetState extends State<GamesWidget> {
     super.dispose();
   }
 
-  CircularLinkedList generateCircularList(){
-    List<CircularNode> nodeList = [];
+  List<GameItem> generateGames(){
+    List<GameItem> list = [];
     for (final game in widget.gamesList){
-      GameItem item = GameItem(
+      bool last = (widget.gamesList.last == game) ? true : false;
+      list.add(GameItem(
           image: game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY].valueMap[boxEnums.WL] == "L" ?
           imageMap[game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME].valueMap[boxEnums.TEAM_ID]]! :
           imageMap[game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY].valueMap[boxEnums.TEAM_ID]]!,
-          game: game
-      );
-      CircularNode node = CircularNode(item, null, false);
-      nodeList.add(node);
+          game: game,
+          last: last
+      ));
     }
-    for (int i = 0; i < nodeList.length; i++){
-      if(i+1 == nodeList.length){ //end reached, loop it back to front
-        nodeList.elementAt(i).next = nodeList.elementAt(0);
-        nodeList.elementAt(i).end = true;
-      } else{
-        nodeList.elementAt(i).next = nodeList.elementAt(i+1);
-      }
-    }
-    return CircularLinkedList(nodeList.first);
-  }
-
-  List<GameItem> generateGames(){
-    List<GameItem> games = [];
-    CircularLinkedList testList = this.circularGameList;
-    while (true){
-      games.add(testList.head!.value);
-      if (testList.head!.end == true){
-        break;
-      }
-      testList.head = testList.head!.next;
-    }
-    return games;
+    return list;
   }
 
 
@@ -135,40 +110,25 @@ class GamesWidgetState extends State<GamesWidget> {
     );
   }
   void scrollListener(){
-    print(controller.offset);
+    //print(controller.offset);
     pos = controller.offset;
-    print('pos $pos');
-    if (controller.offset == controller.position.maxScrollExtent){ //at bottom
+    // print('pos $pos');
+    if ((controller.offset + 100) >= controller.position.maxScrollExtent){ //at bottom
       print('at bottom');
       //CircularLinkedList newLinkedList = CircularLinkedList(circularGameList.head!.next);
-      List<GameItem> newList = this.gameList;
-      GameItem replace = newList.removeAt(0);
+      List<Widget> newList = this.gameList;
+      Widget replace = newList.removeAt(0);
       newList.add(replace);
       //controller.keepScrollOffset
-      controller.jumpTo(controller.offset - 300);
+      //print('jumping down ${controller.offset/widget.gamesList.length}');
+      controller.jumpTo(controller.offset - ((controller.offset / widget.gamesList.length) + (widget.gamesList.length * 29)));
       this.setState(() {
         //circularGameList = newLinkedList;
         gameList = newList;
-
       });
     }
-    // else if (controller.offset == controller.position.minScrollExtent){ //at top
-    //   print('at top');
-    //   //CircularLinkedList newLinkedList = CircularLinkedList(circularGameList.head!.next);
-    //   List<GameItem> newList = this.gameList;
-    //   GameItem replace = newList.removeAt(gameList.length-1);
-    //   newList.insert(0, replace);
-    //   this.setState(() {
-    //     //circularGameList = newLinkedList;
-    //     gameList = newList;
-    //   });
-    // }
   }
-
 }
-
-
-
 
 const imageMap = {
   1610612762: 'images/jazz.jpg', //jazz

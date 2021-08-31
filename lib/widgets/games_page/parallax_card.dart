@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -12,21 +13,25 @@ class GameItem extends StatelessWidget {
     Key? key,
     required this.image,
     required this.game,
+    required this.last,
   }) : super(key: key);
 
   final String image;
   final Game game;
+  final bool last;
   final GlobalKey _backgroundImageKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      child: AspectRatio(
-              aspectRatio: 16 / 9,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: LayoutBuilder(
+      child: last ? Column(
+        children: [
+          AspectRatio(
+            aspectRatio: 16 / 9,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: LayoutBuilder(
                   builder: (context, constraints){
                     return Stack(
                       children: [
@@ -36,9 +41,39 @@ class GameItem extends StatelessWidget {
                       ],
                     );
                   }
-                ),
               ),
-            )
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+            child: DottedLine(
+              direction: Axis.horizontal,
+              lineLength: double.infinity,
+              lineThickness: 1.0,
+              dashLength: 20,
+              dashColor: Theme.of(context).accentColor,
+              dashGapLength: 4.0,
+              dashGapColor: Colors.transparent,
+            ),
+          )
+        ],
+      ): AspectRatio(
+        aspectRatio: 16 / 9,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: LayoutBuilder(
+              builder: (context, constraints){
+                return Stack(
+                  children: [
+                    buildBackground(context),
+                    //_buildGradient(),
+                    buildSummary(context, constraints.maxHeight),
+                  ],
+                );
+              }
+          ),
+        ),
+      )
     );
   }
 
