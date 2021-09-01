@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_nba/database_models/game.dart';
 
 class InheritedCallBack extends InheritedWidget{
   const InheritedCallBack({

@@ -7,7 +7,7 @@ import 'package:flutter_nba/widgets/games_page/inherited_call_back.dart';
 import 'package:flutter_nba/widgets/games_page/game_card.dart';
 import 'package:flutter_nba/widgets/standings_page/standings_widget.dart';
 import 'package:page_flip_builder/page_flip_builder.dart';
-import '../globals.dart';
+import '../globals.dart' as globals;
 import 'games_page/games_widget.dart';
 import 'menu_button/menu_widget.dart';
 
@@ -27,12 +27,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final pageFlipKey = GlobalKey<PageFlipBuilderState>();
-  late Game selectedGame;
   bool hidden = true;
 
-  updateGameCard(Game game){
+  updateGameCard(Game selectedGame){
+    globals.game = selectedGame;
     this.setState(() {
-      selectedGame = game;
       hidden = false;
     });
   }
@@ -49,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: Menu(
           onFlip: () => {
             pageFlipKey.currentState?.flip(),
-            onScores = !onScores
+            globals.onScores = !globals.onScores
           }
       ),
       body: PageFlipBuilder(
@@ -66,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              GameCard(hidden: hidden)
+              GameCard(hidden: hidden, updateHidden: (hidden) => {updateHidden(hidden)})
             ],
           ),
         ),
