@@ -58,9 +58,9 @@ class GamesWidgetState extends State<GamesWidget> {
     for (final game in widget.gamesList){
       bool last = (widget.gamesList.last == game) ? true : false;
       list.add(GameItem(
-          image: game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY].valueMap[boxEnums.WL] == "L" ?
-          imageMap[game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME].valueMap[boxEnums.TEAM_ID]]! :
-          imageMap[game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY].valueMap[boxEnums.TEAM_ID]]!,
+          image: game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.WL] == "L" ?
+          imageMap[game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]]! :
+          imageMap[game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]]!,
           game: game,
           last: last
       ));

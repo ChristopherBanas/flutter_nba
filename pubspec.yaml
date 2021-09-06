@@ -32,7 +32,7 @@ dependencies:
   animated_text_kit: ^4.2.1  # loading text
   get: ^4.1.4  # navigation
   dotted_line: ^3.0.0  # for games
-  sliding_up_panel: ^2.0.0+1
+  sticky_headers: ^0.2.0  # for opened game
 
 dev_dependencies:
   flutter_test:

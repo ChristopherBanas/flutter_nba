@@ -13,18 +13,86 @@ class Game{
     valueMap: {
       gameEnums.GAME_ID: json['GAME_ID'],
       gameEnums.TEAM_BOX_SCORE: {
-        gameEnums.AWAY: TeamBoxScore.fromJson(json['TEAM_BOX_SCORE']['AWAY']),
-        gameEnums.HOME: TeamBoxScore.fromJson(json['TEAM_BOX_SCORE']['HOME'])
+        gameEnums.AWAY: {
+          gameEnums.TOTAL: TeamBoxScore.fromJson(json['TEAM_BOX_SCORE']['AWAY']['TOTAL']),
+          gameEnums.FIRST_HALF: TeamBoxScore.fromJson(json['TEAM_BOX_SCORE']['AWAY']['FIRST_HALF']),
+          gameEnums.SECOND_HALF: TeamBoxScore.fromJson(json['TEAM_BOX_SCORE']['AWAY']['SECOND_HALF']),
+          gameEnums.Q1: TeamBoxScore.fromJson(json['TEAM_BOX_SCORE']['AWAY']['Q1']),
+          gameEnums.Q2: TeamBoxScore.fromJson(json['TEAM_BOX_SCORE']['AWAY']['Q2']),
+          gameEnums.Q3: TeamBoxScore.fromJson(json['TEAM_BOX_SCORE']['AWAY']['Q3']),
+          gameEnums.Q4: TeamBoxScore.fromJson(json['TEAM_BOX_SCORE']['AWAY']['Q4']),
+        },
+        gameEnums.HOME: {
+          gameEnums.TOTAL: TeamBoxScore.fromJson(json['TEAM_BOX_SCORE']['HOME']['TOTAL']),
+          gameEnums.FIRST_HALF: TeamBoxScore.fromJson(json['TEAM_BOX_SCORE']['HOME']['FIRST_HALF']),
+          gameEnums.SECOND_HALF: TeamBoxScore.fromJson(json['TEAM_BOX_SCORE']['HOME']['SECOND_HALF']),
+          gameEnums.Q1: TeamBoxScore.fromJson(json['TEAM_BOX_SCORE']['HOME']['Q1']),
+          gameEnums.Q2: TeamBoxScore.fromJson(json['TEAM_BOX_SCORE']['HOME']['Q2']),
+          gameEnums.Q3: TeamBoxScore.fromJson(json['TEAM_BOX_SCORE']['HOME']['Q3']),
+          gameEnums.Q4: TeamBoxScore.fromJson(json['TEAM_BOX_SCORE']['HOME']['Q4']),
+        },
       },
       gameEnums.PLAYER_BOX_SCORE: {
-        gameEnums.AWAY: [
-          for (final player in json['PLAYER_BOX_SCORE']['AWAY'])
-            PlayerBoxScore.fromJson(player)
-        ],
-        gameEnums.HOME: [
-          for (final player in json['PLAYER_BOX_SCORE']['HOME'])
-            PlayerBoxScore.fromJson(player)
-        ],
+        gameEnums.AWAY: {
+          gameEnums.TOTAL: [
+            for (final player in json['PLAYER_BOX_SCORE']['AWAY']['TOTAL'])
+              PlayerBoxScore.fromJson(player)
+          ],
+          gameEnums.FIRST_HALF: [
+            for (final player in json['PLAYER_BOX_SCORE']['AWAY']['FIRST_HALF'])
+              PlayerBoxScore.fromJson(player)
+          ],
+          gameEnums.SECOND_HALF: [
+            for (final player in json['PLAYER_BOX_SCORE']['AWAY']['SECOND_HALF'])
+              PlayerBoxScore.fromJson(player)
+          ],
+          gameEnums.Q1: [
+            for (final player in json['PLAYER_BOX_SCORE']['AWAY']['Q1'])
+              PlayerBoxScore.fromJson(player)
+          ],
+          gameEnums.Q2: [
+            for (final player in json['PLAYER_BOX_SCORE']['AWAY']['Q2'])
+              PlayerBoxScore.fromJson(player)
+          ],
+          gameEnums.Q3: [
+            for (final player in json['PLAYER_BOX_SCORE']['AWAY']['Q3'])
+              PlayerBoxScore.fromJson(player)
+          ],
+          gameEnums.Q4: [
+            for (final player in json['PLAYER_BOX_SCORE']['AWAY']['Q4'])
+              PlayerBoxScore.fromJson(player)
+          ],
+        },
+        gameEnums.HOME: {
+          gameEnums.TOTAL: [
+            for (final player in json['PLAYER_BOX_SCORE']['HOME']['TOTAL'])
+              PlayerBoxScore.fromJson(player)
+          ],
+          gameEnums.FIRST_HALF: [
+            for (final player in json['PLAYER_BOX_SCORE']['HOME']['FIRST_HALF'])
+              PlayerBoxScore.fromJson(player)
+          ],
+          gameEnums.SECOND_HALF: [
+            for (final player in json['PLAYER_BOX_SCORE']['HOME']['SECOND_HALF'])
+              PlayerBoxScore.fromJson(player)
+          ],
+          gameEnums.Q1: [
+            for (final player in json['PLAYER_BOX_SCORE']['HOME']['Q1'])
+              PlayerBoxScore.fromJson(player)
+          ],
+          gameEnums.Q2: [
+            for (final player in json['PLAYER_BOX_SCORE']['HOME']['Q2'])
+              PlayerBoxScore.fromJson(player)
+          ],
+          gameEnums.Q3: [
+            for (final player in json['PLAYER_BOX_SCORE']['HOME']['Q3'])
+              PlayerBoxScore.fromJson(player)
+          ],
+          gameEnums.Q4: [
+            for (final player in json['PLAYER_BOX_SCORE']['HOME']['Q4'])
+              PlayerBoxScore.fromJson(player)
+          ],
+        }
       },
       gameEnums.TOP_PERFORMERS: {
         gameEnums.AWAY: {

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_nba/database_models/game.dart';
 import 'package:flutter_nba/enums.dart';
 import 'package:flutter_nba/globals.dart' as globals;
-import 'package:flutter_nba/widgets/games_page/inherited_call_back.dart';
+import 'package:flutter_nba/widgets/games_page/opened_game/body.dart';
 
 class GameCard extends StatelessWidget {
   final bool hidden;
@@ -28,20 +28,7 @@ class GameCard extends StatelessWidget {
             children: [
               TopRow(),
               MiddleRow(),
-              Container(
-                height: MediaQuery.of(context).size.height - 100,
-                width: MediaQuery.of(context).size.width - 20,
-                child: Card(
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    side: BorderSide(
-                      color: Colors.black,
-                      width: 1,
-                    ),
-                  ),
-                ),
-              ),
+              OpenedGameBody(),
             ],
           ),
         ),
@@ -73,7 +60,7 @@ class TopRow extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '${game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY].valueMap[boxEnums.TEAM_ABBREVIATION]}',
+                '${game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ABBREVIATION]}',
                 style: TextStyle(
                   //fontSize: height / 12,
                   fontWeight: FontWeight.bold,
@@ -87,7 +74,7 @@ class TopRow extends StatelessWidget {
                 ),
               ),
               Text(
-                '${game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME].valueMap[boxEnums.TEAM_ABBREVIATION]}',
+                '${game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ABBREVIATION]}',
                 style: TextStyle(
                   //fontSize: height / 12,
                   fontWeight: FontWeight.bold,
@@ -146,5 +133,3 @@ class MiddleRow extends StatelessWidget {
     );
   }
 }
-
-

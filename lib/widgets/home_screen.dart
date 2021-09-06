@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nba/database_models/game.dart';
 import 'package:flutter_nba/widgets/games_page/inherited_call_back.dart';
-import 'package:flutter_nba/widgets/games_page/game_card.dart';
+import 'package:flutter_nba/widgets/games_page/opened_game/game_card.dart';
 import 'package:flutter_nba/widgets/standings_page/standings_widget.dart';
 import 'package:page_flip_builder/page_flip_builder.dart';
 import '../globals.dart' as globals;

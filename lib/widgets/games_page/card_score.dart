@@ -28,10 +28,10 @@ class CardScore extends StatelessWidget {
     return Row(
       children: [
         isHome ?
-          WinLoss(value: game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME].valueMap[boxEnums.WL], height: height) :
+          WinLoss(value: game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.WL], height: height) :
             Padding(
               padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-              child: getImage(game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY].valueMap[boxEnums.TEAM_ID]),
+              child: getImage(game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]),
             ),
         Padding(
           padding: isHome ? const EdgeInsets.fromLTRB(10, 5, 5, 5) : const EdgeInsets.fromLTRB(5, 5, 10, 5),
@@ -39,14 +39,14 @@ class CardScore extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '${game.valueMap[gameEnums.TEAM_BOX_SCORE][isHome ? gameEnums.HOME : gameEnums.AWAY].valueMap[boxEnums.PTS]}',
+                '${game.valueMap[gameEnums.TEAM_BOX_SCORE][isHome ? gameEnums.HOME : gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.PTS]}',
                 style: TextStyle(
                     fontSize: height / 12,
                     fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
-                '${game.valueMap[gameEnums.TEAM_BOX_SCORE][isHome ? gameEnums.HOME : gameEnums.AWAY].valueMap[boxEnums.TEAM_ABBREVIATION]}',
+                '${game.valueMap[gameEnums.TEAM_BOX_SCORE][isHome ? gameEnums.HOME : gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ABBREVIATION]}',
                 style: TextStyle(
                     fontSize: height / 12,
                     fontWeight: FontWeight.bold
@@ -57,9 +57,9 @@ class CardScore extends StatelessWidget {
         ),
         isHome ? Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 5, 0),
-          child: getImage(game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME].valueMap[boxEnums.TEAM_ID]),
+          child: getImage(game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]),
         ) :
-          WinLoss(value: game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY].valueMap[boxEnums.WL], height: height)
+          WinLoss(value: game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.WL], height: height)
       ],
     );
   }

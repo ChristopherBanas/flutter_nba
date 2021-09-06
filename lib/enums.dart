@@ -45,7 +45,11 @@ enum gameEnums{
   HOME,
   PLAYER_BOX_SCORE,
   TOP_PERFORMERS,
-  DATE
+  DATE,
+  TOTAL,
+  FIRST_HALF,
+  SECOND_HALF,
+  Q1,Q2,Q3,Q4
 }
 
 enum boxEnums{
