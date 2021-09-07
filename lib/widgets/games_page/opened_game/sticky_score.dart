@@ -28,27 +28,47 @@ class StickyScore extends StatelessWidget {
         child: Container(
           color: Theme.of(context).cardColor,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              getImage(game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]),
-              Text(
-                '${game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.PTS]}',
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.WL] == 'W' ?
-                    FontWeight.bold : FontWeight.normal
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                child: Row(
+                  children: [
+                    getImage(game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(60, 0, 0, 0),
+                      child: Text(
+                        '${game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.PTS]}',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.WL] == 'W' ?
+                            FontWeight.bold : FontWeight.normal
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              Text(
-                '${game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.PTS]}',
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.WL] == 'W' ?
-                    FontWeight.bold : FontWeight.normal
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 60, 0),
+                      child: Text(
+                        '${game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.PTS]}',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.WL] == 'W' ?
+                            FontWeight.bold : FontWeight.normal
+                        ),
+                      ),
+                    ),
+                    getImage(game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]),
+                  ],
                 ),
               ),
-              getImage(game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]),
-            ],
+              ],
           ),
         ),
       ),

@@ -93,7 +93,7 @@ class MiddleRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 2.5, 0, 2.5),
+      padding: const EdgeInsets.fromLTRB(0, 2.5, 0, 7.5),
       child: Container(
         height: 35,
         width: 300,

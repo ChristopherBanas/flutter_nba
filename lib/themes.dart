@@ -15,6 +15,7 @@ ThemeData darkTheme = ThemeData(
 
 ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
+    scaffoldBackgroundColor: Color(0xfffEAE4DF),
     //accentColor: Color(0xffc8741c),
     splashColor: Colors.transparent,
     highlightColor: Colors.transparent,
