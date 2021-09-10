@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_nba/widgets/games_page/opened_game/top_performers/performer_table.dart';
 import 'package:flutter_point_tab_bar/pointTabIndicator.dart';
-
+import 'package:flutter_nba/enums.dart';
 class TopPerformersBody extends StatefulWidget {
 
   @override
@@ -9,9 +10,10 @@ class TopPerformersBody extends StatefulWidget {
 }
 
 const stats = const ['PTS', 'REB', 'AST'];
+const performerEnums = [boxEnums.TOP_POINTS, boxEnums.TOP_REBOUNDS, boxEnums.TOP_ASSISTS];
+const statType = [boxEnums.PTS, boxEnums.REB, boxEnums.AST];
 
 class _TopPerformersBodyState extends State<TopPerformersBody> with SingleTickerProviderStateMixin {
-  int selectedConference = 0;
   late TabController _tabController;
 
   @override
@@ -43,19 +45,21 @@ class _TopPerformersBodyState extends State<TopPerformersBody> with SingleTicker
             for (final stat in stats)
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                child: Text(stat),
+                child: Text(
+                  stat,
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyText1!.color,
+                  ),
+                ),
               )
           ],
           indicator: PointTabIndicator(
               position: PointTabIndicatorPosition.bottom,
-              color: Colors.white,
+              color: Colors.black,
               insets: EdgeInsets.only(bottom: 6)
           ),
         ),
-        SizedBox(
-          width: double.infinity,
-          height: 200,
-        ),
+        PerformerTable(performerEnum: performerEnums[_tabController.index], statType: statType[_tabController.index]),
       ],
     );
   }

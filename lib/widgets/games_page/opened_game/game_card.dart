@@ -66,13 +66,13 @@ class TopRow extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text(
-                '|',
-                style: TextStyle(
-                  //fontSize: height / 12,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              // Text(
+              //   '|',
+              //   style: TextStyle(
+              //     //fontSize: height / 12,
+              //     fontWeight: FontWeight.bold,
+              //   ),
+              // ),
               Text(
                 '${game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ABBREVIATION]}',
                 style: TextStyle(

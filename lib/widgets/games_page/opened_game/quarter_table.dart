@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_nba/database_models/game.dart';
 import 'package:flutter_nba/enums.dart';
 import 'package:flutter_nba/globals.dart' as globals;
+import 'package:flutter_svg/svg.dart';
 
 class QuarterTable extends StatelessWidget {
 

@@ -52,7 +52,7 @@ class StackItems extends StatelessWidget{
         backgroundImageKey: _backgroundImageKey,
       ),
       children: [
-        Image.network(
+        Image.asset(
           image,
           key: _backgroundImageKey,
           fit: BoxFit.cover,

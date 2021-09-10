@@ -17,6 +17,7 @@ class CardScore extends StatelessWidget {
   Image getImage(id){
     return Image.network(
       'https://cdn.nba.com/logos/nba/$id/primary/L/logo.svg',
+      //'assets/images/logos/hawks.png',
       height: height / 4.5,
       width: height / 4.5,
       fit: BoxFit.contain,
@@ -28,11 +29,11 @@ class CardScore extends StatelessWidget {
     return Row(
       children: [
         isHome ?
-          WinLoss(value: game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.WL], height: height) :
-            Padding(
-              padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-              child: getImage(game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]),
-            ),
+        WinLoss(value: game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.WL], height: height) :
+        Padding(
+          padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+          child: getImage(game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]),
+        ),
         Padding(
           padding: isHome ? const EdgeInsets.fromLTRB(10, 5, 5, 5) : const EdgeInsets.fromLTRB(5, 5, 10, 5),
           child: Column(
@@ -41,8 +42,8 @@ class CardScore extends StatelessWidget {
               Text(
                 '${game.valueMap[gameEnums.TEAM_BOX_SCORE][isHome ? gameEnums.HOME : gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.PTS]}',
                 style: TextStyle(
-                    fontSize: height / 12,
-                    fontWeight: FontWeight.bold,
+                  fontSize: height / 12,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
@@ -59,7 +60,7 @@ class CardScore extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(0, 0, 5, 0),
           child: getImage(game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]),
         ) :
-          WinLoss(value: game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.WL], height: height)
+        WinLoss(value: game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.WL], height: height)
       ],
     );
   }
@@ -77,12 +78,12 @@ class WinLoss extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      value,
-      style: TextStyle(
-        fontWeight: FontWeight.bold,
-        color: value == 'W' ? Colors.green : Colors.red,
-        fontSize: height / 8
-      )
+        value,
+        style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: value == 'W' ? Colors.green : Colors.red,
+            fontSize: height / 8
+        )
     );
   }
 

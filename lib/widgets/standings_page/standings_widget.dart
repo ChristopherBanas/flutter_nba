@@ -22,7 +22,6 @@ class StandingsWidget extends StatefulWidget {
 const conferences = const ['EAST', 'WEST', 'LEAGUE'];
 
 class StandingsWidgetState extends State<StandingsWidget> with SingleTickerProviderStateMixin{
-  int selectedConference = 0;
   late TabController _tabController;
 
   Map<String, dynamic> calculateStandings(apiData) {
@@ -84,7 +83,7 @@ class StandingsWidgetState extends State<StandingsWidget> with SingleTickerProvi
     return Scaffold(
         appBar: AppBar(
           title: Text("Standings"),
-          toolbarHeight: 100,
+          toolbarHeight: 75,
           bottom: TabBar(
             controller: _tabController,
             tabs: [

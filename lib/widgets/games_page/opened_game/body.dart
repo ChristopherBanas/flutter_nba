@@ -36,12 +36,8 @@ class OpenedGameBody extends StatelessWidget {
               ),
               content: Column(
                 children: [
-                  OpenedChildFormat(name: "Breakdown", child: QuarterTable()),
-                  OpenedChildFormat(name: "Top Performers", child: TopPerformersBody()),
-                  OpenedChildFormat(name: "Breakdown", child: QuarterTable()),
-                  OpenedChildFormat(name: "Top Performers", child: TopPerformersBody()),
-                  OpenedChildFormat(name: "Breakdown", child: QuarterTable()),
-                  OpenedChildFormat(name: "Top Performers", child: TopPerformersBody()),
+                  OpenedChildFormat(child: QuarterTable()),
+                  OpenedChildFormat(child: TopPerformersBody()),
                 ],
               ),
             ),

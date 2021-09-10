@@ -109,8 +109,8 @@ class _LoadingScreenState extends State<LoadingScreen>
                   children: [
                     SlideTransition(
                       position: _offsetAnimation,
-                      child: Image.network(
-                        "images/logo.png",
+                      child: Image.asset(
+                        "assets/images/logo.png",
                         height: size.height * 0.060,
                       ),
                     ),
@@ -120,8 +120,8 @@ class _LoadingScreenState extends State<LoadingScreen>
                         opacity: _textOpacity,
                         curve: Curves.easeIn,
                         duration: Duration(milliseconds: 400),
-                        child: Image.network(
-                          "images/secondary_logo.png",
+                        child: Image.asset(
+                          "assets/images/secondary_logo.png",
                           height: size.height * 0.05,
                         ),
                       ),
