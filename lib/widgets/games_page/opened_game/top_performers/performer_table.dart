@@ -17,88 +17,132 @@ class PerformerTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-        child: DataTable(
-          columnSpacing: 40,
-          showCheckboxColumn: false,
-          columns: const<DataColumn> [
-            DataColumn(
-              label: Text(""),
+      child: Container(
+        margin: const EdgeInsets.all(10),
+        child: Table(
+          border: TableBorder(
+            verticalInside: BorderSide(width:  1, color: Colors.grey),
+            horizontalInside: BorderSide(width:  1, color: Colors.grey),
+          ),
+          children: [
+            TableRow(
+              children: [
+                Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    child: PerformerCell(performerEnum: performerEnum, statType: statType, first: true, homeAway: gameEnums.AWAY, index: 0)
+                ),
+                Container(
+                    margin: const EdgeInsets.only(left: 10),
+                    child: PerformerCell(performerEnum: performerEnum, statType: statType, first: false, homeAway: gameEnums.HOME, index: 0)
+                )
+              ]
             ),
-            DataColumn(
-              label: Text(""),
-            ),
-          ],
-          rows: [
-            DataRow(
-                cells: [
-                  DataCell(
-                    PerformerCell(
-                        performerEnum: performerEnum,
-                        statType: statType,
-                        first: true,
-                        homeAway: gameEnums.AWAY,
-                        index: 0,
-                    )
+            TableRow(
+                children: [
+                  Container(
+                      margin: const EdgeInsets.only(right: 10),
+                      child: PerformerCell(performerEnum: performerEnum, statType: statType, first: true, homeAway: gameEnums.AWAY, index: 1)
                   ),
-                  DataCell(
-                      PerformerCell(
-                          performerEnum: performerEnum,
-                          statType: statType,
-                          first: false,
-                          homeAway: gameEnums.HOME,
-                          index: 0,
-                      )
-                  ),
+                  Container(
+                      margin: const EdgeInsets.only(left: 10),
+                      child: PerformerCell(performerEnum: performerEnum, statType: statType, first: false, homeAway: gameEnums.HOME, index: 1)
+                  )
                 ]
             ),
-            DataRow(
-                cells: [
-                  DataCell(
-                      PerformerCell(
-                        performerEnum: performerEnum,
-                        statType: statType,
-                        first: true,
-                        homeAway: gameEnums.AWAY,
-                        index: 1,
-                      )
+            TableRow(
+                children: [
+                  Container(
+                      margin: const EdgeInsets.only(right: 10),
+                      child: PerformerCell(performerEnum: performerEnum, statType: statType, first: true, homeAway: gameEnums.AWAY, index: 2)
                   ),
-                  DataCell(
-                      PerformerCell(
-                        performerEnum: performerEnum,
-                        statType: statType,
-                        first: false,
-                        homeAway: gameEnums.HOME,
-                        index: 1,
-                      )
-                  ),
-                ]
-            ),
-            DataRow(
-                cells: [
-                  DataCell(
-                      PerformerCell(
-                        performerEnum: performerEnum,
-                        statType: statType,
-                        first: true,
-                        homeAway: gameEnums.AWAY,
-                        index: 2,
-                      )
-                  ),
-                  DataCell(
-                      PerformerCell(
-                        performerEnum: performerEnum,
-                        statType: statType,
-                        first: false,
-                        homeAway: gameEnums.HOME,
-                        index: 2,
-                      )
-                  ),
+                  Container(
+                      margin: const EdgeInsets.only(left: 10),
+                      child: PerformerCell(performerEnum: performerEnum, statType: statType, first: false, homeAway: gameEnums.HOME, index: 2)
+                  )
                 ]
             ),
           ],
         ),
+        // child: DataTable(
+        //   columnSpacing: 40,
+        //   showCheckboxColumn: false,
+        //   columns: const<DataColumn> [
+        //     DataColumn(
+        //       label: Text(""),
+        //     ),
+        //     DataColumn(
+        //       label: Text(""),
+        //     ),
+        //   ],
+        //   rows: [
+        //     DataRow(
+        //         cells: [
+        //           DataCell(
+        //             PerformerCell(
+        //                 performerEnum: performerEnum,
+        //                 statType: statType,
+        //                 first: true,
+        //                 homeAway: gameEnums.AWAY,
+        //                 index: 0,
+        //             )
+        //           ),
+        //           DataCell(
+        //               PerformerCell(
+        //                   performerEnum: performerEnum,
+        //                   statType: statType,
+        //                   first: false,
+        //                   homeAway: gameEnums.HOME,
+        //                   index: 0,
+        //               )
+        //           ),
+        //         ]
+        //     ),
+        //     DataRow(
+        //         cells: [
+        //           DataCell(
+        //               PerformerCell(
+        //                 performerEnum: performerEnum,
+        //                 statType: statType,
+        //                 first: true,
+        //                 homeAway: gameEnums.AWAY,
+        //                 index: 1,
+        //               )
+        //           ),
+        //           DataCell(
+        //               PerformerCell(
+        //                 performerEnum: performerEnum,
+        //                 statType: statType,
+        //                 first: false,
+        //                 homeAway: gameEnums.HOME,
+        //                 index: 1,
+        //               )
+        //           ),
+        //         ]
+        //     ),
+        //     DataRow(
+        //         cells: [
+        //           DataCell(
+        //               PerformerCell(
+        //                 performerEnum: performerEnum,
+        //                 statType: statType,
+        //                 first: true,
+        //                 homeAway: gameEnums.AWAY,
+        //                 index: 2,
+        //               )
+        //           ),
+        //           DataCell(
+        //               PerformerCell(
+        //                 performerEnum: performerEnum,
+        //                 statType: statType,
+        //                 first: false,
+        //                 homeAway: gameEnums.HOME,
+        //                 index: 2,
+        //               )
+        //           ),
+        //         ]
+        //     ),
+        //   ],
+        // ),
       ),
     );
   }
