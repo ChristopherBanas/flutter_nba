@@ -20,8 +20,8 @@ class QuarterTable extends StatelessWidget {
   Widget build(BuildContext context) {
     Game game = globals.game;
     return Center(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+      child: Container(
+        margin: EdgeInsets.all(10),
         child: DataTable(
           columnSpacing: 30,
           showCheckboxColumn: false,
