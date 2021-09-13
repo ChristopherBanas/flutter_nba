@@ -96,8 +96,14 @@ class NameCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Game game = globals.game;
-    return Text('${game.valueMap[gameEnums.TOP_PERFORMERS][homeAway][performerEnum][index].valueMap[boxEnums.PLAYER_NAME]
-        .toString().split(' ').sublist(1)[0].toString()}'); //get last name
+    String name = game.valueMap[gameEnums.TOP_PERFORMERS][homeAway][performerEnum][index].valueMap[boxEnums.PLAYER_NAME]
+        .toString().split(' ').sublist(1)[0].toString();
+    return Text(
+        name,
+        style: TextStyle(
+          fontSize: name.length > 11 ? 11 : 14
+        ),
+    ); //get last name
   }
 }
 
@@ -266,6 +272,3 @@ class PictureCell extends StatelessWidget {
     );
   }
 }
-
-
-

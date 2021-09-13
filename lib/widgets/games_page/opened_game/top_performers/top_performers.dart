@@ -53,11 +53,11 @@ class _TopPerformersBodyState extends State<TopPerformersBody> with SingleTicker
                 ),
               )
           ],
-          indicator: PointTabIndicator(
-              position: PointTabIndicatorPosition.bottom,
-              color: Colors.black,
-              insets: EdgeInsets.only(bottom: 6)
-          ),
+          // indicator: PointTabIndicator(
+          //     position: PointTabIndicatorPosition.bottom,
+          //     color: Colors.black,
+          //     insets: EdgeInsets.only(bottom: 6)
+          // ),
         ),
         PerformerTable(performerEnum: performerEnums[_tabController.index], statType: statType[_tabController.index]),
       ],
