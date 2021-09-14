@@ -75,22 +75,22 @@ class GamesWidgetState extends State<GamesWidget> {
       appBar: AppBar(
         title: Text("Games"),
         toolbarHeight: 100,
-        // bottom: PreferredSize(
-        //   preferredSize: const Size.fromWidth(1),
-        //   child: SizedBox(
-        //     height: 30,
-        //     child: Center(
-        //       child: Padding(
-        //         padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
-        //         child: Text(
-        //           //widget.gamesList[0].valueMap[gameEnums.DATE],
-        //           '12/25/2020',
-        //           style: TextStyle(color: Colors.white),
-        //         ),
-        //       ),
-        //     ),
-        //   ),
-        // ),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1),
+          child: SizedBox(
+            height: 30,
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
+                child: Text(
+                  //widget.gamesList[0].valueMap[gameEnums.DATE],
+                  '12/25/2020',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+        ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(20),
@@ -114,7 +114,6 @@ class GamesWidgetState extends State<GamesWidget> {
     pos = controller.offset;
     // print('pos $pos');
     if ((controller.offset + 100) >= controller.position.maxScrollExtent){ //at bottom
-      print('at bottom');
       //CircularLinkedList newLinkedList = CircularLinkedList(circularGameList.head!.next);
       List<Widget> newList = this.gameList;
       Widget replace = newList.removeAt(0);

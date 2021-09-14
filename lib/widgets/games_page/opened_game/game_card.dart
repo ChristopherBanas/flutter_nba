@@ -1,3 +1,4 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nba/database_models/game.dart';
@@ -66,13 +67,6 @@ class TopRow extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              // Text(
-              //   '|',
-              //   style: TextStyle(
-              //     //fontSize: height / 12,
-              //     fontWeight: FontWeight.bold,
-              //   ),
-              // ),
               Text(
                 '${game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ABBREVIATION]}',
                 style: TextStyle(
@@ -106,26 +100,12 @@ class MiddleRow extends StatelessWidget {
               width: 1,
             ),
           ),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(20,0,20,0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'GAME',
-                  style: TextStyle(
-                    //fontSize: height / 12,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  'BOX',
-                  style: TextStyle(
-                    //fontSize: height / 12,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
+          child: Center(
+            child: Container(
+              margin: const EdgeInsets.only(left: 10, right: 10),
+              width: double.infinity,
+              height: 1,
+              color: Theme.of(context).colorScheme.secondary,
             ),
           ),
         ),

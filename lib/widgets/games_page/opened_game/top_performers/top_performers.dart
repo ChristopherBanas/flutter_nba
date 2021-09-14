@@ -13,7 +13,7 @@ const stats = const ['PTS', 'REB', 'AST'];
 const performerEnums = [boxEnums.TOP_POINTS, boxEnums.TOP_REBOUNDS, boxEnums.TOP_ASSISTS];
 const statType = [boxEnums.PTS, boxEnums.REB, boxEnums.AST];
 
-class _TopPerformersBodyState extends State<TopPerformersBody> with SingleTickerProviderStateMixin {
+class _TopPerformersBodyState extends State<TopPerformersBody> with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin{
   late TabController _tabController;
 
   @override
@@ -22,6 +22,9 @@ class _TopPerformersBodyState extends State<TopPerformersBody> with SingleTicker
     _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(_handleTabSelection);
   }
+
+  @override
+  bool get wantKeepAlive => true; //prevent laggy animations
 
   _handleTabSelection() {
     if (_tabController.indexIsChanging) {
