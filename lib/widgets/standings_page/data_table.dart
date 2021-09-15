@@ -80,22 +80,22 @@ class _StandingsTableState extends State<StandingsTable> {
             bottom: BorderSide(color: Theme.of(context).dividerColor),
           ),
           alternateColumnHeaderBorder: Border(
-              bottom: BorderSide(color: Theme.of(context).accentColor, width: 2)
+              bottom: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 2)
           ),
           alternateRowHeaderBorder: Border(
-              right: BorderSide(color: Theme.of(context).accentColor, width: 2),
+              right: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 2),
               top: BorderSide(color: Theme.of(context).dividerColor),
               bottom: BorderSide(color: Theme.of(context).dividerColor)
           ),
           columnHeaderBorder: Border(
-              bottom: BorderSide(color: Theme.of(context).accentColor, width: 2)
+              bottom: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 2)
           ),
           cornerBorder: Border(
-              bottom: BorderSide(color: Theme.of(context).accentColor, width: 2),
-              right: BorderSide(color: Theme.of(context).accentColor, width: 2),
+              bottom: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 2),
+              right: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 2),
           ),
           rowHeaderBorder: Border(
-              right: BorderSide(color: Theme.of(context).accentColor, width: 2),
+              right: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 2),
               top: BorderSide(color: Theme.of(context).dividerColor),
               bottom: BorderSide(color: Theme.of(context).dividerColor)
           ),

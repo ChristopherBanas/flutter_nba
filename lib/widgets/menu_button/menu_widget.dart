@@ -26,8 +26,8 @@ class _MenuState extends State<Menu> {
       ),
       childWhenDragging: Container(),
       child: SpeedDial(
-        backgroundColor: Theme.of(context).accentColor,
-        activeBackgroundColor: Theme.of(context).accentColor,
+        backgroundColor: Theme.of(context).colorScheme.secondary,
+        activeBackgroundColor: Theme.of(context).colorScheme.secondary,
         icon: Icons.menu,
         activeIcon: Icons.close,
         spacing: 3,

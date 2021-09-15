@@ -125,7 +125,7 @@ class GameItem extends StatelessWidget {
               lineLength: double.infinity,
               lineThickness: 1.0,
               dashLength: 20,
-              dashColor: Theme.of(context).accentColor,
+              dashColor: Theme.of(context).colorScheme.secondary,
               dashGapLength: 4.0,
               dashGapColor: Colors.transparent,
             ),

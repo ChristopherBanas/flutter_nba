@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nba/widgets/games_page/opened_game/top_performers/performer_table.dart';
-import 'package:flutter_point_tab_bar/pointTabIndicator.dart';
 import 'package:flutter_nba/enums.dart';
+
 class TopPerformersBody extends StatefulWidget {
 
   @override
@@ -10,10 +10,8 @@ class TopPerformersBody extends StatefulWidget {
 }
 
 const stats = const ['PTS', 'REB', 'AST'];
-const performerEnums = [boxEnums.TOP_POINTS, boxEnums.TOP_REBOUNDS, boxEnums.TOP_ASSISTS];
-const statType = [boxEnums.PTS, boxEnums.REB, boxEnums.AST];
 
-class _TopPerformersBodyState extends State<TopPerformersBody> with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin{
+class _TopPerformersBodyState extends State<TopPerformersBody> with SingleTickerProviderStateMixin{
   late TabController _tabController;
 
   @override
@@ -22,9 +20,6 @@ class _TopPerformersBodyState extends State<TopPerformersBody> with SingleTicker
     _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(_handleTabSelection);
   }
-
-  @override
-  bool get wantKeepAlive => true; //prevent laggy animations
 
   _handleTabSelection() {
     if (_tabController.indexIsChanging) {
@@ -56,13 +51,12 @@ class _TopPerformersBodyState extends State<TopPerformersBody> with SingleTicker
                 ),
               )
           ],
-          // indicator: PointTabIndicator(
-          //     position: PointTabIndicatorPosition.bottom,
-          //     color: Colors.black,
-          //     insets: EdgeInsets.only(bottom: 6)
-          // ),
         ),
-        PerformerTable(performerEnum: performerEnums[_tabController.index], statType: statType[_tabController.index]),
+        [
+          PerformerTable(performerEnum: boxEnums.TOP_POINTS, statType: boxEnums.PTS),
+          PerformerTable(performerEnum: boxEnums.TOP_REBOUNDS, statType: boxEnums.REB),
+          PerformerTable(performerEnum: boxEnums.TOP_ASSISTS, statType: boxEnums.AST),
+        ][_tabController.index]
       ],
     );
   }

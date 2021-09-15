@@ -10,22 +10,20 @@ class CardSpacer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-      child: Container(
-        height: header ? 10 : 10,
-        width: header ? double.infinity : double.infinity,
-        decoration: BoxDecoration(
-          color: Theme.of(context).scaffoldBackgroundColor,
-          border: Border(
-            top: BorderSide(
-              color: Colors.black
-            ),
-            bottom: BorderSide(
-              color: Colors.black
-            ),
-          )
-        ),
+    return Container(
+      margin: const EdgeInsets.only(bottom: 5.5, top: 5.5),
+      height: header ? 10 : 10,
+      width: header ? double.infinity : double.infinity,
+      decoration: BoxDecoration(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        border: Border(
+          top: BorderSide(
+            color: Colors.black
+          ),
+          bottom: BorderSide(
+            color: Colors.black
+          ),
+        )
       ),
     );
   }

@@ -33,7 +33,7 @@ dependencies:
   get: ^4.1.4  # navigation
   dotted_line: ^3.0.0  # for games
   sticky_headers: ^0.2.0  # for opened game
-  flutter_svg: ^0.22.0 # for card score
+  syncfusion_flutter_sliders: ^19.2.62  # for box score slider
 
 dev_dependencies:
   flutter_test:

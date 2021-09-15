@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nba/enums.dart';
 import 'package:flutter_nba/widgets/standings_page/color_identifer.dart';
-import 'package:flutter_nba/widgets/standings_page/stat_switch.dart';
+import 'package:flutter_nba/widgets/stat_switch.dart';
 import 'data_table.dart';
 
 class StandingsBody extends StatefulWidget {
@@ -50,6 +50,7 @@ class _StandingsBodyState extends State<StandingsBody> {
                       padding: const EdgeInsets.fromLTRB(5, 7, 5, 0),
                       child: StatSwitch(
                           initIndex: selectedStatType,
+                          labels: statTypes,
                           callBack: (index) => {
                             this.setState(() {
                               selectedStatType = index;
