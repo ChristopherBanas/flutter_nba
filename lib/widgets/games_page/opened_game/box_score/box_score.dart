@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 import '../../../stat_switch.dart';
@@ -10,9 +11,11 @@ class BoxScoreBody extends StatefulWidget {
   _BoxScoreBodyState createState() => _BoxScoreBodyState();
 }
 
+const dict = {0: "Q1",20: "Q2",40: "H!",60: "Q3",80: "Q4",100: "H2",120: "T",};
 class _BoxScoreBodyState extends State<BoxScoreBody> {
   int selectedStatType = 0;
   double value = 0.0;
+  double value2 = 0.0;
 
   /// Handled callback to change numeric value into a custom text.
   String _handleLabelCreated(dynamic val, String str) {
@@ -48,19 +51,31 @@ class _BoxScoreBodyState extends State<BoxScoreBody> {
                 })
               }
           ),
+          Slider(
+            value: value,
+            min: 0,
+            max: 120,
+            divisions: 6,
+            label: dict[value],
+            onChanged: (double val) {
+              setState(() {
+                value = val;
+              });
+            },
+          ),
           SfSlider(
               min: 0,
               stepSize: 20,
               max: 120,
               interval: 20,
-              value: value,
+              value: value2,
               enableTooltip: true,
               labelFormatterCallback: _handleLabelCreated,
               showTicks: true,
               showLabels: true,
               onChanged: (dynamic val) {
                 setState(() {
-                  value = val;
+                  value2 = val;
                 });
               },
           ),

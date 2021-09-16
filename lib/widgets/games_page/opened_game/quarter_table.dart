@@ -7,8 +7,8 @@ import 'package:flutter_nba/globals.dart' as globals;
 class QuarterTable extends StatelessWidget {
 
   Image getImage(id){
-    return Image.network(
-      'https://cdn.nba.com/logos/nba/$id/primary/L/logo.svg',
+    return Image.asset(
+      'assets/images/$id.png',
       height: 40,
       width: 40,
       fit: BoxFit.contain,

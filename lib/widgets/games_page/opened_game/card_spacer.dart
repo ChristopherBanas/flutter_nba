@@ -11,7 +11,7 @@ class CardSpacer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 5.5, top: 5.5),
+      // margin: const EdgeInsets.only(bottom: 5.5, top: 5.5),
       height: header ? 10 : 10,
       width: header ? double.infinity : double.infinity,
       decoration: BoxDecoration(

@@ -15,9 +15,8 @@ class CardScore extends StatelessWidget {
   });
 
   Image getImage(id){
-    return Image.network(
-      'https://cdn.nba.com/logos/nba/$id/primary/L/logo.svg',
-      //'assets/images/logos/hawks.png',
+    return Image.asset(
+      'assets/images/$id.png',
       height: height / 4.5,
       width: height / 4.5,
       fit: BoxFit.contain,

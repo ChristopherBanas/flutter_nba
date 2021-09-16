@@ -135,8 +135,8 @@ class _StandingsTableState extends State<StandingsTable> {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(3, 0, 0, 0),
-                    child: Image.network(
-                        'https://cdn.nba.com/logos/nba/${widget.teams[i].valueMap[teamEnums.TEAM_ID]}/primary/L/logo.svg',
+                    child: Image.asset(
+                        'assets/images/${widget.teams[i].valueMap[teamEnums.TEAM_ID]}.png',
                         height: 30.0,
                         width: 30.0,
                         fit: BoxFit.contain,

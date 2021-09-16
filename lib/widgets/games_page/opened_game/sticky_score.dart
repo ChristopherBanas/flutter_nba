@@ -7,8 +7,8 @@ import 'package:flutter_nba/enums.dart';
 class StickyScore extends StatelessWidget {
 
   Image getImage(id){
-    return Image.network(
-      'https://cdn.nba.com/logos/nba/$id/primary/L/logo.svg',
+    return Image.asset(
+      'assets/images/$id.png',
       height: 60,
       width: 60,
       fit: BoxFit.contain,
