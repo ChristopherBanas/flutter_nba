@@ -1,12 +1,12 @@
-import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nba/database_models/game.dart';
 import 'package:flutter_nba/enums.dart';
 import 'package:flutter_nba/globals.dart' as globals;
 import 'package:flutter_nba/widgets/games_page/opened_game/body.dart';
+import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
-class GameCard extends StatelessWidget {
+class GameCard extends StatefulWidget {
   final bool hidden;
   final ValueSetter updateHidden;
 
@@ -16,20 +16,33 @@ class GameCard extends StatelessWidget {
   });
 
   @override
+  _GameCardState createState() => _GameCardState();
+}
+
+class _GameCardState extends State<GameCard> {
+  int chosen = 0;
+
+  void setChosen(val){
+    this.setState(() {
+      chosen = val;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return hidden ? Container() :
+    return widget.hidden ? Container() :
     Dismissible(
       direction: DismissDirection.vertical,
       key: const Key('key'),
-      onDismissed: (_) => updateHidden(true),
+      onDismissed: (_) => widget.updateHidden(true),
       child: Center(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
           child: Column(
             children: [
               TopRow(),
-              MiddleRow(),
-              OpenedGameBody(),
+              MiddleRow(callBack: (val) => {setChosen(val)},),
+              OpenedGameBody(selected: chosen),
             ],
           ),
         ),
@@ -82,7 +95,41 @@ class TopRow extends StatelessWidget {
   }
 }
 
-class MiddleRow extends StatelessWidget {
+const tabs = const ['GAME', 'BOX'];
+
+class MiddleRow extends StatefulWidget {
+  final ValueSetter callBack;
+
+  const MiddleRow({
+    required this.callBack
+  });
+
+  @override
+  _MiddleRowState createState() => _MiddleRowState();
+}
+
+class _MiddleRowState extends State<MiddleRow> with SingleTickerProviderStateMixin{
+  late TabController _tabController;
+
+  @override
+  void initState(){
+    super.initState();
+    _tabController = TabController(length: tabs.length, vsync: this);
+    _tabController.addListener(_handleTabSelection);
+  }
+
+  _handleTabSelection() {
+    if (_tabController.indexIsChanging) {
+      widget.callBack(_tabController.index);
+      setState(() {});
+    }
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,10 +149,25 @@ class MiddleRow extends StatelessWidget {
           ),
           child: Center(
             child: Container(
-              margin: const EdgeInsets.only(left: 10, right: 10),
-              width: double.infinity,
-              height: 1,
-              color: Theme.of(context).colorScheme.secondary,
+              padding: const EdgeInsets.only(left: 5, right: 5),
+              child: TabBar(
+                controller: _tabController,
+                tabs: [
+                  for (final tab in tabs)
+                    Text(
+                        tab,
+                        style: TextStyle(
+                          color: Theme.of(context).textTheme.bodyText1!.color
+                        ),
+                    )
+                ],
+                indicator: MaterialIndicator(
+                    color: Theme.of(context).colorScheme.secondary,
+                    horizontalPadding: 10,
+                    strokeWidth: .5,
+                    height: 2
+                ),
+              ),
             ),
           ),
         ),

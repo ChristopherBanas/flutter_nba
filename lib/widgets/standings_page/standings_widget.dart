@@ -5,8 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nba/database_models/team.dart';
 import 'package:flutter_nba/widgets/standings_page/standings_body.dart';
-import 'package:flutter_point_tab_bar/pointTabBar.dart';
 import 'package:http/http.dart' as http;
+import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
 class StandingsWidget extends StatefulWidget {
   final Map<String, dynamic> standingsMap;
@@ -93,10 +93,8 @@ class StandingsWidgetState extends State<StandingsWidget> with SingleTickerProvi
                   child: Text(conf),
                 )
             ],
-            indicator: PointTabIndicator(
-                position: PointTabIndicatorPosition.bottom,
+            indicator: DotIndicator(
                 color: Colors.white,
-                insets: EdgeInsets.only(bottom: 6)
             ),
           ),
           shape: RoundedRectangleBorder(

@@ -3,9 +3,11 @@ import 'package:flutter_nba/widgets/games_page/opened_game/card_spacer.dart';
 
 class OpenedChildFormat extends StatelessWidget {
   final Widget child;
+  final bool bottom;
 
   const OpenedChildFormat({
     required this.child,
+    required this.bottom
   });
 
   @override
@@ -13,7 +15,7 @@ class OpenedChildFormat extends StatelessWidget {
     return Column(
       children: [
         child,
-        CardSpacer(header: false)
+        bottom ? Container() : CardSpacer(header: false)
       ],
     );
   }

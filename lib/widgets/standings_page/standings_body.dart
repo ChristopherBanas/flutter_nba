@@ -20,12 +20,16 @@ class StandingsBody extends StatefulWidget {
 
 const statTypes = const ['NORMAL', 'ADVANCED'];
 
-class _StandingsBodyState extends State<StandingsBody> {
+class _StandingsBodyState extends State<StandingsBody> with AutomaticKeepAliveClientMixin{
   int selectedStatType = 0;
   bool status = false;
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 10, 0, 10,),
       child: Column(

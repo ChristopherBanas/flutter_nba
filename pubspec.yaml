@@ -27,7 +27,7 @@ dependencies:
   flutter_speed_dial: ^4.2.0  # speed dial
   http: ^0.13.3  # http get and post
   lazy_data_table: ^0.3.0  # standings
-  flutter_point_tab_bar: ^0.2.0  # directory
+  tab_indicator_styler: ^2.0.0  # tabs
   toggle_switch: ^1.2.0  # normal / advanced in standings
   animated_text_kit: ^4.2.1  # loading text
   get: ^4.1.4  # navigation

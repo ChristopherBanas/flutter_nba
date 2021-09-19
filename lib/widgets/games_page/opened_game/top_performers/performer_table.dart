@@ -1,11 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_nba/database_models/game.dart';
-import 'package:flutter_nba/globals.dart' as globals;
 import 'package:flutter_nba/enums.dart';
 import 'package:flutter_nba/widgets/games_page/opened_game/top_performers/performer_cell.dart';
 
-class PerformerTable extends StatelessWidget {
+class PerformerTable extends StatefulWidget {
   final boxEnums performerEnum;
   final boxEnums statType;
 
@@ -15,7 +13,17 @@ class PerformerTable extends StatelessWidget {
   });
 
   @override
+  _PerformerTableState createState() => _PerformerTableState();
+}
+
+class _PerformerTableState extends State<PerformerTable> with AutomaticKeepAliveClientMixin{
+
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Center(
       child: Container(
         margin: const EdgeInsets.all(10),
@@ -29,11 +37,11 @@ class PerformerTable extends StatelessWidget {
               children: [
                 Container(
                     margin: const EdgeInsets.only(right: 10),
-                    child: PerformerCell(performerEnum: performerEnum, statType: statType, first: true, homeAway: gameEnums.AWAY, index: 0)
+                    child: PerformerCell(performerEnum: widget.performerEnum, statType: widget.statType, first: true, homeAway: gameEnums.AWAY, index: 0)
                 ),
                 Container(
                     margin: const EdgeInsets.only(left: 10),
-                    child: PerformerCell(performerEnum: performerEnum, statType: statType, first: false, homeAway: gameEnums.HOME, index: 0)
+                    child: PerformerCell(performerEnum: widget.performerEnum, statType: widget.statType, first: false, homeAway: gameEnums.HOME, index: 0)
                 )
               ]
             ),
@@ -41,11 +49,11 @@ class PerformerTable extends StatelessWidget {
                 children: [
                   Container(
                       margin: const EdgeInsets.only(right: 10),
-                      child: PerformerCell(performerEnum: performerEnum, statType: statType, first: true, homeAway: gameEnums.AWAY, index: 1)
+                      child: PerformerCell(performerEnum: widget.performerEnum, statType: widget.statType, first: true, homeAway: gameEnums.AWAY, index: 1)
                   ),
                   Container(
                       margin: const EdgeInsets.only(left: 10),
-                      child: PerformerCell(performerEnum: performerEnum, statType: statType, first: false, homeAway: gameEnums.HOME, index: 1)
+                      child: PerformerCell(performerEnum: widget.performerEnum, statType: widget.statType, first: false, homeAway: gameEnums.HOME, index: 1)
                   )
                 ]
             ),
@@ -53,11 +61,11 @@ class PerformerTable extends StatelessWidget {
                 children: [
                   Container(
                       margin: const EdgeInsets.only(right: 10),
-                      child: PerformerCell(performerEnum: performerEnum, statType: statType, first: true, homeAway: gameEnums.AWAY, index: 2)
+                      child: PerformerCell(performerEnum: widget.performerEnum, statType: widget.statType, first: true, homeAway: gameEnums.AWAY, index: 2)
                   ),
                   Container(
                       margin: const EdgeInsets.only(left: 10),
-                      child: PerformerCell(performerEnum: performerEnum, statType: statType, first: false, homeAway: gameEnums.HOME, index: 2)
+                      child: PerformerCell(performerEnum: widget.performerEnum, statType: widget.statType, first: false, homeAway: gameEnums.HOME, index: 2)
                   )
                 ]
             ),
