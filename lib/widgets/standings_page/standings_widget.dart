@@ -82,8 +82,11 @@ class StandingsWidgetState extends State<StandingsWidget> with SingleTickerProvi
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Standings"),
-          toolbarHeight: 75,
+          title: Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: Text("Standings"),
+          ),
+          toolbarHeight: 50,
           bottom: TabBar(
             controller: _tabController,
             tabs: [

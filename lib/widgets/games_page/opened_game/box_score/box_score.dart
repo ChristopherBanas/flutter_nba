@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_nba/database_models/game.dart';
+import 'package:flutter_nba/enums.dart';
+import 'package:flutter_nba/widgets/games_page/opened_game/box_score/team_box/team_box_body.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
-
 import '../../../stat_switch.dart';
+import 'package:flutter_nba/globals.dart' as globals;
 
 class BoxScoreBody extends StatefulWidget {
   const BoxScoreBody({Key? key}) : super(key: key);
@@ -11,13 +14,11 @@ class BoxScoreBody extends StatefulWidget {
   _BoxScoreBodyState createState() => _BoxScoreBodyState();
 }
 
-const dict = {0: "Q1",20: "Q2",40: "H!",60: "Q3",80: "Q4",100: "H2",120: "T",};
 class _BoxScoreBodyState extends State<BoxScoreBody> {
-  int selectedStatType = 0;
-  double value = 0.0;
-  double value2 = 0.0;
+  int selectedBoxType = 0;
+  int selectedTeamType = 0;
+  double sliderValue = 0.0;
 
-  /// Handled callback to change numeric value into a custom text.
   String _handleLabelCreated(dynamic val, String str) {
     if (str == '0') {
       str = 'Q1';
@@ -39,46 +40,64 @@ class _BoxScoreBodyState extends State<BoxScoreBody> {
 
   @override
   Widget build(BuildContext context) {
+    Game game = globals.game;
     return Center(
       child: Column(
         children: [
-          StatSwitch(
-              initIndex: selectedStatType,
-              labels: ['TEAM', 'PLAYER'],
-              callBack: (index) => {
-                this.setState(() {
-                  selectedStatType = index;
-                })
-              }
+          Padding(
+            padding: const EdgeInsets.only(bottom: 5),
+            child: Column(
+              children: [
+                StatSwitch(
+                    initIndex: selectedBoxType,
+                    labels: ['TEAM', 'PLAYER'],
+                    callBack: (index) => {
+                      this.setState(() {
+                        selectedBoxType = index;
+                      })
+                    }
+                ),
+                selectedBoxType == 0 ? Container() :
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: StatSwitch(
+                      initIndex: selectedTeamType,
+                      labels: [
+                        game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ABBREVIATION],
+                        game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ABBREVIATION]
+                      ],
+                      callBack: (index) => {
+                        this.setState(() {
+                          selectedTeamType = index;
+                        })
+                      }
+                  ),
+                ),
+              ],
+            ),
           ),
-          Slider(
-            value: value,
-            min: 0,
-            max: 120,
-            divisions: 6,
-            label: dict[value],
-            onChanged: (double val) {
-              setState(() {
-                value = val;
-              });
-            },
+          Padding(
+            padding: const EdgeInsets.only(bottom: 35),
+            child: SfSlider(
+                min: 0,
+                stepSize: 20,
+                max: 120,
+                interval: 20,
+                value: sliderValue,
+                enableTooltip: true,
+                tooltipShape: SfRectangularTooltipShape(),
+                tooltipTextFormatterCallback: _handleLabelCreated,
+                labelFormatterCallback: _handleLabelCreated,
+                showTicks: true,
+                showLabels: true,
+                onChanged: (dynamic val) {
+                  setState(() {
+                    sliderValue = val;
+                  });
+                },
+            ),
           ),
-          SfSlider(
-              min: 0,
-              stepSize: 20,
-              max: 120,
-              interval: 20,
-              value: value2,
-              enableTooltip: true,
-              labelFormatterCallback: _handleLabelCreated,
-              showTicks: true,
-              showLabels: true,
-              onChanged: (dynamic val) {
-                setState(() {
-                  value2 = val;
-                });
-              },
-          ),
+          TeamBoxBody(),
         ],
       ),
     );
