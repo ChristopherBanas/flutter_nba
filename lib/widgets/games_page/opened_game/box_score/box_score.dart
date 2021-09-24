@@ -17,7 +17,7 @@ class BoxScoreBody extends StatefulWidget {
 class _BoxScoreBodyState extends State<BoxScoreBody> {
   int selectedBoxType = 0;
   int selectedTeamType = 0;
-  double sliderValue = 0.0;
+  double sliderValue = 120.0;
 
   String _handleLabelCreated(dynamic val, String str) {
     if (str == '0') {
