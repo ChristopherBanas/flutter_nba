@@ -224,7 +224,7 @@ class AssistsFooter extends StatelessWidget {
         child: Align(
           alignment: first ? Alignment.centerRight : Alignment.centerLeft,
           child: Text(
-            '${map[boxEnums.TO]} TOV',
+            '${map[boxEnums.TO]} TO',
             style: TextStyle(
                 fontSize: 10
             ),

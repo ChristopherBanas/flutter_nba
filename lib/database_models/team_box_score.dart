@@ -34,7 +34,7 @@ class TeamBoxScore{
       boxEnums.AST : json['AST'],
       boxEnums.STL : json['STL'],
       boxEnums.BLK : json['BLK'],
-      boxEnums.TOV : json['TOV'],
+      boxEnums.TOV : json['TO'],
       boxEnums.PF : json['PF'],
       boxEnums.PLUS_MINUS : json['PLUS_MINUS'],
     }
