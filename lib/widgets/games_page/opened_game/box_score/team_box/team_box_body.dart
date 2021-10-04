@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_nba/enums.dart';
 import 'package:flutter_nba/widgets/games_page/opened_game/box_score/team_box/team_box_cell.dart';
 import 'package:flutter_nba/widgets/games_page/opened_game/box_score/team_box/team_table_header.dart';
+
 class TeamBoxBody extends StatelessWidget {
   final gameEnums statDuration;
   

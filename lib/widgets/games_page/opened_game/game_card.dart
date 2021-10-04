@@ -22,10 +22,21 @@ class GameCard extends StatefulWidget {
 class _GameCardState extends State<GameCard> {
   int chosen = 0;
 
+  @override
+  void initState(){
+    super.initState();
+    this.chosen = 0;
+  }
+
   void setChosen(val){
     this.setState(() {
       chosen = val;
     });
+  }
+
+  void hideCard(){
+    chosen = 0;
+    widget.updateHidden(true);
   }
 
   @override
@@ -34,7 +45,7 @@ class _GameCardState extends State<GameCard> {
     Dismissible(
       direction: DismissDirection.vertical,
       key: const Key('key'),
-      onDismissed: (_) => widget.updateHidden(true),
+      onDismissed: (_) => hideCard(),
       child: Center(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),

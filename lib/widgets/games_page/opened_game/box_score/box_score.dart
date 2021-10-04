@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nba/database_models/game.dart';
 import 'package:flutter_nba/enums.dart';
+import 'package:flutter_nba/widgets/games_page/opened_game/box_score/player_box/player_box_body.dart';
 import 'package:flutter_nba/widgets/games_page/opened_game/box_score/team_box/team_box_body.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import '../../../stat_switch.dart';
@@ -16,6 +17,8 @@ class BoxScoreBody extends StatefulWidget {
 
 const sliderMap = {0: gameEnums.Q1, 20: gameEnums.Q2, 40: gameEnums.FIRST_HALF, 
   60: gameEnums.Q3, 80: gameEnums.Q4, 100: gameEnums.SECOND_HALF, 120: gameEnums.TOTAL};
+const teamMap = {0: gameEnums.AWAY, 1: gameEnums.HOME};
+
 class _BoxScoreBodyState extends State<BoxScoreBody> {
   int selectedBoxType = 0;
   int selectedTeamType = 0;
@@ -101,7 +104,8 @@ class _BoxScoreBodyState extends State<BoxScoreBody> {
                 onChanged: (dynamic val) => sliderChanged(val),
             ),
           ),
-          TeamBoxBody(statDuration: sliderMap[sliderValue.toInt()]!,),
+          selectedBoxType == 0 ? TeamBoxBody(statDuration: sliderMap[sliderValue.toInt()]!,)
+              : Expanded(child: PlayerBoxBody(statDuration: sliderMap[sliderValue.toInt()]!, team: teamMap[selectedTeamType]!))
         ],
       ),
     );
