@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_nba/database_models/game.dart';
+import 'package:flutter_nba/models/game.dart';
 import 'package:flutter_nba/enums.dart';
 import 'package:flutter_nba/globals.dart' as globals;
 import 'package:flutter_nba/widgets/games_page/opened_game/body.dart';

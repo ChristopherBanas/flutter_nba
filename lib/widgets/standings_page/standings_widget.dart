@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_nba/database_models/team.dart';
+import 'package:flutter_nba/models/team.dart';
 import 'package:flutter_nba/widgets/standings_page/standings_body.dart';
 import 'package:http/http.dart' as http;
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';

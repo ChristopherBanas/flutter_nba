@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_nba/database_models/game.dart';
+import 'package:flutter_nba/models/game.dart';
 import 'package:flutter_nba/enums.dart';
 import 'package:flutter_nba/widgets/games_page/opened_game/box_score/player_box/player_box_body.dart';
 import 'package:flutter_nba/widgets/games_page/opened_game/box_score/team_box/team_box_body.dart';
@@ -105,7 +105,7 @@ class _BoxScoreBodyState extends State<BoxScoreBody> {
             ),
           ),
           selectedBoxType == 0 ? TeamBoxBody(statDuration: sliderMap[sliderValue.toInt()]!,)
-              : Expanded(child: PlayerBoxBody(statDuration: sliderMap[sliderValue.toInt()]!, team: teamMap[selectedTeamType]!))
+              : PlayerBoxBody(statDuration: sliderMap[sliderValue.toInt()]!, team: teamMap[selectedTeamType]!)
         ],
       ),
     );

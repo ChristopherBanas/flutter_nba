@@ -1,6 +1,6 @@
 import 'package:flutter_nba/enums.dart';
-import 'package:flutter_nba/database_models/player_box_score.dart';
-import 'package:flutter_nba/database_models/team_box_score.dart';
+import 'package:flutter_nba/models/player_box_score.dart';
+import 'package:flutter_nba/models/team_box_score.dart';
 
 class Game{
   final Map<gameEnums, dynamic> valueMap;

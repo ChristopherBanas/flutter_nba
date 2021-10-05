@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_nba/database_models/team.dart';
+import 'package:flutter_nba/models/team.dart';
 import 'package:flutter_nba/enums.dart';
 import 'package:flutter_nba/widgets/standings_page/data_cell.dart';
 import 'package:lazy_data_table/lazy_data_table.dart';

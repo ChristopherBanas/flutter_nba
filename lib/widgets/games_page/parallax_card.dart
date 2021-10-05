@@ -4,7 +4,7 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_nba/database_models/game.dart';
+import 'package:flutter_nba/models/game.dart';
 import 'package:flutter_nba/widgets/games_page/card_score.dart';
 import 'inherited_call_back.dart';
 

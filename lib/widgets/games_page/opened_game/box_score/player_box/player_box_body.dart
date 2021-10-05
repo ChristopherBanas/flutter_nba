@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_nba/database_models/player_box_score.dart';
+import 'package:flutter_nba/models/player_box_score.dart';
 import 'package:flutter_nba/enums.dart';
 import 'package:flutter_nba/widgets/games_page/opened_game/box_score/player_box/player_box_cell.dart';
+import 'package:http/http.dart';
 import 'package:lazy_data_table/lazy_data_table.dart';
 import 'package:flutter_nba/globals.dart' as globals;
 
@@ -17,7 +18,42 @@ class PlayerBoxBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    List<PlayerBoxScore> mapList = globals.game.valueMap[gameEnums
+        .PLAYER_BOX_SCORE][team][statDuration];
+    var headerList = [boxEnums.PLAYER_NAME];
+    headerList.addAll(mapList[0].valueMap.keys.toList().sublist(9, mapList[0].valueMap.keys.toList().length));
+    return SizedBox(
+      width: double.infinity,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: DataTable(
+            columns: List<DataColumn>.generate(
+              headerList.length,
+                (int index) => DataColumn(
+                    label: index == 0 ? Text("NAME")
+                        : Text(headerList[index].toString().split('.').last.replaceAll('_', ' '))
+                ),
+            ),
+            rows: List<DataRow>.generate(
+              mapList.length,
+                  (int row) => DataRow(
+                  cells: List<DataCell>.generate(
+                    headerList.length,
+                        (int col) => DataCell(
+                          col == 0 ? Text('${mapList[row].valueMap[headerList[col]].toString().split(" ")[0].substring(0,1).toString()}. ${mapList[row].valueMap[headerList[col]].toString().split(" ").sublist(1)[0].toString()}')
+                            : headerList[col].toString().split('.').last.contains("PCT") ?
+                          Text('${mapList[row].valueMap[headerList[col]]}%')
+                              : Text('${mapList[row].valueMap[headerList[col]]}')
+                    ),
+                  ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
     // List<PlayerBoxScore> mapList = globals.game.valueMap[gameEnums.PLAYER_BOX_SCORE][team][statDuration];
     // var headerList = mapList[0].valueMap.keys.toList().sublist(9, mapList[0].valueMap.keys.toList().length);
     // return Container(
@@ -87,4 +123,6 @@ class PlayerBoxBody extends StatelessWidget {
     //   ),
     // );
   }
+
+
 }
