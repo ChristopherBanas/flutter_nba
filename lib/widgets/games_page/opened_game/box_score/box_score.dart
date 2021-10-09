@@ -15,7 +15,7 @@ class BoxScoreBody extends StatefulWidget {
   _BoxScoreBodyState createState() => _BoxScoreBodyState();
 }
 
-const sliderMap = {0: gameEnums.Q1, 20: gameEnums.Q2, 40: gameEnums.FIRST_HALF, 
+const sliderMap = {0: gameEnums.Q1, 20: gameEnums.Q2, 40: gameEnums.FIRST_HALF,
   60: gameEnums.Q3, 80: gameEnums.Q4, 100: gameEnums.SECOND_HALF, 120: gameEnums.TOTAL};
 const teamMap = {0: gameEnums.AWAY, 1: gameEnums.HOME};
 
@@ -46,6 +46,12 @@ class _BoxScoreBodyState extends State<BoxScoreBody> {
   sliderChanged(dynamic val){
     this.setState(() {
       sliderValue = val;
+    });
+  }
+
+  boxScoreChange(int index){
+    this.setState(() {
+      selectedBoxType = index;
     });
   }
 

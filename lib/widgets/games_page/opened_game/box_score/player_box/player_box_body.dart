@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nba/models/player_box_score.dart';
 import 'package:flutter_nba/enums.dart';
-import 'package:flutter_nba/widgets/games_page/opened_game/box_score/player_box/player_box_cell.dart';
-import 'package:http/http.dart';
 import 'package:lazy_data_table/lazy_data_table.dart';
 import 'package:flutter_nba/globals.dart' as globals;
 
@@ -33,11 +31,11 @@ class PlayerBoxBody extends StatelessWidget {
     List<PlayerBoxScore> mapList = globals.game.valueMap[gameEnums
         .PLAYER_BOX_SCORE][team][statDuration];
     List<boxEnums> headerList = [boxEnums.PLAYER_NAME];
-    headerList.addAll(mapList[0].valueMap.keys.toList().sublist(9, mapList[0].valueMap.keys.toList().length));
+    headerList.addAll(mapList[0].valueMap.keys.toList().sublist(8, mapList[0].valueMap.keys.toList().length));
     int highest = getLongestName(mapList);
     return SizedBox(
       width: double.infinity,
-      height: 700,
+      height: 350,
       child: LazyDataTable(
           tableTheme: LazyDataTableTheme(
             cellColor: Colors.transparent,
@@ -76,28 +74,26 @@ class PlayerBoxBody extends StatelessWidget {
             ),
           ),
           tableDimensions: LazyDataTableDimensions(
-            cellHeight: 50,
+            cellHeight: 40,
             cellWidth: 50,
-            topHeaderHeight: 50,
+            topHeaderHeight: 40,
             leftHeaderWidth: 90+highest.toDouble(),
-            customCellWidth: {0:40,1:40,2:40,3:70,4:50,5:50,6:70,7:40,8:40,9:70,10:50,11:50,
-            12:40,13:40,14:40,15:40,16:30,17:30,18:70}
+            customCellWidth: {0:40,1:30,2:30,3:30,4:50,5:35,6:35,7:50,8:30,9:30,10:50,11:35,
+            12:30,13:30,14:30,15:30,16:30,17:20,18:20,19:50}
           ),
           columns: headerList.length-1,
           rows: mapList.length,
-        topLeftCornerWidget: Align(
-            alignment: Alignment.centerRight,
-            child: Container(
-                margin: const EdgeInsets.only(right: 2),
-                child: Text("NAME")
-            )
-        ),
+        topLeftCornerWidget: Center(),
         topHeaderBuilder: (i) => Align(
           alignment: Alignment.centerRight,
           child: Container(
             margin: i == headerList.length-2 ? const EdgeInsets.only(right: 5) : const EdgeInsets.only(right: 0),
             child: Text(
-              headerList.sublist(1,headerList.length)[i].toString().split('.').last.replaceAll('_', ' ')
+              headerList.sublist(1,headerList.length)[i].toString().split('.').last.replaceAll('_', ' '),
+              textAlign: TextAlign.right,
+              style: TextStyle(
+                fontSize: 9,
+              ),
             ),
           ),
         ),
@@ -125,9 +121,9 @@ class PlayerText extends StatelessWidget {
   Widget build(BuildContext context) {
     var base = mapList[row].valueMap[headerList[col]] ?? "N/A";
     return Align(
-      alignment: Alignment.centerRight,
+      alignment: col == 0 ? Alignment.centerLeft : Alignment.centerRight,
       child: col == 0 ? Container(
-        margin: const EdgeInsets.only(right: 2),
+        margin: const EdgeInsets.only(left: 4),
         child: Text(
           '${base.toString().split(" ")[0].substring(0,1).toString()}. ${base.toString().split(" ").sublist(1)[0].toString()}',
           style: TextStyle(
@@ -135,10 +131,10 @@ class PlayerText extends StatelessWidget {
           ),
         ),
       ) : headerList[col].toString().split('.').last.contains("PCT") ?
-      Text(base == 'N/A' ? '$base' : '$base%')
+      Text(base == 'N/A' ? '$base' : '$base%',style: TextStyle(fontSize: 9))
           : Container(
             margin: col == headerList.length-1 ? const EdgeInsets.only(right: 5) : const EdgeInsets.only(right: 0),
-            child: Text('$base')
+            child: Text('$base',style: TextStyle(fontSize: 9))
         )
     );
   }

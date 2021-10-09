@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_nba/widgets/games_page/opened_game/box_score/box_score.dart';
 import 'package:flutter_nba/widgets/games_page/opened_game/opened_child.dart';
 import 'package:flutter_nba/widgets/games_page/opened_game/quarter_table.dart';
 import 'package:flutter_nba/widgets/games_page/opened_game/sticky_score.dart';
 import 'package:flutter_nba/widgets/games_page/opened_game/top_performers/top_performers.dart';
 import 'package:sticky_headers/sticky_headers.dart';
+import 'box_score/box_score.dart';
 import 'card_spacer.dart';
 
 class OpenedGameBody extends StatefulWidget {
