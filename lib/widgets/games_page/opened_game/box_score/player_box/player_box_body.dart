@@ -29,6 +29,10 @@ class PlayerBoxBody extends StatelessWidget {
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: DataTable(
+            columnSpacing: 8,
+            headingRowHeight: 40,
+            dataRowHeight: 40,
+            headingRowColor: MaterialStateColor.resolveWith((states) => Theme.of(context).scaffoldBackgroundColor),
             columns: List<DataColumn>.generate(
               headerList.length,
                 (int index) => DataColumn(
@@ -42,10 +46,7 @@ class PlayerBoxBody extends StatelessWidget {
                   cells: List<DataCell>.generate(
                     headerList.length,
                         (int col) => DataCell(
-                          col == 0 ? Text('${mapList[row].valueMap[headerList[col]].toString().split(" ")[0].substring(0,1).toString()}. ${mapList[row].valueMap[headerList[col]].toString().split(" ").sublist(1)[0].toString()}')
-                            : headerList[col].toString().split('.').last.contains("PCT") ?
-                          Text('${mapList[row].valueMap[headerList[col]]}%')
-                              : Text('${mapList[row].valueMap[headerList[col]]}')
+                          PlayerText(mapList: mapList, headerList: headerList, row: row, col: col)
                     ),
                   ),
               ),
@@ -123,6 +124,33 @@ class PlayerBoxBody extends StatelessWidget {
     //   ),
     // );
   }
-
-
 }
+
+class PlayerText extends StatelessWidget {
+  final List<PlayerBoxScore> mapList;
+  final List<boxEnums> headerList;
+  final int row;
+  final int col;
+
+  const PlayerText({
+      required this.mapList,
+      required this.headerList,
+      required this.row,
+      required this.col
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    var base = mapList[row].valueMap[headerList[col]] ?? "N/A";
+    return col == 0 ? Text(
+        '${base.toString().split(" ")[0].substring(0,1).toString()}. ${base.toString().split(" ").sublist(1)[0].toString()}',
+        style: TextStyle(
+          fontSize: base.toString().split(" ").sublist(1)[0].toString().length > 11 ? 9 : 11
+        ),
+    )
+        : headerList[col].toString().split('.').last.contains("PCT") ?
+    Text(base == 'N/A' ? '$base' : '$base%')
+        : Text('$base');
+  }
+}
+
