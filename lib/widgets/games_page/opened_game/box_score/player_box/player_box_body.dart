@@ -16,113 +16,95 @@ class PlayerBoxBody extends StatelessWidget {
     required this.team
   });
 
+  int getLongestName(List<PlayerBoxScore> nameMapList){
+    int highest = 0;
+    for(var i = 0; i < nameMapList.length; i++){
+      var base = nameMapList[i].valueMap[boxEnums.PLAYER_NAME];
+      String name = '${base.toString().split(" ")[0].substring(0,1).toString()}. ${base.toString().split(" ").sublist(1)[0].toString()}';
+      if (name.length > highest){
+        highest = name.length;
+      }
+    }
+    return highest;
+  }
+
   @override
   Widget build(BuildContext context) {
     List<PlayerBoxScore> mapList = globals.game.valueMap[gameEnums
         .PLAYER_BOX_SCORE][team][statDuration];
-    var headerList = [boxEnums.PLAYER_NAME];
+    List<boxEnums> headerList = [boxEnums.PLAYER_NAME];
     headerList.addAll(mapList[0].valueMap.keys.toList().sublist(9, mapList[0].valueMap.keys.toList().length));
+    int highest = getLongestName(mapList);
     return SizedBox(
       width: double.infinity,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: DataTable(
-            columnSpacing: 8,
-            headingRowHeight: 40,
-            dataRowHeight: 40,
-            headingRowColor: MaterialStateColor.resolveWith((states) => Theme.of(context).scaffoldBackgroundColor),
-            columns: List<DataColumn>.generate(
-              headerList.length,
-                (int index) => DataColumn(
-                    label: index == 0 ? Text("NAME")
-                        : Text(headerList[index].toString().split('.').last.replaceAll('_', ' '))
-                ),
+      height: 700,
+      child: LazyDataTable(
+          tableTheme: LazyDataTableTheme(
+            cellColor: Colors.transparent,
+            alternateCellColor: Theme.of(context).scaffoldBackgroundColor,
+            columnHeaderColor: Colors.transparent,
+            cornerColor: Colors.transparent,
+            rowHeaderColor: Colors.transparent,
+            alternateRowHeaderColor: Theme.of(context).scaffoldBackgroundColor,
+            cellBorder: Border(
+              top: BorderSide(color: Theme.of(context).dividerColor),
+              bottom: BorderSide(color: Theme.of(context).dividerColor),
             ),
-            rows: List<DataRow>.generate(
-              mapList.length,
-                  (int row) => DataRow(
-                  cells: List<DataCell>.generate(
-                    headerList.length,
-                        (int col) => DataCell(
-                          PlayerText(mapList: mapList, headerList: headerList, row: row, col: col)
-                    ),
-                  ),
-              ),
+            alternateCellBorder: Border(
+              top: BorderSide(color: Theme.of(context).dividerColor),
+              bottom: BorderSide(color: Theme.of(context).dividerColor),
+            ),
+            alternateColumnHeaderBorder: Border(
+                bottom: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 2)
+            ),
+            alternateRowHeaderBorder: Border(
+                right: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 2),
+                top: BorderSide(color: Theme.of(context).dividerColor),
+                bottom: BorderSide(color: Theme.of(context).dividerColor)
+            ),
+            columnHeaderBorder: Border(
+                bottom: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 2)
+            ),
+            cornerBorder: Border(
+              bottom: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 2),
+              right: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 2),
+            ),
+            rowHeaderBorder: Border(
+                right: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 2),
+                top: BorderSide(color: Theme.of(context).dividerColor),
+                bottom: BorderSide(color: Theme.of(context).dividerColor)
+            ),
+          ),
+          tableDimensions: LazyDataTableDimensions(
+            cellHeight: 50,
+            cellWidth: 50,
+            topHeaderHeight: 50,
+            leftHeaderWidth: 90+highest.toDouble(),
+            customCellWidth: {0:40,1:40,2:40,3:70,4:50,5:50,6:70,7:40,8:40,9:70,10:50,11:50,
+            12:40,13:40,14:40,15:40,16:30,17:30,18:70}
+          ),
+          columns: headerList.length-1,
+          rows: mapList.length,
+        topLeftCornerWidget: Align(
+            alignment: Alignment.centerRight,
+            child: Container(
+                margin: const EdgeInsets.only(right: 2),
+                child: Text("NAME")
+            )
+        ),
+        topHeaderBuilder: (i) => Align(
+          alignment: Alignment.centerRight,
+          child: Container(
+            margin: i == headerList.length-2 ? const EdgeInsets.only(right: 5) : const EdgeInsets.only(right: 0),
+            child: Text(
+              headerList.sublist(1,headerList.length)[i].toString().split('.').last.replaceAll('_', ' ')
             ),
           ),
         ),
+        leftHeaderBuilder: (i) => PlayerText(mapList: mapList, headerList: headerList, row: i, col: 0),
+        dataCellBuilder: (row, col) => PlayerText(mapList: mapList, headerList: headerList, row: row, col: col+1),
       ),
     );
-    // List<PlayerBoxScore> mapList = globals.game.valueMap[gameEnums.PLAYER_BOX_SCORE][team][statDuration];
-    // var headerList = mapList[0].valueMap.keys.toList().sublist(9, mapList[0].valueMap.keys.toList().length);
-    // return Container(
-    //   margin: const EdgeInsets.fromLTRB(40, 0, 40, 10),
-    //   child: LazyDataTable(
-    //       tableTheme: LazyDataTableTheme(
-    //         cellColor: Colors.transparent,
-    //         alternateCellColor: Colors.transparent,
-    //         columnHeaderColor: Colors.transparent,
-    //         cornerColor: Colors.transparent,
-    //         rowHeaderColor: Colors.transparent,
-    //         alternateRowHeaderColor: Colors.transparent,
-    //         cellBorder: Border(
-    //           top: BorderSide(color: Theme.of(context).dividerColor),
-    //           bottom: BorderSide(color: Theme.of(context).dividerColor),
-    //         ),
-    //         alternateCellBorder: Border(
-    //           top: BorderSide(color: Theme.of(context).dividerColor),
-    //           bottom: BorderSide(color: Theme.of(context).dividerColor),
-    //         ),
-    //         alternateColumnHeaderBorder: Border(
-    //             bottom: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 2)
-    //         ),
-    //         alternateRowHeaderBorder: Border(
-    //             right: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 2),
-    //             top: BorderSide(color: Theme.of(context).dividerColor),
-    //             bottom: BorderSide(color: Theme.of(context).dividerColor)
-    //         ),
-    //         columnHeaderBorder: Border(
-    //             bottom: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 2)
-    //         ),
-    //         cornerBorder: Border(
-    //           bottom: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 2),
-    //           right: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 2),
-    //         ),
-    //         rowHeaderBorder: Border(
-    //             right: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 2),
-    //             top: BorderSide(color: Theme.of(context).dividerColor),
-    //             bottom: BorderSide(color: Theme.of(context).dividerColor)
-    //         ),
-    //       ),
-    //       tableDimensions: LazyDataTableDimensions(
-    //         cellHeight: 10,
-    //         cellWidth: 10,
-    //         leftHeaderWidth: 10,
-    //         topHeaderHeight: 10
-    //       ),
-    //       columns: headerList.length,
-    //       rows: mapList.length,
-    //     topHeaderBuilder: (i) => Align(
-    //       alignment: Alignment.centerRight,
-    //       child: Padding(
-    //         padding: const EdgeInsets.fromLTRB(0, 0, 5, 0),
-    //         child: Text(
-    //           headerList[i].toString().split('.').last.replaceAll('_', ' '),
-    //           textAlign: TextAlign.right,
-    //         ),
-    //       ),
-    //     ),
-    //     leftHeaderBuilder: (i) => Align(
-    //       alignment: Alignment.centerRight,
-    //       child: Text(
-    //         mapList[i].valueMap['PLAYER_NAME']
-    //       ),
-    //     ),
-    //     dataCellBuilder: (row, col) => PlayerBoxCell(data: mapList[row].valueMap.values.toList()[col]),
-    //   ),
-    // );
   }
 }
 
@@ -142,15 +124,23 @@ class PlayerText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var base = mapList[row].valueMap[headerList[col]] ?? "N/A";
-    return col == 0 ? Text(
-        '${base.toString().split(" ")[0].substring(0,1).toString()}. ${base.toString().split(" ").sublist(1)[0].toString()}',
-        style: TextStyle(
-          fontSize: base.toString().split(" ").sublist(1)[0].toString().length > 11 ? 9 : 11
+    return Align(
+      alignment: Alignment.centerRight,
+      child: col == 0 ? Container(
+        margin: const EdgeInsets.only(right: 2),
+        child: Text(
+          '${base.toString().split(" ")[0].substring(0,1).toString()}. ${base.toString().split(" ").sublist(1)[0].toString()}',
+          style: TextStyle(
+              fontSize: base.toString().split(" ").sublist(1)[0].toString().length > 11 ? 9 : 11
+          ),
         ),
-    )
-        : headerList[col].toString().split('.').last.contains("PCT") ?
-    Text(base == 'N/A' ? '$base' : '$base%')
-        : Text('$base');
+      ) : headerList[col].toString().split('.').last.contains("PCT") ?
+      Text(base == 'N/A' ? '$base' : '$base%')
+          : Container(
+            margin: col == headerList.length-1 ? const EdgeInsets.only(right: 5) : const EdgeInsets.only(right: 0),
+            child: Text('$base')
+        )
+    );
   }
 }
 

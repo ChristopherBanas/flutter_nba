@@ -71,40 +71,42 @@ class GamesWidgetState extends State<GamesWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Games"),
-        toolbarHeight: 100,
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: SizedBox(
-            height: 30,
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
-                child: Text(
-                  //widget.gamesList[0].valueMap[gameEnums.DATE],
-                  '12/25/2020',
-                  style: TextStyle(color: Colors.white),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Games"),
+          toolbarHeight: 100,
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(1),
+            child: SizedBox(
+              height: 30,
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
+                  child: Text(
+                    //widget.gamesList[0].valueMap[gameEnums.DATE],
+                    '12/25/2020',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(20),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(20),
+            ),
           ),
         ),
-      ),
-      body: SingleChildScrollView(
-        //key: PageStorageKey(value),
-        controller: controller,
-        child: Column(
-          children: [
-            for(final game in gameList)
-              game
-          ],
+        body: SingleChildScrollView(
+          //key: PageStorageKey(value),
+          controller: controller,
+          child: Column(
+            children: [
+              for(final game in gameList)
+                game
+            ],
+          ),
         ),
       ),
     );

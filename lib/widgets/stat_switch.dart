@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_nba/widgets/standings_page/standings_body.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class StatSwitch extends StatelessWidget {
