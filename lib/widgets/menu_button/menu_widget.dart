@@ -36,7 +36,7 @@ class _MenuState extends State<Menu> {
         buttonSize: 56,
         childrenButtonSize: 56,
         visible: true,
-        direction: SpeedDialDirection.Up,
+        direction: SpeedDialDirection.up,
         closeManually: false,
         renderOverlay: true,
         tooltip: "Menu",
