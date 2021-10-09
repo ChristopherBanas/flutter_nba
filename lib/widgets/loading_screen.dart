@@ -93,98 +93,100 @@ class _LoadingScreenState extends State<LoadingScreen>
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: Center(
-        child: Container(
-          width: double.infinity,
-          height: 500,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                height: 80,
-                width: double.infinity,
-                child: Stack(
-                  alignment: Alignment.center,
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
+          child: Container(
+            width: double.infinity,
+            height: 500,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: 80,
+                  width: double.infinity,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      SlideTransition(
+                        position: _offsetAnimation,
+                        child: Image.asset(
+                          "assets/images/logo.png",
+                          height: size.height * 0.060,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 70),
+                        child: AnimatedOpacity(
+                          opacity: _textOpacity,
+                          curve: Curves.easeIn,
+                          duration: Duration(milliseconds: 400),
+                          child: Image.asset(
+                            "assets/images/secondary_logo.png",
+                            height: size.height * 0.05,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Stack(
                   children: [
-                    SlideTransition(
-                      position: _offsetAnimation,
-                      child: Image.asset(
-                        "assets/images/logo.png",
-                        height: size.height * 0.060,
+                    AnimatedOpacity(
+                      duration: Duration(milliseconds: 400),
+                      opacity: _connOpacity,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: 35,
+                          ),
+                          Text("Connecting to servers "),
+                          SizedBox(
+                            width: 40,
+                            child: AnimatedTextKit(
+                              repeatForever: true,
+                              pause: Duration(milliseconds: 400),
+                              animatedTexts: [
+                                TyperAnimatedText("...",
+                                    speed: Duration(milliseconds: 400)),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 70),
-                      child: AnimatedOpacity(
-                        opacity: _textOpacity,
-                        curve: Curves.easeIn,
-                        duration: Duration(milliseconds: 400),
-                        child: Image.asset(
-                          "assets/images/secondary_logo.png",
-                          height: size.height * 0.05,
-                        ),
+                    AnimatedOpacity(
+                      duration: Duration(milliseconds: 400),
+                      opacity: _fetchOpacity,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: 35,
+                          ),
+                          Text("Fetching data "),
+                          SizedBox(
+                            width: 40,
+                            child: AnimatedTextKit(
+                              repeatForever: true,
+                              pause: Duration(milliseconds: 400),
+                              animatedTexts: [
+                                TyperAnimatedText("...",
+                                    speed: Duration(milliseconds: 400)),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Stack(
-                children: [
-                  AnimatedOpacity(
-                    duration: Duration(milliseconds: 400),
-                    opacity: _connOpacity,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: 35,
-                        ),
-                        Text("Connecting to servers "),
-                        SizedBox(
-                          width: 40,
-                          child: AnimatedTextKit(
-                            repeatForever: true,
-                            pause: Duration(milliseconds: 400),
-                            animatedTexts: [
-                              TyperAnimatedText("...",
-                                  speed: Duration(milliseconds: 400)),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  AnimatedOpacity(
-                    duration: Duration(milliseconds: 400),
-                    opacity: _fetchOpacity,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: 35,
-                        ),
-                        Text("Fetching data "),
-                        SizedBox(
-                          width: 40,
-                          child: AnimatedTextKit(
-                            repeatForever: true,
-                            pause: Duration(milliseconds: 400),
-                            animatedTexts: [
-                              TyperAnimatedText("...",
-                                  speed: Duration(milliseconds: 400)),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

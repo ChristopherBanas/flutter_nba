@@ -80,46 +80,48 @@ class StandingsWidgetState extends State<StandingsWidget> with SingleTickerProvi
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: Text("Standings"),
-          ),
-          toolbarHeight: 50,
-          bottom: TabBar(
-            controller: _tabController,
-            tabs: [
-              for (final conf in conferences)
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 15),
-                  child: Text(conf),
-                )
-            ],
-            indicator: DotIndicator(
-                color: Colors.white,
+    return SafeArea(
+      child: Scaffold(
+          appBar: AppBar(
+            title: Container(
+              margin: const EdgeInsets.only(top: 10),
+              child: Text("Standings"),
+            ),
+            toolbarHeight: 50,
+            bottom: TabBar(
+              controller: _tabController,
+              tabs: [
+                for (final conf in conferences)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 15),
+                    child: Text(conf),
+                  )
+              ],
+              indicator: DotIndicator(
+                  color: Colors.white,
+              ),
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(20),
+              ),
             ),
           ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(20),
+          body: [
+            StandingsBody(
+                standingsMap: widget.standingsMap,
+                conference: 'EAST'
             ),
-          ),
-        ),
-        body: [
-          StandingsBody(
-              standingsMap: widget.standingsMap,
-              conference: 'EAST'
-          ),
-          StandingsBody(
-              standingsMap: widget.standingsMap,
-              conference: 'WEST'
-          ),
-          StandingsBody(
-              standingsMap: widget.standingsMap,
-              conference: 'LEAGUE'
-          ),
-        ][_tabController.index]
+            StandingsBody(
+                standingsMap: widget.standingsMap,
+                conference: 'WEST'
+            ),
+            StandingsBody(
+                standingsMap: widget.standingsMap,
+                conference: 'LEAGUE'
+            ),
+          ][_tabController.index]
+      ),
     );
   }
 }

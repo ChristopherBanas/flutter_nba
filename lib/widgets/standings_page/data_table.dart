@@ -64,11 +64,11 @@ class _StandingsTableState extends State<StandingsTable> {
     return LazyDataTable(
       tableTheme: LazyDataTableTheme(
         cellColor: Colors.transparent,
-        alternateCellColor: Colors.transparent,
+        alternateCellColor: Theme.of(context).scaffoldBackgroundColor,
         columnHeaderColor: Colors.transparent,
         cornerColor: Colors.transparent,
         rowHeaderColor: Colors.transparent,
-        alternateRowHeaderColor: Colors.transparent,
+        alternateRowHeaderColor: Theme.of(context).scaffoldBackgroundColor,
         cellBorder: Border(
           top: BorderSide(color: Theme.of(context).dividerColor),
           bottom: BorderSide(color: Theme.of(context).dividerColor),
