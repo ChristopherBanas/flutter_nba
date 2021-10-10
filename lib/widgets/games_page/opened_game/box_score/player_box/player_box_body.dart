@@ -35,7 +35,7 @@ class PlayerBoxBody extends StatelessWidget {
     int highest = getLongestName(mapList);
     return SizedBox(
       width: double.infinity,
-      height: 350,
+      height: 500,
       child: LazyDataTable(
           tableTheme: LazyDataTableTheme(
             cellColor: Colors.transparent,

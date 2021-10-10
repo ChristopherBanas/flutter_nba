@@ -2,6 +2,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nba/globals.dart';
+import 'package:flutter_nba/widgets/menu_button/info_button.dart';
+import 'package:flutter_nba/widgets/menu_button/info_header.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class Menu extends StatefulWidget {
@@ -76,9 +78,9 @@ class _MenuState extends State<Menu> {
                 showDialog<String>(
                   context: context,
                   builder: (BuildContext context) => SimpleDialog(
-                    title: Center(child: const Text("Info")),
+                    title: InfoHeader(),
                     children: [
-                      Center(child: Text("Credits & dark mode / light mode button will go here")),
+                      InfoButton(),
                     ],
                   ),
                 ),
