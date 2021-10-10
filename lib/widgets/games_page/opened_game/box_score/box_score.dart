@@ -32,7 +32,7 @@ const colorMap = {
   1610612752: 0xff006BB6, //knicks
   1610612737: 0xffE03A3E, //hawks
   1610612748: 0xff98002E, //heat
-  1610612744: 0xff1D428A, //warriors
+  1610612744: 0xffFFC72C, //warriors
   1610612763: 0xff5D76A9, //grizzlies
   1610612738: 0xff007A33, //celtics
   1610612764: 0xff002B5C, //wizards
@@ -99,6 +99,7 @@ class _BoxScoreBodyState extends State<BoxScoreBody> {
               children: [
                 StatSwitch(
                     initIndex: selectedBoxType,
+                    colorList: [Theme.of(context).colorScheme.secondary, Theme.of(context).colorScheme.secondary],
                     labels: ['TEAM', 'PLAYER'],
                     callBack: (index) => {
                       this.setState(() {
@@ -111,6 +112,8 @@ class _BoxScoreBodyState extends State<BoxScoreBody> {
                   padding: const EdgeInsets.only(top: 10),
                   child: StatSwitch(
                       initIndex: selectedTeamType,
+                      colorList: [Color(colorMap[game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]]!),
+                        Color(colorMap[game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]]!)],
                       labels: [
                         game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ABBREVIATION],
                         game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ABBREVIATION]
@@ -140,10 +143,14 @@ class _BoxScoreBodyState extends State<BoxScoreBody> {
                 showTicks: true,
                 showLabels: true,
                 onChanged: (dynamic val) => sliderChanged(val),
-                activeColor: selectedBoxType == 0 ? Colors.blue
+                activeColor: selectedBoxType == 0 ? Theme.of(context).sliderTheme.activeTrackColor
                     : Color(colorMap[selectedTeamType == 0 ?
                 game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID] :
                 game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]]!),
+                inactiveColor: selectedBoxType == 0 ? Theme.of(context).sliderTheme.inactiveTrackColor
+                    : Color(colorMap[selectedTeamType == 0 ?
+                game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID] :
+                game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]]!).withOpacity(.6),
             ),
           ),
           selectedBoxType == 0 ? TeamBoxBody(statDuration: sliderMap[sliderValue.toInt()]!,)

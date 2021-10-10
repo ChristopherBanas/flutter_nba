@@ -54,6 +54,7 @@ class _StandingsBodyState extends State<StandingsBody> with AutomaticKeepAliveCl
                       padding: const EdgeInsets.fromLTRB(5, 7, 5, 0),
                       child: StatSwitch(
                           initIndex: selectedStatType,
+                          colorList: [Theme.of(context).colorScheme.secondary, Theme.of(context).colorScheme.secondary],
                           labels: statTypes,
                           callBack: (index) => {
                             this.setState(() {

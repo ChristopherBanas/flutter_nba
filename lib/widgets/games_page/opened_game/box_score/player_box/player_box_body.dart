@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nba/models/player_box_score.dart';
 import 'package:flutter_nba/enums.dart';
+import 'package:flutter_nba/widgets/games_page/opened_game/box_score/box_score.dart';
 import 'package:lazy_data_table/lazy_data_table.dart';
 import 'package:flutter_nba/globals.dart' as globals;
 
@@ -33,6 +34,7 @@ class PlayerBoxBody extends StatelessWidget {
     List<boxEnums> headerList = [boxEnums.PLAYER_NAME];
     headerList.addAll(mapList[0].valueMap.keys.toList().sublist(8, mapList[0].valueMap.keys.toList().length));
     int highest = getLongestName(mapList);
+    Color teamColor = Color(colorMap[mapList[0].valueMap[boxEnums.TEAM_ID]]!);
     return SizedBox(
       width: double.infinity,
       height: 500,
@@ -53,22 +55,22 @@ class PlayerBoxBody extends StatelessWidget {
               bottom: BorderSide(color: Theme.of(context).dividerColor),
             ),
             alternateColumnHeaderBorder: Border(
-                bottom: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 2)
+                bottom: BorderSide(color: teamColor, width: 2)
             ),
             alternateRowHeaderBorder: Border(
-                right: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 2),
+                right: BorderSide(color: teamColor, width: 2),
                 top: BorderSide(color: Theme.of(context).dividerColor),
                 bottom: BorderSide(color: Theme.of(context).dividerColor)
             ),
             columnHeaderBorder: Border(
-                bottom: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 2)
+                bottom: BorderSide(color: teamColor, width: 2)
             ),
             cornerBorder: Border(
-              bottom: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 2),
-              right: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 2),
+              bottom: BorderSide(color: teamColor, width: 2),
+              right: BorderSide(color: teamColor, width: 2),
             ),
             rowHeaderBorder: Border(
-                right: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 2),
+                right: BorderSide(color: teamColor, width: 2),
                 top: BorderSide(color: Theme.of(context).dividerColor),
                 bottom: BorderSide(color: Theme.of(context).dividerColor)
             ),
