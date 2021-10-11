@@ -11,6 +11,8 @@ ThemeData darkTheme = ThemeData(
   ),
   scaffoldBackgroundColor: Color(0xfff3c3c3c),
   cardColor: Color(0xff565656),
+  colorScheme: ColorScheme.dark(secondary: Color(0xff22a505)),
+  tabBarTheme: TabBarTheme(indicator: UnderlineTabIndicator(borderSide: BorderSide(color: Color(0xff22a505))))
 );
 
 ThemeData lightTheme = ThemeData(

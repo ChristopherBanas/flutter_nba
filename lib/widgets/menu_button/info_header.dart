@@ -7,11 +7,13 @@ class InfoHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(bottom: BorderSide(color: Theme.of(context).colorScheme.secondary))
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(),
           Text("Info"),
           Tooltip(
             message: Theme.of(context).brightness == Brightness.light ? "Light mode" : "Dark mode",

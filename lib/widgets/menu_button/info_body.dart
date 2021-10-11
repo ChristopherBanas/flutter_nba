@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class InfoButton extends StatelessWidget {
+class InfoBody extends StatelessWidget {
 
   Future<void> _onOpen(LinkableElement link) async {
     if (await canLaunch(link.url)) {
-      await launch(link.url);
+      await launch(link.url, forceSafariVC: false);
     } else {
       throw 'Could not launch $link';
     }
@@ -17,7 +16,7 @@ class InfoButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(left: 5),
+      margin: const EdgeInsets.only(left: 5, right: 5),
       child: Column(
         children: [
           Align(
@@ -36,7 +35,7 @@ class InfoButton extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Linkify(
               textAlign: TextAlign.left,
-              onOpen: (link) => _onOpen,
+              onOpen: (link) => {_onOpen(link)},
               text: "Backend API supported by https://github.com/swar/nba_api",
             ),
           ),
@@ -44,7 +43,7 @@ class InfoButton extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Linkify(
               textAlign: TextAlign.left,
-              onOpen: (link) => _onOpen,
+              onOpen: (link) => {_onOpen(link)},
               text: "Loading screen based on https://github.com/ShreeyansB/fontina",
             ),
           ),

@@ -1,8 +1,7 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nba/globals.dart';
-import 'package:flutter_nba/widgets/menu_button/info_button.dart';
+import 'package:flutter_nba/widgets/menu_button/info_body.dart';
 import 'package:flutter_nba/widgets/menu_button/info_header.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
@@ -80,7 +79,7 @@ class _MenuState extends State<Menu> {
                   builder: (BuildContext context) => SimpleDialog(
                     title: InfoHeader(),
                     children: [
-                      InfoButton(),
+                      InfoBody(),
                     ],
                   ),
                 ),
