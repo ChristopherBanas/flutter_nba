@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nba/enums.dart';
 import 'package:flutter_nba/models/game.dart';
@@ -102,6 +103,28 @@ class GamesWidgetState extends State<GamesWidget> {
         controller: controller,
         child: Column(
           children: [
+            (defaultTargetPlatform != TargetPlatform.iOS &&
+                defaultTargetPlatform != TargetPlatform.android) ? SimpleDialog(
+              backgroundColor: Colors.yellow.withOpacity(.8),
+              title: Text(
+                  "Warning",
+                  style: TextStyle(
+                      color: Colors.black
+                  ),
+              ),
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(left: 10, right: 10),
+                  child: Text(
+                      "This page is intended for mobile devices. Since you are on a web browser it is "
+                      "recommended you decrease the dimensions of your window. Layout scaling for browsers is still a WIP.",
+                      style: TextStyle(
+                        color: Colors.black
+                      ),
+                  ),
+                ),
+              ],
+            ) : Container(),
             for(final game in gameList)
               game
           ],
