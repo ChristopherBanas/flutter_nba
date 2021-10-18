@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_nba/models/game.dart';
 import 'package:flutter_nba/widgets/games_page/inherited_call_back.dart';
 import 'package:flutter_nba/widgets/games_page/opened_game/game_card.dart';
+import 'package:flutter_nba/widgets/games_page/opened_game/opened_page.dart';
 import 'package:flutter_nba/widgets/standings_page/standings_widget.dart';
 import 'package:page_flip_builder/page_flip_builder.dart';
 import '../globals.dart' as globals;
 import 'games_page/games_widget.dart';
 import 'menu_button/menu_widget.dart';
+import 'no_animation.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -27,20 +29,15 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final pageFlipKey = GlobalKey<PageFlipBuilderState>();
-  bool hidden = true;
 
   updateGameCard(Game selectedGame){
     globals.game = selectedGame;
-    this.setState(() {
-      hidden = false;
-    });
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => OpenedPage())
+    );
   }
 
-  updateHidden(bool hiddenVal){
-    this.setState(() {
-      hidden = hiddenVal;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,13 +56,12 @@ class _HomeScreenState extends State<HomeScreen> {
               Center(
                 child: InheritedCallBack(
                   updateGameItem: (game) => {updateGameCard(game)},
-                  updateHidden: (hidden) => {updateHidden(hidden)},
                   child: GamesWidget(
                       gamesList: widget.gamesList,
                   ),
                 ),
               ),
-              GameCard(hidden: hidden, updateHidden: (hidden) => {updateHidden(hidden)})
+              //GameCard(hidden: hidden, updateHidden: (hidden) => {updateHidden(hidden)})
             ],
           ),
         ),

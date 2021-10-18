@@ -107,24 +107,6 @@ class _BoxScoreBodyState extends State<BoxScoreBody> {
                       })
                     }
                 ),
-                selectedBoxType == 0 ? Container() :
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: StatSwitch(
-                      initIndex: selectedTeamType,
-                      colorList: [Color(colorMap[game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]]!),
-                        Color(colorMap[game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]]!)],
-                      labels: [
-                        game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ABBREVIATION],
-                        game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ABBREVIATION]
-                      ],
-                      callBack: (index) => {
-                        this.setState(() {
-                          selectedTeamType = index;
-                        })
-                      }
-                  ),
-                ),
               ],
             ),
           ),
@@ -154,7 +136,28 @@ class _BoxScoreBodyState extends State<BoxScoreBody> {
             ),
           ),
           selectedBoxType == 0 ? TeamBoxBody(statDuration: sliderMap[sliderValue.toInt()]!,)
-              : PlayerBoxBody(statDuration: sliderMap[sliderValue.toInt()]!, team: teamMap[selectedTeamType]!)
+              : Column(
+                children: [
+                  PlayerBoxBody(statDuration: sliderMap[sliderValue.toInt()]!, team: teamMap[selectedTeamType]!),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: StatSwitch(
+                        initIndex: selectedTeamType,
+                        colorList: [Color(colorMap[game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]]!),
+                          Color(colorMap[game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]]!)],
+                        labels: [
+                          game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ABBREVIATION],
+                          game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ABBREVIATION]
+                        ],
+                        callBack: (index) => {
+                          this.setState(() {
+                            selectedTeamType = index;
+                          })
+                        }
+                    ),
+                  ),
+                ],
+              )
         ],
       ),
     );

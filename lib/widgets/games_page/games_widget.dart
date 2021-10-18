@@ -75,7 +75,7 @@ class GamesWidgetState extends State<GamesWidget> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Games"),
-        toolbarHeight: 100,
+        toolbarHeight: 105,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1),
           child: SizedBox(
@@ -84,8 +84,7 @@ class GamesWidgetState extends State<GamesWidget> {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
                 child: Text(
-                  //widget.gamesList[0].valueMap[gameEnums.DATE],
-                  '12/25/2020',
+                  widget.gamesList[0].valueMap[gameEnums.DATE],
                   style: TextStyle(color: Colors.white),
                 ),
               ),

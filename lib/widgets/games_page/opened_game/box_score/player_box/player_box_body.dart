@@ -37,7 +37,7 @@ class PlayerBoxBody extends StatelessWidget {
     Color teamColor = Color(colorMap[mapList[0].valueMap[boxEnums.TEAM_ID]]!);
     return SizedBox(
       width: double.infinity,
-      height: (mapList.length + 1) * 20,
+      height: MediaQuery.of(context).size.height - 400,
       child: LazyDataTable(
           tableTheme: LazyDataTableTheme(
             cellColor: Colors.transparent,

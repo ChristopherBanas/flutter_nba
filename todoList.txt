@@ -1,6 +1,4 @@
 fix coloring areas from ios15
 game opened transition
 parallex scrolling
-minutes displayed
 transition desktop screens
-scroll quarter for player box make team color
