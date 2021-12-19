@@ -93,8 +93,8 @@ class _LineChart extends StatelessWidget {
   );
 
   List<LineChartBarData> get lineBarsData1 => [
-    lineChartBarDataHome,
     lineChartBarDataAway,
+    lineChartBarDataHome,
   ];
 
   SideTitles leftTitles({required GetTitleFunction getTitles}) => SideTitles(
