@@ -36,7 +36,7 @@ class GamesWidgetState extends State<GamesWidget> {
 
   Future<List<Game>> getAPIData() async{
     final response = await http
-        .get(Uri.parse('https://nba-function.azurewebsites.net/games/month/12/day/22/year/2020'));
+        .get(Uri.parse('https://nba-function.azurewebsites.net/games'));
     final apiData = jsonDecode(response.body);
     return calculateGames(apiData);
   }
@@ -132,27 +132,24 @@ class GamesWidgetState extends State<GamesWidget> {
     );
   }
   void scrollListener(){
-    //print(controller.offset);
-    pos = controller.offset;
-    // print('pos $pos');
-    if ((controller.offset + 100) >= controller.position.maxScrollExtent){ //at bottom
-      //CircularLinkedList newLinkedList = CircularLinkedList(circularGameList.head!.next);
-      List<Widget> newList = this.gameList;
-      Widget replace = newList.removeAt(0);
-      newList.add(replace);
-      //controller.keepScrollOffset
-      //print('jumping down ${controller.offset/widget.gamesList.length}');
-      controller.jumpTo(controller.offset - ((controller.offset / widget.gamesList.length) + (widget.gamesList.length * 29)));
-      this.setState(() {
-        //circularGameList = newLinkedList;
-        gameList = newList;
-      });
-    }
+    // pos = controller.offset;
+    // if ((controller.offset + 100) >= controller.position.maxScrollExtent){ //at bottom
+    //   List<Widget> newList = this.gameList;
+    //   Widget replace = newList.removeAt(0);
+    //   newList.add(replace);
+    //   //controller.keepScrollOffset
+    //   //print('jumping down ${controller.offset/widget.gamesList.length}');
+    //   controller.jumpTo(controller.offset - ((controller.offset / widget.gamesList.length) + (widget.gamesList.length * 29)));
+    //   this.setState(() {
+    //     //circularGameList = newLinkedList;
+    //     gameList = newList;
+    //   });
+    // }
   }
 }
 
 const imageMap = {
-  1610612762: 'assets/images/jazz.jpg', //jazz
+  1610612762: 'assets/images/jazz.webp', //jazz
   1610612756: 'assets/images/suns.jpg', //suns
   1610612755: 'assets/images/sixers.jpg', //sixers
   1610612751: 'assets/images/nets.jpg', //nets
@@ -164,11 +161,11 @@ const imageMap = {
   1610612747: 'assets/images/lakers.jpg', //lakers
   1610612752: 'assets/images/knicks.jpg', //knicks
   1610612737: 'assets/images/hawks.jpeg', //hawks
-  1610612748: 'assets/images/heat.jpg', //heat
+  1610612748: 'assets/images/heat.webp', //heat
   1610612744: 'assets/images/warriors.jpg', //warriors
-  1610612763: 'assets/images/grizzlies.jpg', //grizzlies
+  1610612763: 'assets/images/grizzlies.webp', //grizzlies
   1610612738: 'assets/images/celtics.jpg', //celtics
-  1610612764: 'assets/images/wizards.jpg', //wizards
+  1610612764: 'assets/images/wizards.png', //wizards
   1610612754: 'assets/images/pacers.jpg', //pacers
   1610612766: 'assets/images/hornets.jpg', //hornets
   1610612759: 'assets/images/spurs.jpeg', //spurs
@@ -181,5 +178,5 @@ const imageMap = {
   1610612760: 'assets/images/thunder.jpg', //thunder
   1610612753: 'assets/images/magic.jpg', //magic
   1610612765: 'assets/images/pistons.jpg', //pistons
-  1610612745: 'assets/images/rockets.jpg', //rockets
+  1610612745: 'assets/images/rockets.webp', //rockets
 };

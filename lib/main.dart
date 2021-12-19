@@ -26,17 +26,15 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: InheritedCallBack(
-        callBack: (theme) => callBack(theme),
-        child: GetMaterialApp(
-          title: "Flutter NBA",
-          theme: lightTheme,
-          themeMode: themeMode,
-          darkTheme: darkTheme,
-          debugShowCheckedModeBanner: false,
-          home: LoadingScreen(),
-        ),
+    return InheritedCallBack(
+      callBack: (theme) => callBack(theme),
+      child: GetMaterialApp(
+        title: "Flutter NBA",
+        theme: lightTheme,
+        themeMode: themeMode,
+        darkTheme: darkTheme,
+        debugShowCheckedModeBanner: false,
+        home: LoadingScreen(),
       ),
     );
   }

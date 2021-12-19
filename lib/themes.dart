@@ -5,6 +5,7 @@ ThemeData darkTheme = ThemeData(
   splashColor: Colors.transparent,
   highlightColor: Colors.transparent,
   hoverColor: Colors.transparent,
+  backgroundColor: Color(0xfff212121),
   appBarTheme: AppBarTheme(
       backgroundColor: Color(0xfff212121)
   ),
@@ -21,6 +22,7 @@ ThemeData lightTheme = ThemeData(
     splashColor: Colors.transparent,
     highlightColor: Colors.transparent,
     hoverColor: Colors.transparent,
+    backgroundColor: Color(0xfff2196f3),
     appBarTheme: AppBarTheme(
         backgroundColor: Color(0xfff2196f3)
     ),
