@@ -34,8 +34,9 @@ dependencies:
   dotted_line: ^3.0.0  # for games
   sticky_headers: ^0.2.0  # for opened game
   syncfusion_flutter_sliders: ^19.2.62  # for box score slider
-  flutter_linkify: ^5.0.2
-  url_launcher: ^6.0.12
+  flutter_linkify: ^5.0.2  # for about page links
+  url_launcher: ^6.0.12  # for opening links
+  fl_chart: ^0.40.6  # for charts
 
 dev_dependencies:
   flutter_test:

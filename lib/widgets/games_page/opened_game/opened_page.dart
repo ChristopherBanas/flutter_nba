@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_nba/globals.dart' as globals;
 import 'package:flutter_nba/models/game.dart';
 import 'package:flutter_nba/enums.dart';
+import 'package:flutter_nba/widgets/games_page/opened_game/charts_tab/charts.dart';
 import 'package:flutter_nba/widgets/games_page/opened_game/quarter_table.dart';
 import 'package:flutter_nba/widgets/games_page/opened_game/sticky_score.dart';
 import 'package:flutter_nba/widgets/games_page/opened_game/top_performers/top_performers.dart';
@@ -89,6 +90,14 @@ class _OpenedPageState extends State<OpenedPage> {
                           bottom: true,
                         )
                       ],
+                    ),
+                    Column(
+                      children: [
+                        OpenedChildFormat(
+                          child: ChartsBody(),
+                          bottom: true,
+                        )
+                      ],
                     )
                   ][chosen],
                 ),
@@ -99,7 +108,7 @@ class _OpenedPageState extends State<OpenedPage> {
   }
 }
 
-const tabs = const ['GAME', 'BOX'];
+const tabs = const ['GAME', 'BOX', 'CHARTS'];
 
 class OpenedTab extends StatefulWidget with PreferredSizeWidget {
   final ValueSetter callBack;

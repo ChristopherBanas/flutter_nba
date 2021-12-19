@@ -1,4 +1,3 @@
 fix coloring areas from ios15
 game opened transition
 parallex scrolling
-transition desktop screens

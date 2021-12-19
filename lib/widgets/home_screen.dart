@@ -4,14 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nba/models/game.dart';
 import 'package:flutter_nba/widgets/games_page/inherited_call_back.dart';
-import 'package:flutter_nba/widgets/games_page/opened_game/game_card.dart';
 import 'package:flutter_nba/widgets/games_page/opened_game/opened_page.dart';
 import 'package:flutter_nba/widgets/standings_page/standings_widget.dart';
 import 'package:page_flip_builder/page_flip_builder.dart';
 import '../globals.dart' as globals;
 import 'games_page/games_widget.dart';
 import 'menu_button/menu_widget.dart';
-import 'no_animation.dart';
 
 
 class HomeScreen extends StatefulWidget {
