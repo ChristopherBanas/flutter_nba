@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nba/models/player_box_score.dart';
 import 'package:flutter_nba/enums.dart';
-import 'package:flutter_nba/widgets/games_page/opened_game/box_score/box_score.dart';
 import 'package:lazy_data_table/lazy_data_table.dart';
 import 'package:flutter_nba/globals.dart' as globals;
 
@@ -34,7 +33,7 @@ class PlayerBoxBody extends StatelessWidget {
     List<boxEnums> headerList = [boxEnums.PLAYER_NAME];
     headerList.addAll(mapList[0].valueMap.keys.toList().sublist(8, mapList[0].valueMap.keys.toList().length));
     int highest = getLongestName(mapList);
-    Color teamColor = Color(colorMap[mapList[0].valueMap[boxEnums.TEAM_ID]]!);
+    Color teamColor = Color(globals.colorMap[mapList[0].valueMap[boxEnums.TEAM_ID]]!);
     return SizedBox(
       width: double.infinity,
       height: MediaQuery.of(context).size.height - 400,

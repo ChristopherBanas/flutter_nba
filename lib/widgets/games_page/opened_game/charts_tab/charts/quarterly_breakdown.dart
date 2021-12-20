@@ -1,196 +1,111 @@
-// Based on: https://github.com/imaNNeoFighT/fl_chart/blob/master/example/lib/line_chart/samples/line_chart_sample1.dart
+// Based on: https://github.com/imaNNeoFighT/fl_chart/blob/master/example/lib/bar_chart/samples/bar_chart_sample2.dart
 
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_nba/models/game.dart';
 import 'package:flutter_nba/globals.dart' as globals;
-import 'package:flutter_nba/models/game.dart';
 import 'package:flutter_nba/enums.dart';
 
-const colorMap = {
-  1610612762: 0xff002B5C, //jazz
-  1610612756: 0xff1D1160, //suns
-  1610612755: 0xff006BB6, //sixers
-  1610612751: 0xff000000, //nets
-  1610612743: 0xff0E2240, //nuggets
-  1610612746: 0xffC8102E, //clippers
-  1610612749: 0xff00471B, //bucks
-  1610612742: 0xff00538C, //mavs
-  1610612757: 0xffE03A3E, //blazers
-  1610612747: 0xff552583, //lakers
-  1610612752: 0xff006BB6, //knicks
-  1610612737: 0xffE03A3E, //hawks
-  1610612748: 0xff98002E, //heat
-  1610612744: 0xffFFC72C, //warriors
-  1610612763: 0xff5D76A9, //grizzlies
-  1610612738: 0xff007A33, //celtics
-  1610612764: 0xff002B5C, //wizards
-  1610612754: 0xff002D62, //pacers
-  1610612766: 0xff1D1160, //hornets
-  1610612759: 0xffC4CED4, //spurs
-  1610612741: 0xffCE1141, //bulls
-  1610612740: 0xff0C2340, //pelicans
-  1610612758: 0xff5A2D81, //kings
-  1610612761: 0xffCE1141, //raptors
-  1610612750: 0xff0C2340, //wolves
-  1610612739: 0xff860038, //cavs
-  1610612760: 0xff007AC1, //thunder
-  1610612753: 0xff0077C0, //magic
-  1610612765: 0xffC8102E, //pistons
-  1610612745: 0xffCE1141, //rockets
-};
-
-class _LineChart extends StatelessWidget {
+class QuarterlyBarChart extends StatefulWidget {
+  final Widget colorRow;
+  const QuarterlyBarChart({Key? key, required this.colorRow}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return LineChart(
-      gameBreakdown,
-    );
-  }
-
-  LineChartData get gameBreakdown => LineChartData(
-    lineTouchData: lineTouchData1,
-    gridData: gridData,
-    titlesData: titlesData1,
-    borderData: borderData,
-    lineBarsData: lineBarsData1,
-    minX: 1,
-    maxX: 4,
-    maxY: 50,
-    minY: 0,
-  );
-
-
-  LineTouchData get lineTouchData1 => LineTouchData(
-    handleBuiltInTouches: true,
-    touchTooltipData: LineTouchTooltipData(
-      tooltipBgColor: Colors.white.withOpacity(.8),
-    ),
-  );
-
-  FlTitlesData get titlesData1 => FlTitlesData(
-    bottomTitles: bottomTitles,
-    rightTitles: SideTitles(showTitles: false),
-    topTitles: SideTitles(showTitles: false),
-    leftTitles: leftTitles(
-      getTitles: (value) {
-        switch (value.toInt()) {
-          case 10:
-            return '10';
-          case 20:
-            return '20';
-          case 30:
-            return '30';
-          case 40:
-            return '40';
-          case 50:
-            return '50';
-        }
-        return '';
-      },
-    ),
-  );
-
-  List<LineChartBarData> get lineBarsData1 => [
-    lineChartBarDataAway,
-    lineChartBarDataHome,
-  ];
-
-  SideTitles leftTitles({required GetTitleFunction getTitles}) => SideTitles(
-    getTitles: getTitles,
-    showTitles: true,
-    margin: 8,
-    interval: 1,
-    reservedSize: 40,
-    getTextStyles: (context, value) => const TextStyle(
-      color: Color(0xff75729e),
-      fontWeight: FontWeight.bold,
-      fontSize: 14,
-    ),
-  );
-
-  SideTitles get bottomTitles => SideTitles(
-    showTitles: true,
-    reservedSize: 22,
-    margin: 10,
-    interval: 1,
-    getTextStyles: (context, value) => const TextStyle(
-      color: Color(0xff72719b),
-      fontWeight: FontWeight.bold,
-      fontSize: 16,
-    ),
-    getTitles: (value) {
-      switch (value.toInt()) {
-        case 1:
-          return 'Q1';
-        case 2:
-          return 'Q2';
-        case 3:
-          return 'Q3';
-        case 4:
-          return 'Q4';
-      }
-      return '';
-    },
-  );
-
-  FlGridData get gridData => FlGridData(show: false);
-
-  FlBorderData get borderData => FlBorderData(
-    show: true,
-    border: const Border(
-      bottom: BorderSide(color: Color(0xff4e4965), width: 4),
-      left: BorderSide(color: Colors.transparent),
-      right: BorderSide(color: Colors.transparent),
-      top: BorderSide(color: Colors.transparent),
-    ),
-  );
-
-  LineChartBarData get lineChartBarDataHome => LineChartBarData(
-    isCurved: true,
-    colors: [Color(colorMap[globals.game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]]!)],
-    barWidth: 8,
-    isStrokeCapRound: true,
-    dotData: FlDotData(show: false),
-    belowBarData: BarAreaData(show: false),
-    spots: [
-      FlSpot(1, globals.game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.Q1].valueMap[boxEnums.PTS]),
-      FlSpot(2, globals.game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.Q2].valueMap[boxEnums.PTS]),
-      FlSpot(3, globals.game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.Q3].valueMap[boxEnums.PTS]),
-      FlSpot(4, globals.game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.Q4].valueMap[boxEnums.PTS]),
-    ],
-  );
-
-  LineChartBarData get lineChartBarDataAway => LineChartBarData(
-    isCurved: true,
-    colors: [Color(colorMap[globals.game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]]!)],
-    barWidth: 8,
-    isStrokeCapRound: true,
-    dotData: FlDotData(show: false),
-    belowBarData: BarAreaData(show: false, colors: [
-      const Color(0x00aa4cfc),
-    ]),
-    spots: [
-      FlSpot(1, globals.game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.Q1].valueMap[boxEnums.PTS]),
-      FlSpot(2, globals.game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.Q2].valueMap[boxEnums.PTS]),
-      FlSpot(3, globals.game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.Q3].valueMap[boxEnums.PTS]),
-      FlSpot(4, globals.game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.Q4].valueMap[boxEnums.PTS]),
-    ],
-  );
+  State<StatefulWidget> createState() => QuarterlyBarChartState();
 }
 
-class QuarterBreakdownChart extends StatefulWidget {
+class QuarterlyBarChartState extends State<QuarterlyBarChart> {
+  final Color awayBarColor = Color(globals.colorMap[globals
+      .game
+      .valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL]
+      .valueMap[boxEnums.TEAM_ID]]!);
+  final Color homeBarColor = Color(globals.colorMap[globals
+      .game
+      .valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL]
+      .valueMap[boxEnums.TEAM_ID]]!);
+  final double width = 7;
 
-  @override
-  State<StatefulWidget> createState() => QuarterBreakdownChartState();
-}
+  late List<BarChartGroupData> rawBarGroups;
+  late List<BarChartGroupData> showingBarGroups;
 
-class QuarterBreakdownChartState extends State<QuarterBreakdownChart> {
+  int touchedGroupIndex = -1;
 
   @override
   void initState() {
     super.initState();
+    final barGroup1 = makeGroupData(
+        1,
+        globals
+            .game
+            .valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.Q1]
+            .valueMap[boxEnums.PTS],
+        globals
+            .game
+            .valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.Q1]
+            .valueMap[boxEnums.PTS]);
+    final barGroup2 = makeGroupData(
+        2,
+        globals
+            .game
+            .valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.Q2]
+            .valueMap[boxEnums.PTS],
+        globals
+            .game
+            .valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.Q2]
+            .valueMap[boxEnums.PTS]);
+    final barGroup3 = makeGroupData(
+        3,
+        globals
+            .game
+            .valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.Q3]
+            .valueMap[boxEnums.PTS],
+        globals
+            .game
+            .valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.Q3]
+            .valueMap[boxEnums.PTS]);
+    final barGroup4 = makeGroupData(
+        4,
+        globals
+            .game
+            .valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.Q4]
+            .valueMap[boxEnums.PTS],
+        globals
+            .game
+            .valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.Q4]
+            .valueMap[boxEnums.PTS]);
+
+    final items = [
+      barGroup1,
+      barGroup2,
+      barGroup3,
+      barGroup4,
+    ];
+
+    rawBarGroups = items;
+
+    showingBarGroups = rawBarGroups;
+  }
+
+  BarTouchData get lineTouchData1 => BarTouchData(
+    handleBuiltInTouches: true,
+    touchTooltipData: BarTouchTooltipData(
+      tooltipBgColor: Colors.white,
+    ),
+  );
+
+  BarChartGroupData makeGroupData(int x, double y1, double y2) {
+    return BarChartGroupData(barsSpace: 4, x: x, barRods: [
+      BarChartRodData(
+        y: y1,
+        colors: [awayBarColor],
+        width: width,
+      ),
+      BarChartRodData(
+        y: y2,
+        colors: [homeBarColor],
+        width: width,
+      ),
+    ]);
   }
 
   @override
@@ -200,49 +115,100 @@ class QuarterBreakdownChartState extends State<QuarterBreakdownChart> {
       child: AspectRatio(
         aspectRatio: 1.50,
         child: Container(
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(18)),
-            gradient: LinearGradient(
-              colors: [
-                Color(0xff2c274c),
-                Color(0xff46426c),
-              ],
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-            ),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(18)),
+              border: Border.all(
+                color: Colors.black,
+                width: 1.5,
+              ),
+              color: Theme.of(context).scaffoldBackgroundColor
           ),
-          child: Stack(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const Text(
-                    'Quarterly Breakdown',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1.5,
+              const SizedBox(
+                height: 3.5,
+              ),
+              const Center(
+                child: const Text(
+                  'Points Per Quarter',
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              widget.colorRow,
+              const SizedBox(
+                height: 15,
+              ),
+              Expanded(
+                child: BarChart(
+                  BarChartData(
+                    maxY: 60,
+                    barTouchData: lineTouchData1,
+                    titlesData: FlTitlesData(
+                      show: true,
+                      rightTitles: SideTitles(showTitles: false),
+                      topTitles: SideTitles(showTitles: false),
+                      bottomTitles: SideTitles(
+                        showTitles: true,
+                        getTextStyles: (context, value) => const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 14),
+                        margin: 10,
+                        getTitles: (double value) {
+                          switch (value.toInt()) {
+                            case 1:
+                              return 'Q1';
+                            case 2:
+                              return 'Q2';
+                            case 3:
+                              return 'Q3';
+                            case 4:
+                              return 'Q4';
+                            default:
+                              return '';
+                          }
+                        },
+                      ),
+                      leftTitles: SideTitles(
+                        showTitles: true,
+                        getTextStyles: (context, value) => const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 14),
+                        margin: 8,
+                        reservedSize: 28,
+                        interval: 1,
+                        getTitles: (value) {
+                          switch (value.toInt()) {
+                            case 15:
+                              return '15';
+                            case 30:
+                              return '30';
+                            case 45:
+                              return '45';
+                            case 60:
+                              return '60';
+                            default:
+                              return '';
+                          }
+                        },
+                      ),
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const ColorRow(),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 16.0, left: 6.0),
-                      child: _LineChart(),
+                    borderData: FlBorderData(
+                      border: const Border(
+                        bottom: BorderSide(width: 2),
+                        left: BorderSide(width: 2),
+                        right: BorderSide(color: Colors.transparent),
+                        top: BorderSide(color: Colors.transparent),
+                      ),
                     ),
+                    barGroups: showingBarGroups,
+                    gridData: FlGridData(show: true),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                ],
+                ),
+              ),
+              const SizedBox(
+                height: 12,
               ),
             ],
           ),
@@ -250,62 +216,6 @@ class QuarterBreakdownChartState extends State<QuarterBreakdownChart> {
       ),
     );
   }
+
+
 }
-
-class ColorRow extends StatelessWidget {
-  const ColorRow({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 5),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          RowChild(teamEnum: gameEnums.AWAY),
-          RowChild(teamEnum: gameEnums.HOME),
-        ],
-      ),
-    );
-  }
-}
-
-class RowChild extends StatelessWidget {
-  final gameEnums teamEnum;
-
-  const RowChild({Key? key, required this.teamEnum}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-            width: 20,
-            height: 20,
-            decoration: BoxDecoration(
-              color: Color(colorMap[globals.game.valueMap[gameEnums.TEAM_BOX_SCORE][teamEnum][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]]!),
-              border: Border.all(
-                color: Colors.white,
-                width: 1.5,
-              ),
-              borderRadius: BorderRadius.circular(9),
-            ),
-        ),
-        Container(
-          margin: const EdgeInsets.only(left: 5, right: 7),
-          child: Text(
-            globals.game.valueMap[gameEnums.TEAM_BOX_SCORE][teamEnum][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ABBREVIATION],
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 12,
-              fontWeight: FontWeight.bold,
-            ),
-            textAlign: TextAlign.left,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
