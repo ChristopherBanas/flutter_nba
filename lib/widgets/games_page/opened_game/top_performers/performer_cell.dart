@@ -251,6 +251,13 @@ class PictureCell extends StatelessWidget {
   Widget build(BuildContext context) {
     Game game = globals.game;
     var id = game.valueMap[gameEnums.TOP_PERFORMERS][homeAway][performerEnum][index].valueMap[boxEnums.PLAYER_ID];
+    Image img = Image.network(
+      'https://cdn.nba.com/headshots/nba/latest/1040x760/$id.png',
+      fit: BoxFit.cover,
+      width: 50,
+      height: 50,
+    );
+    precacheImage(img.image, context);
     return Container(
       margin: const EdgeInsets.only(bottom: 10, top: 10),
       child: CircleAvatar(
@@ -260,12 +267,7 @@ class PictureCell extends StatelessWidget {
           radius: 20,
           backgroundColor: Theme.of(context).cardColor,
           child: ClipOval(
-            child: Image.network(
-              'https://cdn.nba.com/headshots/nba/latest/1040x760/$id.png',
-              fit: BoxFit.cover,
-              width: 50,
-              height: 50,
-            ),
+            child: img,
           ),
         ),
       ),

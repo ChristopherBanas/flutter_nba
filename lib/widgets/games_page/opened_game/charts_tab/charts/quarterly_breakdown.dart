@@ -23,7 +23,7 @@ class QuarterlyBarChartState extends State<QuarterlyBarChart> {
       .game
       .valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL]
       .valueMap[boxEnums.TEAM_ID]]!);
-  final double width = 7;
+  final double width = 7.0;
 
   late List<BarChartGroupData> rawBarGroups;
   late List<BarChartGroupData> showingBarGroups;
@@ -113,7 +113,7 @@ class QuarterlyBarChartState extends State<QuarterlyBarChart> {
     return Container(
       margin: const EdgeInsets.only(left: 7.5, right: 7.5),
       child: AspectRatio(
-        aspectRatio: 1.50,
+        aspectRatio: globals.chartRatio,
         child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(18)),

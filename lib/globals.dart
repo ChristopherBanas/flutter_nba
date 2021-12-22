@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 import 'models/game.dart';
 
 bool onScores = true;
@@ -34,3 +36,5 @@ const colorMap = {
   1610612765: 0xffC8102E, //pistons
   1610612745: 0xffCE1141, //rockets
 };
+const chartRatio= .85;
+Map<dynamic, Image> imageMap = {};

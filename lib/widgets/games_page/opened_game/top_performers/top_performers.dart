@@ -37,20 +37,23 @@ class _TopPerformersBodyState extends State<TopPerformersBody> with SingleTicker
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TabBar(
-          controller: _tabController,
-          tabs: [
-            for (final stat in stats)
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                child: Text(
-                  stat,
-                  style: TextStyle(
-                    color: Theme.of(context).textTheme.bodyText1!.color,
+        Container(
+          margin: const EdgeInsets.only(top: 5, bottom: 5),
+          child: TabBar(
+            controller: _tabController,
+            tabs: [
+              for (final stat in stats)
+                Container(
+                  margin: const EdgeInsets.only(bottom: 5),
+                  child: Text(
+                    stat,
+                    style: TextStyle(
+                      color: Theme.of(context).textTheme.bodyText1!.color,
+                    ),
                   ),
-                ),
-              )
-          ],
+                )
+            ],
+          ),
         ),
         [
           PerformerTable(performerEnum: boxEnums.TOP_POINTS, statType: boxEnums.PTS),

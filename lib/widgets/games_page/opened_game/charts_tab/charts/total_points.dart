@@ -169,7 +169,7 @@ class TotalPointsLineChartState extends State<TotalPointsLineChart> {
     return Container(
       margin: const EdgeInsets.only(left: 7.5, right: 7.5),
       child: AspectRatio(
-        aspectRatio: 1.50,
+        aspectRatio: globals.chartRatio,
         child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(18)),

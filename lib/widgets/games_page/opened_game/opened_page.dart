@@ -7,7 +7,6 @@ import 'package:flutter_nba/widgets/games_page/opened_game/charts_tab/charts.dar
 import 'package:flutter_nba/widgets/games_page/opened_game/quarter_table.dart';
 import 'package:flutter_nba/widgets/games_page/opened_game/sticky_score.dart';
 import 'package:flutter_nba/widgets/games_page/opened_game/top_performers/top_performers.dart';
-import 'package:flutter_nba/widgets/menu_button/menu_widget.dart';
 import 'package:sticky_headers/sticky_headers/widget.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 import 'box_score/box_score.dart';
@@ -51,7 +50,7 @@ class _OpenedPageState extends State<OpenedPage> {
         body: Center(
           child: Container(
             height: MediaQuery.of(context).size.height - 110,
-            width: MediaQuery.of(context).size.width - 30,
+            width: MediaQuery.of(context).size.width - 5,
             child: Card(
               elevation: 5,
               shape: RoundedRectangleBorder(
