@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_nba/globals.dart' as globals;
 import 'package:flutter_nba/enums.dart';
 
+import 'chart_template.dart';
+
 
 class _LineChart extends StatelessWidget {
 
@@ -166,55 +168,40 @@ class TotalPointsLineChartState extends State<TotalPointsLineChart> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(left: 7.5, right: 7.5),
-      child: AspectRatio(
-        aspectRatio: globals.chartRatio,
-        child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(18)),
-              border: Border.all(
-                color: Colors.black,
-                width: 1.5,
-              ),
-              color: Theme.of(context).scaffoldBackgroundColor
-          ),
-          child: Stack(
+    return ChartTemplate(
+      child: Stack(
+        children: <Widget>[
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  const SizedBox(
-                    height: 3.5,
-                  ),
-                  const Text(
-                    'Total Points',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  widget.colorRow,
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 16.0, left: 6.0),
-                      child: _LineChart(),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                ],
+              const SizedBox(
+                height: 3.5,
+              ),
+              const Text(
+                'Total Points',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              widget.colorRow,
+              const SizedBox(
+                height: 15,
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 16.0, left: 6.0),
+                  child: _LineChart(),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
               ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }
 }
-

@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_nba/globals.dart' as globals;
 import 'package:flutter_nba/enums.dart';
 
+import 'chart_template.dart';
+
 class QuarterlyBarChart extends StatefulWidget {
   final Widget colorRow;
   const QuarterlyBarChart({Key? key, required this.colorRow}) : super(key: key);
@@ -110,112 +112,96 @@ class QuarterlyBarChartState extends State<QuarterlyBarChart> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(left: 7.5, right: 7.5),
-      child: AspectRatio(
-        aspectRatio: globals.chartRatio,
-        child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(18)),
-              border: Border.all(
-                color: Colors.black,
-                width: 1.5,
-              ),
-              color: Theme.of(context).scaffoldBackgroundColor
+    return ChartTemplate(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          const SizedBox(
+            height: 3.5,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              const SizedBox(
-                height: 3.5,
-              ),
-              const Center(
-                child: const Text(
-                  'Points Per Quarter',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              widget.colorRow,
-              const SizedBox(
-                height: 15,
-              ),
-              Expanded(
-                child: BarChart(
-                  BarChartData(
-                    maxY: 60,
-                    barTouchData: lineTouchData1,
-                    titlesData: FlTitlesData(
-                      show: true,
-                      rightTitles: SideTitles(showTitles: false),
-                      topTitles: SideTitles(showTitles: false),
-                      bottomTitles: SideTitles(
-                        showTitles: true,
-                        getTextStyles: (context, value) => const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 14),
-                        margin: 10,
-                        getTitles: (double value) {
-                          switch (value.toInt()) {
-                            case 1:
-                              return 'Q1';
-                            case 2:
-                              return 'Q2';
-                            case 3:
-                              return 'Q3';
-                            case 4:
-                              return 'Q4';
-                            default:
-                              return '';
-                          }
-                        },
-                      ),
-                      leftTitles: SideTitles(
-                        showTitles: true,
-                        getTextStyles: (context, value) => const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 14),
-                        margin: 8,
-                        reservedSize: 28,
-                        interval: 1,
-                        getTitles: (value) {
-                          switch (value.toInt()) {
-                            case 15:
-                              return '15';
-                            case 30:
-                              return '30';
-                            case 45:
-                              return '45';
-                            case 60:
-                              return '60';
-                            default:
-                              return '';
-                          }
-                        },
-                      ),
-                    ),
-                    borderData: FlBorderData(
-                      border: const Border(
-                        bottom: BorderSide(width: 2),
-                        left: BorderSide(width: 2),
-                        right: BorderSide(color: Colors.transparent),
-                        top: BorderSide(color: Colors.transparent),
-                      ),
-                    ),
-                    barGroups: showingBarGroups,
-                    gridData: FlGridData(show: true),
+          const Center(
+            child: const Text(
+              'Points Per Quarter',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          widget.colorRow,
+          const SizedBox(
+            height: 15,
+          ),
+          Expanded(
+            child: BarChart(
+              BarChartData(
+                maxY: 60,
+                barTouchData: lineTouchData1,
+                titlesData: FlTitlesData(
+                  show: true,
+                  rightTitles: SideTitles(showTitles: false),
+                  topTitles: SideTitles(showTitles: false),
+                  bottomTitles: SideTitles(
+                    showTitles: true,
+                    getTextStyles: (context, value) => const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 14),
+                    margin: 10,
+                    getTitles: (double value) {
+                      switch (value.toInt()) {
+                        case 1:
+                          return 'Q1';
+                        case 2:
+                          return 'Q2';
+                        case 3:
+                          return 'Q3';
+                        case 4:
+                          return 'Q4';
+                        default:
+                          return '';
+                      }
+                    },
+                  ),
+                  leftTitles: SideTitles(
+                    showTitles: true,
+                    getTextStyles: (context, value) => const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 14),
+                    margin: 8,
+                    reservedSize: 28,
+                    interval: 1,
+                    getTitles: (value) {
+                      switch (value.toInt()) {
+                        case 15:
+                          return '15';
+                        case 30:
+                          return '30';
+                        case 45:
+                          return '45';
+                        case 60:
+                          return '60';
+                        default:
+                          return '';
+                      }
+                    },
                   ),
                 ),
+                borderData: FlBorderData(
+                  border: const Border(
+                    bottom: BorderSide(width: 2),
+                    left: BorderSide(width: 2),
+                    right: BorderSide(color: Colors.transparent),
+                    top: BorderSide(color: Colors.transparent),
+                  ),
+                ),
+                barGroups: showingBarGroups,
+                gridData: FlGridData(show: true),
               ),
-              const SizedBox(
-                height: 12,
-              ),
-            ],
+            ),
           ),
-        ),
+          const SizedBox(
+            height: 12,
+          ),
+        ],
       ),
     );
   }
-
-
 }
