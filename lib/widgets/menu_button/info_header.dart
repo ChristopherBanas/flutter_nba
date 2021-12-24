@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../../inherited_callback.dart';
 
 class InfoHeader extends StatelessWidget {

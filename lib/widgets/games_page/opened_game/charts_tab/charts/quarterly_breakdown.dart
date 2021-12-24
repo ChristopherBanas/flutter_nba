@@ -17,14 +17,8 @@ class QuarterlyBarChart extends StatefulWidget {
 }
 
 class QuarterlyBarChartState extends State<QuarterlyBarChart> {
-  final Color awayBarColor = Color(globals.colorMap[globals
-      .game
-      .valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL]
-      .valueMap[boxEnums.TEAM_ID]]!);
-  final Color homeBarColor = Color(globals.colorMap[globals
-      .game
-      .valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL]
-      .valueMap[boxEnums.TEAM_ID]]!);
+  final Color awayBarColor = globals.awayColor;
+  final Color homeBarColor = globals.homeColor;
   final double width = 7.0;
 
   late List<BarChartGroupData> rawBarGroups;

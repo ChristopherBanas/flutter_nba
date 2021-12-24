@@ -55,8 +55,8 @@ class PointsPieChartState extends State<PointsPieChart> with SingleTickerProvide
           child: TabBar(
             controller: _tabController,
             indicatorColor: [
-              Color(globals.colorMap[globals.game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]]!),
-              Color(globals.colorMap[globals.game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]]!)
+              globals.awayColor,
+              globals.homeColor
             ][_tabController.index],
             tabs: [
               for (final tab in tabs)

@@ -10,7 +10,7 @@ import 'package:page_flip_builder/page_flip_builder.dart';
 import '../globals.dart' as globals;
 import 'games_page/games_widget.dart';
 import 'menu_button/menu_widget.dart';
-
+import 'package:flutter_nba/enums.dart';
 
 class HomeScreen extends StatefulWidget {
   final Map<String, dynamic> standingsMap;
@@ -30,6 +30,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
   updateGameCard(Game selectedGame){
     globals.game = selectedGame;
+    var awayId = selectedGame.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID];
+    var homeId = selectedGame.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID];
+    String awayBelong = globals.belongsTo[awayId]!;
+    String homeBelong = globals.belongsTo[homeId]!;
+    if(awayBelong == homeBelong && awayBelong != "none"){ //blue & blue or red & red
+      globals.awayColor = Color(globals.secondaryColors[awayId]!);
+    } else{
+      globals.awayColor = Color(globals.primaryColors[awayId]!);
+    }
+    globals.homeColor = Color(globals.primaryColors[homeId]!);
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => OpenedPage())

@@ -120,7 +120,7 @@ class _LineChart extends StatelessWidget {
 
   LineChartBarData get lineChartBarDataHome => LineChartBarData(
     isCurved: true,
-    colors: [Color(globals.colorMap[globals.game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]]!)],
+    colors: [globals.homeColor],
     barWidth: 5,
     isStrokeCapRound: true,
     dotData: FlDotData(show: true),
@@ -136,7 +136,7 @@ class _LineChart extends StatelessWidget {
 
   LineChartBarData get lineChartBarDataAway => LineChartBarData(
     isCurved: true,
-    colors: [Color(globals.colorMap[globals.game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]]!)],
+    colors: [globals.awayColor],
     barWidth: 5,
     isStrokeCapRound: true,
     dotData: FlDotData(show: true),

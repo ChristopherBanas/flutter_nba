@@ -94,11 +94,11 @@ class _BoxScoreBodyState extends State<BoxScoreBody> {
                 showLabels: true,
                 onChanged: (dynamic val) => sliderChanged(val),
                 activeColor: selectedBoxType == 0 ? Theme.of(context).sliderTheme.activeTrackColor
-                    : Color(globals.colorMap[selectedTeamType == 0 ?
+                    : Color(globals.primaryColors[selectedTeamType == 0 ?
                 game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID] :
                 game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]]!),
                 inactiveColor: selectedBoxType == 0 ? Theme.of(context).sliderTheme.inactiveTrackColor
-                    : Color(globals.colorMap[selectedTeamType == 0 ?
+                    : Color(globals.primaryColors[selectedTeamType == 0 ?
                 game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID] :
                 game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]]!).withOpacity(.6),
             ),
@@ -111,8 +111,8 @@ class _BoxScoreBodyState extends State<BoxScoreBody> {
                     padding: const EdgeInsets.only(top: 20),
                     child: StatSwitch(
                         initIndex: selectedTeamType,
-                        colorList: [Color(globals.colorMap[game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]]!),
-                          Color(globals.colorMap[game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]]!)],
+                        colorList: [Color(globals.primaryColors[game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]]!),
+                          Color(globals.primaryColors[game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ID]]!)],
                         labels: [
                           game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.AWAY][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ABBREVIATION],
                           game.valueMap[gameEnums.TEAM_BOX_SCORE][gameEnums.HOME][gameEnums.TOTAL].valueMap[boxEnums.TEAM_ABBREVIATION]

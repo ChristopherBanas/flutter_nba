@@ -210,26 +210,26 @@ class _LoadingScreenState extends State<LoadingScreen>
   }
 }
 
-setImages(List<Game> games) { //for pre loading
-  List<boxEnums> enumList = [boxEnums.TOP_POINTS, boxEnums.TOP_ASSISTS, boxEnums.TOP_REBOUNDS];
-  List<gameEnums> homeAway = [gameEnums.AWAY, gameEnums.HOME];
-  List<int> indexList  = [0,1,2];
-  for(final game in games){
-    for(final en in enumList){
-      for(final loc in homeAway){
-        for(final indx in indexList){
-          var id = game.valueMap[gameEnums.TOP_PERFORMERS][loc][en][indx].valueMap[boxEnums.PLAYER_ID];
-          Image image = Image.network(
-            'https://cdn.nba.com/headshots/nba/latest/1040x760/$id.png',
-            fit: BoxFit.cover,
-            width: 50,
-            height: 50,
-          );
-          if(!globals.imageMap.containsKey(id)){
-            globals.imageMap[id] = image;
-          }
-        }
-      }
-    }
-  }
-}
+// setImages(List<Game> games) { //for pre loading
+//   List<boxEnums> enumList = [boxEnums.TOP_POINTS, boxEnums.TOP_ASSISTS, boxEnums.TOP_REBOUNDS];
+//   List<gameEnums> homeAway = [gameEnums.AWAY, gameEnums.HOME];
+//   List<int> indexList  = [0,1,2];
+//   for(final game in games){
+//     for(final en in enumList){
+//       for(final loc in homeAway){
+//         for(final indx in indexList){
+//           var id = game.valueMap[gameEnums.TOP_PERFORMERS][loc][en][indx].valueMap[boxEnums.PLAYER_ID];
+//           Image image = Image.network(
+//             'https://cdn.nba.com/headshots/nba/latest/1040x760/$id.png',
+//             fit: BoxFit.cover,
+//             width: 50,
+//             height: 50,
+//           );
+//           if(!globals.imageMap.containsKey(id)){
+//             globals.imageMap[id] = image;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }

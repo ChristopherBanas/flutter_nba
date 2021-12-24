@@ -33,7 +33,7 @@ class PlayerBoxBody extends StatelessWidget {
     List<boxEnums> headerList = [boxEnums.PLAYER_NAME];
     headerList.addAll(mapList[0].valueMap.keys.toList().sublist(8, mapList[0].valueMap.keys.toList().length));
     int highest = getLongestName(mapList);
-    Color teamColor = Color(globals.colorMap[mapList[0].valueMap[boxEnums.TEAM_ID]]!);
+    Color teamColor = Color(globals.primaryColors[mapList[0].valueMap[boxEnums.TEAM_ID]]!);
     return SizedBox(
       width: double.infinity,
       height: MediaQuery.of(context).size.height - 400,
